@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import ApplicationFormFirstPage from './ApplicationFormFirstPage';
+import ApplicationFormGeneral from './ApplicationFormGeneral';
+import ApplicationFormCode from './ApplicationFormCode';
+import ApplicationFormOps from './ApplicationFormOps';
 
 class ApplicationForm extends Component {
     constructor(props) {
@@ -20,12 +22,13 @@ class ApplicationForm extends Component {
     }
 
     render() {
+        const { onSubmit } = this.props;
         const { page } = this.state;
         return (
             <div>
-                {page === 1 && <ApplicationFormFirstPage onSubmit={this.nextPage} />}
-                {page === 2 &&
-                <div>second page</div>}
+                {page === 1 && <ApplicationFormGeneral onSubmit={this.nextPage} />}
+                {page === 2 && <ApplicationFormCode onSubmit={this.nextPage} onBack={this.previousPage} />}
+                {page === 3 && <ApplicationFormOps onSubmit={onSubmit} onBack={this.previousPage} />}
             </div>
         )
     }

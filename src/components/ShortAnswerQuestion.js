@@ -10,7 +10,7 @@ const ShortAnswerQuestion = ({title, name, required}) => (
             type="text"
             placeholder="Type your answer here..."
             required={required}
-            className="question_answer"
+            className="question_shortAnswer"
         />
     </Question>
 );

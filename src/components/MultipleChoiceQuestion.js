@@ -2,16 +2,16 @@ import React from 'react';
 import Question from './Question';
 import { Field } from 'redux-form';
 
-const CheckboxesQuestion = ({title, name, options}) => (
-    <Question title={title} description="Choose as many as you like">
+const MultipleChoiceQuestion = ({title, name, options}) => (
+    <Question title={title}>
         <div className="question_answers">
             {options.map((value, n) => (
                 <label className="question_checkboxesAnswer" key={n}>
                     <Field
-                        name={`${name}[${value}]`}
+                        name={name}
                         component="input"
-                        type="checkbox"
-                        value="checked"
+                        type="radio"
+                        value={value}
                     />
                     {value}
                 </label>
@@ -20,4 +20,4 @@ const CheckboxesQuestion = ({title, name, options}) => (
     </Question>
 );
 
-export default CheckboxesQuestion;
+export default MultipleChoiceQuestion;

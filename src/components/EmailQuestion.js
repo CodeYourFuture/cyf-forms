@@ -10,7 +10,7 @@ const EmailQuestion = ({title, name, required}) => (
             type="email"
             placeholder="Type your email here..."
             required={required}
-            className="question_answer"
+            className="question_shortAnswer question_emailAnswer"
         />
     </Question>
 );
