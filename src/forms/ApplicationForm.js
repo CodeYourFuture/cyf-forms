@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import ApplicationFormGeneral from './ApplicationFormGeneral';
 import ApplicationFormCode from './ApplicationFormCode';
 import ApplicationFormOps from './ApplicationFormOps';
+import ApplicationFormThanks from './ApplicationFormThanks';
 
 class ApplicationForm extends Component {
     constructor(props) {
@@ -22,14 +23,38 @@ class ApplicationForm extends Component {
     }
 
     render() {
-        const { onSubmit } = this.props;
+        const { onSubmit, values } = this.props;
         const { page } = this.state;
+
+        const isInterestedInCode = values.fieldOfInterest && values.fieldOfInterest['Teaching code or agile methodologies'] === true;
+        const isInterestedInOps = values.fieldOfInterest && values.fieldOfInterest['Running and growing the organisation'] === true;
+
+        const stages = {
+            1: <ApplicationFormGeneral onSubmit={this.nextPage} />,
+            2: isInterestedInCode
+                ? <ApplicationFormCode
+                    onSubmit={this.nextPage}
+                    onBack={this.previousPage}
+                    nextButtonLabel={isInterestedInOps ? "Next" : "Submit"}
+                  />
+                : <ApplicationFormOps
+                    onSubmit={onSubmit}
+                    onBack={this.previousPage}
+                    nextButtonLabel="Submit"
+                  />,
+            3: isInterestedInCode && isInterestedInOps
+                ? <ApplicationFormOps
+                    onSubmit={onSubmit}
+                    onBack={this.previousPage}
+                    nextButtonLabel="Submit"
+                   />
+                : <ApplicationFormThanks />,
+            4: !isInterestedInCode && isInterestedInOps
+                ? <ApplicationFormThanks />
+                : '',
+        };
         return (
-            <div>
-                {page === 1 && <ApplicationFormGeneral onSubmit={this.nextPage} />}
-                {page === 2 && <ApplicationFormCode onSubmit={this.nextPage} onBack={this.previousPage} />}
-                {page === 3 && <ApplicationFormOps onSubmit={onSubmit} onBack={this.previousPage} />}
-            </div>
+            <div>{stages[page]}</div>
         )
     }
 }

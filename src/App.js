@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import ApplicationForm from './forms/ApplicationForm';
+import StatefulApplicationForm from './containers/StatefulApplicationForm';
 
 import './App.css';
 
 export default () => (
     <div className="app">
-        <ApplicationForm onSubmit={() => console.log('submitted!')} />
+        <StatefulApplicationForm />
     </div>
 );

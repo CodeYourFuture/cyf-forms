@@ -5,7 +5,7 @@ import { reduxForm } from 'redux-form';
 import CheckboxesQuestion from '../components/CheckboxesQuestion';
 import Button from '../components/Button';
 
-const ApplicationFormOps = ({ onSubmit, onBack }) => (
+const ApplicationFormOps = ({ onSubmit, onBack, nextButtonLabel }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
         <CheckboxesQuestion
             title="In which of these areas could you see yourself helping?"
@@ -34,16 +34,17 @@ const ApplicationFormOps = ({ onSubmit, onBack }) => (
                 'During the week',
                 'Varying, remotely',
             ]}
-            required={true}
+            isRequired={true}
         />
         <Button title="Back" type="button" onClick={onBack} />
-        <Button title="Submit" type="submit" />
+        <Button title={nextButtonLabel || 'Next'} type="submit" />
     </form>
 );
 
 ApplicationFormOps.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     onBack: PropTypes.func.isRequired,
+    nextButtonLabel: PropTypes.string,
 };
 
 export default reduxForm({

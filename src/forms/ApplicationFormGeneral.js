@@ -10,9 +10,9 @@ import Button from '../components/Button';
 
 const ApplicationFormGeneral = ({ handleSubmit }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
-        <ShortAnswerQuestion title="What's your first name?" name="firstName" required={true} />
+        <ShortAnswerQuestion title="What's your first name?" name="firstName" isRequired={true} />
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
-        <ShortAnswerQuestion title="Where do you live?" name="placeOfResidence" />
+        <ShortAnswerQuestion title="What city do you live in?" name="placeOfResidence" />
         <DropdownQuestion
             title="Which CYF city is nearest to you?"
             name="placeOfInterest"
@@ -24,7 +24,7 @@ const ApplicationFormGeneral = ({ handleSubmit }) => (
                 'Bogotá',
             ]}
         />
-        <EmailQuestion title="What's your email address?" name="email" required={true} />
+        <EmailQuestion title="What's your email address?" name="email" isRequired={true} />
         <CheckboxesQuestion
             title="Cool. What are you interested in helping with?"
             name="fieldOfInterest"
@@ -32,7 +32,7 @@ const ApplicationFormGeneral = ({ handleSubmit }) => (
                 'Teaching code or agile methodologies',
                 'Running and growing the organisation',
             ]}
-            required={true}
+            isRequired={true}
         />
         <Button title="Next" type="submit" />
     </form>
