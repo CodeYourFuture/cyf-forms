@@ -26,8 +26,8 @@ class ApplicationForm extends Component {
         const { onSubmit, values } = this.props;
         const { page } = this.state;
 
-        const isInterestedInCode = values.fieldOfInterest && values.fieldOfInterest['Teaching code or agile methodologies'] === true;
-        const isInterestedInOps = values.fieldOfInterest && values.fieldOfInterest['Running and growing the organisation'] === true;
+        const isInterestedInCode = values.fieldsOfInterest && values.fieldsOfInterest['Teaching code or agile methodologies'] === true;
+        const isInterestedInOps = values.fieldsOfInterest && values.fieldsOfInterest['Running and growing the organisation'] === true;
 
         const stages = {
             1: <ApplicationFormGeneral onSubmit={this.nextPage} />,

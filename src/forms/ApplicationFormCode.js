@@ -7,7 +7,7 @@ import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion';
 import Button from '../components/Button';
 import ShortAnswerQuestion from "../components/ShortAnswerQuestion";
 
-const ApplicationFormCode = ({ onSubmit, onBack, nextButtonLabel }) => (
+const ApplicationFormCode = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
         <GridQuestion
             title="How much experience do you have in these areas?"
@@ -32,7 +32,7 @@ const ApplicationFormCode = ({ onSubmit, onBack, nextButtonLabel }) => (
             isRequired={true}
         />
         <Button title="Back" type="button" onClick={onBack} />
-        <Button title={nextButtonLabel || 'Next'} type="submit" />
+        <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
     </form>
 );
 
@@ -42,8 +42,13 @@ ApplicationFormCode.propTypes = {
     nextButtonLabel: PropTypes.string,
 };
 
+const validate = values => ({
+    availableOnSundays: values.availableOnSundays !== 'Yes',
+});
+
 export default reduxForm({
     form: 'applicationForm',
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
+    validate,
 })(ApplicationFormCode);

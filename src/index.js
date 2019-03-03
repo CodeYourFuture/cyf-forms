@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 import rootReducer from './store';
 
-import './index.css';
 import 'normalize.css';
 
 const formElements = document.querySelectorAll('.cyf-form');

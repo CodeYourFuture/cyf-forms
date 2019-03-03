@@ -5,7 +5,9 @@ import { reduxForm } from 'redux-form';
 import CheckboxesQuestion from '../components/CheckboxesQuestion';
 import Button from '../components/Button';
 
-const ApplicationFormOps = ({ onSubmit, onBack, nextButtonLabel }) => (
+import * as validators from '../utils/validators';
+
+const ApplicationFormOps = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
         <CheckboxesQuestion
             title="In which of these areas could you see yourself helping?"
@@ -37,7 +39,7 @@ const ApplicationFormOps = ({ onSubmit, onBack, nextButtonLabel }) => (
             isRequired={true}
         />
         <Button title="Back" type="button" onClick={onBack} />
-        <Button title={nextButtonLabel || 'Next'} type="submit" />
+        <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
     </form>
 );
 
@@ -47,8 +49,15 @@ ApplicationFormOps.propTypes = {
     nextButtonLabel: PropTypes.string,
 };
 
+const validate = values => ({
+    availability: {
+        'Varying, remotely': validators.required(values.availability),
+    },
+});
+
 export default reduxForm({
     form: 'applicationForm',
     destroyOnUnmount: false,
     forceUnregisterOnUnmount: true,
+    validate,
 })(ApplicationFormOps);
