@@ -1,7 +1,20 @@
-# Application Form
+# CYF Forms
 
 This project was born out of the need for a free alternative to Typeform. Google Forms is free but doesn't offer  the
 branching logic required.
+
+## How to Use
+
+You can include one or several forms on a page using this syntax:
+
+```html
+<div class="cyf-form" data-form="ApplicationForm"></div>
+```
+
+### Available Forms
+
+- ApplicationForm
+
 
 ## Available Scripts
 
