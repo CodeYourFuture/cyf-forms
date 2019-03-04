@@ -54,7 +54,10 @@ class ApplicationForm extends Component {
                 : '',
         };
         return (
-            <div>{stages[page]}</div>
+            <div>
+                <h1>CYF Volunteer Application Form</h1>
+                {stages[page]}
+            </div>
         )
     }
 }

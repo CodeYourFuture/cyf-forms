@@ -13,6 +13,9 @@ import * as validators from '../utils/validators';
 const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
     return (
     <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
+        <p>So, you're interested in volunteering for CodeYourFuture?
+            Fantastic! We just need a few pieces of information to help us get organised and welcome you.
+        </p>
         <ShortAnswerQuestion title="What's your first name?" name="firstName" isRequired={true} />
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
         <ShortAnswerQuestion title="What city do you live in?" name="placeOfResidence" />

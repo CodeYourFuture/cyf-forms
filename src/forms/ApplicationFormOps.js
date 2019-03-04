@@ -9,6 +9,7 @@ import * as validators from '../utils/validators';
 
 const ApplicationFormOps = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
+        <h2>Running and growing the organisation</h2>
         <CheckboxesQuestion
             title="In which of these areas could you see yourself helping?"
             name="skillSets"
