@@ -23,11 +23,11 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
             title="Which CYF city is nearest to you?"
             name="placeOfInterest"
             options={[
-                'London',
-                'Manchester',
-                'Glasgow',
-                'Rome',
-                'Bogotá',
+                'London (UK)',
+                'Manchester (UK)',
+                'Glasgow (UK)',
+                'Rome (Italy)',
+                'Medellín (Colombia)',
             ]}
             isRequired={true}
         />

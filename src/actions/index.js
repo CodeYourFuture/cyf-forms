@@ -10,7 +10,7 @@ export const postForm = (name, values) => dispatch => {
     dispatch(submitForm());
     return fetch(apiEndpoints[name], {
         method: 'POST',
-        mode:  'no-cors',
+        mode: 'no-cors',
         headers: {
             'Content-Type': 'application/json'
         },

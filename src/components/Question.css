@@ -82,10 +82,14 @@
 
 .question_checkboxesAnswer input {
     margin-right: 10px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 1.15em;
 }
 
 .question_grid {
     width: 100%;
+    min-width: 550px;
     text-align: left;
     border-collapse: collapse;
     border-spacing: 0;
