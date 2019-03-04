@@ -3,7 +3,8 @@ import { reduxForm } from 'redux-form';
 
 const ApplicationFormThanks = () => (
     <div className="applicationForm_thankYou">
-        Thank you! #NailedIt
+        <h2>#NailedIt</h2>
+        <p>Thank you! Your submission is now on its way to us.</p>
     </div>
 );
 

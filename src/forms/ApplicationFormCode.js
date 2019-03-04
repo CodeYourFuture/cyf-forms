@@ -7,8 +7,8 @@ import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion';
 import Button from '../components/Button';
 import ShortAnswerQuestion from "../components/ShortAnswerQuestion";
 
-const ApplicationFormCode = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
-    <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
+const ApplicationFormCode = ({ handleSubmit, previousPage, invalid, nextButtonLabel }) => (
+    <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
         <h2>Teaching code or agile methodologies</h2>
         <GridQuestion
             title="How much experience do you have in these areas?"
@@ -32,14 +32,12 @@ const ApplicationFormCode = ({ onSubmit, onBack, invalid, nextButtonLabel }) => 
             ]}
             isRequired={true}
         />
-        <Button title="Back" type="button" onClick={onBack} />
+        <Button title="Back" type="button" onClick={previousPage} />
         <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
     </form>
 );
 
 ApplicationFormCode.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
     nextButtonLabel: PropTypes.string,
 };
 

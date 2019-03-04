@@ -14,6 +14,7 @@ class ApplicationForm extends Component {
             page: 1
         };
     }
+
     nextPage() {
         this.setState({ page: this.state.page + 1 });
     }
@@ -23,8 +24,9 @@ class ApplicationForm extends Component {
     }
 
     render() {
-        const { onSubmit, values } = this.props;
+        const { onSubmit, values, isSubmitted } = this.props;
         const { page } = this.state;
+        const stage = isSubmitted ? 4 : page;
 
         const isInterestedInCode = values.fieldsOfInterest && values.fieldsOfInterest['Teaching code or agile methodologies'] === true;
         const isInterestedInOps = values.fieldsOfInterest && values.fieldsOfInterest['Running and growing the organisation'] === true;
@@ -34,36 +36,37 @@ class ApplicationForm extends Component {
             2: isInterestedInCode
                 ? <ApplicationFormCode
                     onSubmit={this.nextPage}
-                    onBack={this.previousPage}
+                    previousPage={this.previousPage}
                     nextButtonLabel={isInterestedInOps ? "Next" : "Submit"}
                   />
                 : <ApplicationFormOps
                     onSubmit={onSubmit}
-                    onBack={this.previousPage}
+                    previousPage={this.previousPage}
                     nextButtonLabel="Submit"
                   />,
             3: isInterestedInCode && isInterestedInOps
                 ? <ApplicationFormOps
                     onSubmit={onSubmit}
-                    onBack={this.previousPage}
+                    previousPage={this.previousPage}
                     nextButtonLabel="Submit"
                    />
                 : <ApplicationFormThanks />,
-            4: !isInterestedInCode && isInterestedInOps
-                ? <ApplicationFormThanks />
-                : '',
+            4: <ApplicationFormThanks />,
         };
+
         return (
             <div>
                 <h1>CYF Volunteer Application Form</h1>
-                {stages[page]}
+                {stages[stage]}
             </div>
         )
     }
 }
 
 ApplicationForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired
+    onSubmit: PropTypes.func.isRequired,
+    values: PropTypes.object.isRequired,
+    isSubmitted: PropTypes.bool.isRequired,
 };
 
 export default ApplicationForm;

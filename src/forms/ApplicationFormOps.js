@@ -7,8 +7,8 @@ import Button from '../components/Button';
 
 import * as validators from '../utils/validators';
 
-const ApplicationFormOps = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
-    <form autoComplete="off" className="applicationForm" onSubmit={onSubmit}>
+const ApplicationFormOps = ({ handleSubmit, previousPage, invalid, nextButtonLabel }) => (
+    <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
         <h2>Running and growing the organisation</h2>
         <CheckboxesQuestion
             title="In which of these areas could you see yourself helping?"
@@ -39,14 +39,12 @@ const ApplicationFormOps = ({ onSubmit, onBack, invalid, nextButtonLabel }) => (
             ]}
             isRequired={true}
         />
-        <Button title="Back" type="button" onClick={onBack} />
+        <Button title="Back" type="button" onClick={previousPage} />
         <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
     </form>
 );
 
 ApplicationFormOps.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    onBack: PropTypes.func.isRequired,
     nextButtonLabel: PropTypes.string,
 };
 
