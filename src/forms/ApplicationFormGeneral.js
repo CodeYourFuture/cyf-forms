@@ -29,6 +29,7 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
                 'Rome',
                 'Bogotá',
             ]}
+            isRequired={true}
         />
         <EmailQuestion title="What's your email address?" name="email" isRequired={true} />
         <CheckboxesQuestion
@@ -51,6 +52,7 @@ ApplicationFormGeneral.propTypes = {
 const validate = values => ({
     firstName: validators.required(values.firstName),
     email: validators.required(values.email),
+    placeOfInterest: validators.required(values.placeOfInterest),
     fieldsOfInterest: {
         'Teaching code or agile methodologies': validators.required(values.fieldsOfInterest),
     },

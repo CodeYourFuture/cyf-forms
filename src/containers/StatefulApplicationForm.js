@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import ApplicationForm from '../forms/ApplicationForm';
-import { submitForm } from '../actions';
+import { postForm } from '../actions';
 
 const mapStateToProps = (state) => {
     return {
         onSubmit: (values, dispatch, props) => {
             console.log(props.form, values);
-            dispatch(submitForm(props.form, values));
+            dispatch(postForm(props.form, values));
         },
         values: state.form.applicationForm && state.form.applicationForm.values
             ? state.form.applicationForm.values
