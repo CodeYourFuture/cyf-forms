@@ -20,7 +20,7 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
         <ShortAnswerQuestion title="What city do you live in?" name="placeOfResidence" />
         <DropdownQuestion
-            title="Which CYF city is nearest to you?"
+            title="Which CYF city would you like to volunteer for?"
             name="placeOfInterest"
             options={[
                 'London (UK)',
@@ -28,7 +28,7 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
                 'Glasgow (UK)',
                 'Rome (Italy)',
                 'Medellín (Colombia)',
-            ]}
+            ].sort()}
             isRequired={true}
         />
         <EmailQuestion title="What's your email address?" name="email" isRequired={true} />

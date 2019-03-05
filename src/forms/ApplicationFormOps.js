@@ -20,13 +20,13 @@ const ApplicationFormOps = ({ handleSubmit, previousPage, invalid, nextButtonLab
                 'Growth Marketing / Social Media Strategy',
                 'NGO and Corporate Outreach / Fundraising / Partnerships',
                 'Accounting / Bookkeeping',
-                'Volunteer Engagement',
+                'Volunteer Engagement / Community Management',
                 'Project Management / Business Analysis',
-                'Recruitment',
+                'Graduate Job Placement (Recruitment)',
                 'Event Management',
                 'Personal Support Work / Wellbeing',
                 'Pedagogy / Learning Environments',
-            ]}
+            ].sort()}
             required={true}
         />
         <CheckboxesQuestion

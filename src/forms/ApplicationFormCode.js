@@ -24,7 +24,7 @@ const ApplicationFormCode = ({ handleSubmit, previousPage, invalid, nextButtonLa
         />
         <ShortAnswerQuestion title="In what other programming areas do you have experience?" name="otherCodeExperience" />
         <MultipleChoiceQuestion
-            title="Awesome. Would you be available to help during our classes on Sundays?"
+            title="Awesome. Would you be available to help during our classes on Saturdays/Sundays?"
             name="availableOnSundays"
             options={[
                 'Yes',
