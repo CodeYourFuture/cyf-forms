@@ -1,13 +1,19 @@
 import { apiEndpoints } from '../utils/apiEndpoints';
 
-export const SUBMIT_FORM = 'SUBMIT_FORM';
+export const START_FORM_SUBMISSION = 'START_FORM_SUBMISSION';
+export const END_FORM_SUBMISSION = 'END_FORM_SUBMISSION';
 
-export const submitForm = () => ({
-    type: SUBMIT_FORM,
+export const startFormSubmission = () => ({
+    type: START_FORM_SUBMISSION,
+});
+
+export const endFormSubmission = hasSucceeded => ({
+    type: END_FORM_SUBMISSION,
+    hasSucceeded,
 });
 
 export const postForm = (name, values) => dispatch => {
-    dispatch(submitForm());
+    dispatch(startFormSubmission());
     return fetch(apiEndpoints[name], {
         method: 'POST',
         mode: 'no-cors',
@@ -15,5 +21,7 @@ export const postForm = (name, values) => dispatch => {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(values)
-    });
+    })
+    .then(() => dispatch(endFormSubmission(true)))
+    .catch(() => dispatch(endFormSubmission(false)))
 };

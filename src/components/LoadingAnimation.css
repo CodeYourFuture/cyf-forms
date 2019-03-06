@@ -1,0 +1,10 @@
+.loadingAnimation {
+    visibility: hidden;
+    width: 36px;
+    height: 80px;
+    object-fit: cover;
+    margin-left: 20px;
+}
+.loadingAnimation-isVisible {
+    visibility: visible;
+}

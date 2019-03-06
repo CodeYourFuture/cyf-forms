@@ -5,14 +5,15 @@ import { reduxForm } from 'redux-form';
 import GridQuestion from "../components/GridQuestion";
 import MultipleChoiceQuestion from '../components/MultipleChoiceQuestion';
 import Button from '../components/Button';
+import SubmitButtonGroup from "../containers/SubmitButtonGroup";
 import ShortAnswerQuestion from "../components/ShortAnswerQuestion";
 
 const ApplicationFormCode = ({ handleSubmit, previousPage, invalid, nextButtonLabel }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
         <h2>Teaching code or agile methodologies</h2>
         <GridQuestion
-            title="How much experience do you have in these areas?"
-            name="codeExperience"
+            title="What is your level of expertise in the following areas?"
+            name="codeExpertise"
             options={[
                 'HTML/CSS',
                 'JavaScript',
@@ -22,18 +23,23 @@ const ApplicationFormCode = ({ handleSubmit, previousPage, invalid, nextButtonLa
             scaleLabelLowest="Novice"
             scaleLabelHighest="Expert"
         />
-        <ShortAnswerQuestion title="In what other programming areas do you have experience?" name="otherCodeExperience" />
+        <ShortAnswerQuestion
+            title="What other web development related expertise could you bring to CYF?"
+            name="otherCodeExpertise"
+        />
         <MultipleChoiceQuestion
             title="Awesome. Would you be available to help during our classes on Saturdays/Sundays?"
-            name="availableOnSundays"
+            name="availableOnWeekends"
             options={[
                 'Yes',
                 'No',
             ]}
             isRequired={true}
         />
-        <Button title="Back" type="button" onClick={previousPage} />
-        <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
+        <SubmitButtonGroup>
+            <Button title="Back" type="button" onClick={previousPage} />
+            <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
+        </SubmitButtonGroup>
     </form>
 );
 
@@ -42,7 +48,7 @@ ApplicationFormCode.propTypes = {
 };
 
 const validate = values => ({
-    availableOnSundays: values.availableOnSundays !== 'Yes',
+    availableOnWeekends: values.availableOnWeekends !== 'Yes',
 });
 
 export default reduxForm({

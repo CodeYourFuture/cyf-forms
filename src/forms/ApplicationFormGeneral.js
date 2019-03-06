@@ -7,21 +7,20 @@ import EmailQuestion from '../components/EmailQuestion';
 import CheckboxesQuestion from '../components/CheckboxesQuestion';
 import DropdownQuestion from '../components/DropdownQuestion';
 import Button from '../components/Button';
+import ButtonGroup from "../components/ButtonGroup";
 
 import * as validators from '../utils/validators';
 
-const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
-    return (
+const ApplicationFormGeneral = ({ handleSubmit, invalid }) => (
     <form autoComplete="off" className="applicationForm" onSubmit={handleSubmit}>
         <p>So, you're interested in volunteering for CodeYourFuture?
             Fantastic! We just need a few pieces of information to help us get organised and welcome you.
         </p>
         <ShortAnswerQuestion title="What's your first name?" name="firstName" isRequired={true} />
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
-        <ShortAnswerQuestion title="What city do you live in?" name="placeOfResidence" />
         <DropdownQuestion
             title="Which CYF city would you like to volunteer for?"
-            name="placeOfInterest"
+            name="cityOfCyf"
             options={[
                 'London (UK)',
                 'Manchester (UK)',
@@ -32,6 +31,11 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
             isRequired={true}
         />
         <EmailQuestion title="What's your email address?" name="email" isRequired={true} />
+        <ShortAnswerQuestion
+            title="What's your mobile number?"
+            description="If you don't mind us contacting you this way"
+            name="phone"
+        />
         <CheckboxesQuestion
             title="Cool. What are you interested in helping with?"
             name="fieldsOfInterest"
@@ -41,9 +45,11 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => {
             ]}
             isRequired={true}
         />
-        <Button title="Next" type="submit" disabled={invalid} />
+        <ButtonGroup>
+            <Button title="Next" type="submit" disabled={invalid} />
+        </ButtonGroup>
     </form>
-)};
+);
 
 ApplicationFormGeneral.propTypes = {
     onSubmit: PropTypes.func.isRequired,
@@ -52,7 +58,7 @@ ApplicationFormGeneral.propTypes = {
 const validate = values => ({
     firstName: validators.required(values.firstName),
     email: validators.required(values.email),
-    placeOfInterest: validators.required(values.placeOfInterest),
+    cityOfCyf: validators.required(values.cityOfCyf),
     fieldsOfInterest: {
         'Teaching code or agile methodologies': validators.required(values.fieldsOfInterest),
     },

@@ -4,6 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import CheckboxesQuestion from '../components/CheckboxesQuestion';
 import Button from '../components/Button';
+import SubmitButtonGroup from "../containers/SubmitButtonGroup";
 
 import * as validators from '../utils/validators';
 
@@ -33,14 +34,16 @@ const ApplicationFormOps = ({ handleSubmit, previousPage, invalid, nextButtonLab
             title="Awesome. When would you be available to help?"
             name="availability"
             options={[
-                'During our classes on Sundays',
+                'During our classes on Saturdays/Sundays',
                 'During the week',
-                'Varying, remotely',
+                'Other',
             ]}
             isRequired={true}
         />
-        <Button title="Back" type="button" onClick={previousPage} />
-        <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
+        <SubmitButtonGroup>
+            <Button title="Back" type="button" onClick={previousPage} />
+            <Button title={nextButtonLabel || 'Next'} type="submit" disabled={invalid} />
+        </SubmitButtonGroup>
     </form>
 );
 
@@ -50,7 +53,7 @@ ApplicationFormOps.propTypes = {
 
 const validate = values => ({
     availability: {
-        'Varying, remotely': validators.required(values.availability),
+        'Other': validators.required(values.availability),
     },
 });
 

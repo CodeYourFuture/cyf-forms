@@ -24,9 +24,9 @@ class ApplicationForm extends Component {
     }
 
     render() {
-        const { onSubmit, values, isSubmitted } = this.props;
+        const { onSubmit, values, hasSubmissionSucceeded } = this.props;
         const { page } = this.state;
-        const stage = isSubmitted ? 4 : page;
+        const stage = hasSubmissionSucceeded === true ? 4 : page;
 
         const isInterestedInCode = values.fieldsOfInterest && values.fieldsOfInterest['Teaching code or agile methodologies'] === true;
         const isInterestedInOps = values.fieldsOfInterest && values.fieldsOfInterest['Running and growing the organisation'] === true;
@@ -66,7 +66,8 @@ class ApplicationForm extends Component {
 ApplicationForm.propTypes = {
     onSubmit: PropTypes.func.isRequired,
     values: PropTypes.object.isRequired,
-    isSubmitted: PropTypes.bool.isRequired,
+    isSubmissionInProgress: PropTypes.bool.isRequired,
+    hasSubmissionSucceeded: PropTypes.bool.isRequired,
 };
 
 export default ApplicationForm;

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import Question from './Question';
 import { Field } from 'redux-form';
 
-const ShortAnswerQuestion = ({title, name, isRequired}) => (
-    <Question title={title} isRequired={isRequired}>
+const ShortAnswerQuestion = ({title, description, name, isRequired}) => (
+    <Question title={title} isRequired={isRequired} description={description}>
         <Field
             name={name}
             component="input"
@@ -17,6 +17,8 @@ const ShortAnswerQuestion = ({title, name, isRequired}) => (
 );
 
 ShortAnswerQuestion.propTypes = {
+    title: PropTypes.string,
+    description: PropTypes.string,
     isRequired: PropTypes.bool,
 };
 
