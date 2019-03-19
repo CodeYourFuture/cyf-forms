@@ -18,9 +18,12 @@ export const postForm = (name, values) => dispatch => {
         method: 'POST',
         mode: 'no-cors',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
         },
-        body: JSON.stringify(values)
+        body: JSON.stringify({
+            'Authorization': `Timestamp ${Date.now()}`,
+            ...values,
+        })
     })
     .then(() => dispatch(endFormSubmission(true)))
     .catch(() => dispatch(endFormSubmission(false)))

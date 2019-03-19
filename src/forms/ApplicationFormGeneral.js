@@ -20,7 +20,7 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => (
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
         <DropdownQuestion
             title="Which CYF city would you like to volunteer for?"
-            name="cityOfCyf"
+            name="city"
             options={[
                 'London (UK)',
                 'Manchester (UK)',
@@ -58,7 +58,7 @@ ApplicationFormGeneral.propTypes = {
 const validate = values => ({
     firstName: validators.required(values.firstName),
     email: validators.required(values.email),
-    cityOfCyf: validators.required(values.cityOfCyf),
+    city: validators.required(values.city),
     fieldsOfInterest: {
         'Teaching code or agile methodologies': validators.required(values.fieldsOfInterest),
     },

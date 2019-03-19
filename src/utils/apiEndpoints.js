@@ -1,3 +1,3 @@
 export const apiEndpoints = {
-    applicationForm:  'https://script.google.com/macros/s/AKfycby3Ga7H5bpSSt1e2STpVRSeQMqHjbMh39y8nl43IsWXcBetbwOX/exec',
+    applicationForm:  'https://script.google.com/a/codeyourfuture.io/macros/s/AKfycbznJP8xVvZa7bblZnFkhTkbamLxV85HYP8oSxb9PQ/exec',
 };
