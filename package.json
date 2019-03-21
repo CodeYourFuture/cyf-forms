@@ -1,7 +1,8 @@
 {
-  "name": "application-form",
+  "name": "cyf-forms",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://s3.eu-west-2.amazonaws.com/cyf-test-application-form/",
   "dependencies": {
     "normalize.css": "^8.0.1",
     "react": "^16.8.3",
