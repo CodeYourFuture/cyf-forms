@@ -8,7 +8,7 @@
     />
     <meta name="theme-color" content="#000000" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <title>Application Form</title>
+    <title>Volunteers Application Form</title>
     <style>
       .cyf-form {
         width: 880px;
@@ -19,6 +19,19 @@
       }
       h1 {
         line-height: 1.2em;
+      }
+      @media only screen and (max-width: 800px) {
+        .cyf-form {
+          position: fixed;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          padding: 0 5%;
+          -webkit-overflow-scrolling: touch;
+          -webkit-transform: translate3d(0, 0, 0);
+          overflow-y: scroll;
+        }
       }
     </style>
   </head>
