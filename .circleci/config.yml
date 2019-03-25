@@ -72,11 +72,6 @@ workflows:
     jobs:
       - test:
           context: build
-          filters:
-            branches:
-              only:
-                - staging       
-                - master
       - deploy_staging:
           context: deployments_staging
           requires:
