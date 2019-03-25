@@ -1,7 +1,7 @@
 ---
 version: 2
 jobs:
-  build_test:
+  test:
     docker:
       - image: circleci/node:11.12
         REACT_APP_NODE_ENV: STAGING
@@ -14,25 +14,22 @@ jobs:
       - run:
           name: Install dependencies for lint and test
           command: yarn
-       - run:
-           name: Lint project & run test
-           command: yarn test
+      - run:
+          name: Lint project & run test
+          command: yarn test
       - run:
           name: Set env variables
           command: 
             echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
-      - run:
-          name: build staging
-          command: yarn build:staging
-      - run:
-          name: build production
-          command: yarn build:production
 
   deploy_staging:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/repo
     steps:
+      - run:
+          name: build staging
+          command: yarn build:staging
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
@@ -53,6 +50,9 @@ jobs:
     working_directory: ~/repo
     steps:
       - run:
+          name: build production
+          command: yarn build:production
+      - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
@@ -68,9 +68,9 @@ jobs:
 
 workflows:
   version: 2
-  build_and_test:
+  test_and_deploy:
     jobs:
-      - build_test:
+      - test:
           context: build
           filters:
             branches:
@@ -80,7 +80,7 @@ workflows:
       - deploy_staging:
           context: deployments_staging
           requires:
-            - build_test
+            - test
           filters:
             branches:
               only:
@@ -88,7 +88,7 @@ workflows:
       - deploy_production:
           context: deployments
           requires:
-            - build_test
+            - test
           filters:
             branches:
               only:
