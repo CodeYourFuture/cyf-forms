@@ -21,15 +21,18 @@ jobs:
           name: Set env variables
           command: 
             echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: build staging
+          command: yarn build:staging
+      - run:
+          name: build production
+          command: yarn build:production
 
   deploy_staging:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/repo
     steps:
-      - run:
-          name: build staging
-          command: yarn build:staging
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
@@ -49,9 +52,6 @@ jobs:
       - image: circleci/python:3.6-jessie
     working_directory: ~/repo
     steps:
-      - run:
-          name: build production
-          command: yarn build:production
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
