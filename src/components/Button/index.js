@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Button.css';
+import './index.css';
 
 const Button = props => {
-    const { title } = props;
+    const { title, ...otherProps } = props;
     return (
-        <button className="button" {...props}>{title}</button>
+        <button className="button" {...otherProps}>{title}</button>
     );
 };
 

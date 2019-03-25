@@ -1,9 +1,10 @@
-import React, { Component } from 'react';
+import React, { lazy, Suspense, Component } from 'react';
 import PropTypes from 'prop-types';
-import ApplicationFormGeneral from './ApplicationFormGeneral';
-import ApplicationFormCode from './ApplicationFormCode';
-import ApplicationFormOps from './ApplicationFormOps';
-import ApplicationFormThanks from './ApplicationFormThanks';
+import LoadingAnimation from '../components/LoadingAnimation';
+const ApplicationFormGeneral = lazy(() => import('./ApplicationFormGeneral'));
+const ApplicationFormCode = lazy(() => import('./ApplicationFormCode'));
+const ApplicationFormOps = lazy(() => import('./ApplicationFormOps'));
+const ApplicationFormThanks = lazy(() => import('./ApplicationFormThanks'));
 
 class ApplicationForm extends Component {
     constructor(props) {
@@ -31,27 +32,41 @@ class ApplicationForm extends Component {
         const isInterestedInCode = values.fieldsOfInterest && values.fieldsOfInterest['Teaching code or agile methodologies'] === true;
         const isInterestedInOps = values.fieldsOfInterest && values.fieldsOfInterest['Running and growing the organisation'] === true;
 
+        const fallbackElement = <LoadingAnimation isVisible={true} />;
+
         const stages = {
-            1: <ApplicationFormGeneral onSubmit={this.nextPage} />,
+            1: <Suspense fallback={fallbackElement}>
+                <ApplicationFormGeneral onSubmit={this.nextPage} />
+              </Suspense>,
             2: isInterestedInCode
-                ? <ApplicationFormCode
-                    onSubmit={this.nextPage}
-                    previousPage={this.previousPage}
-                    nextButtonLabel={isInterestedInOps ? "Next" : "Submit"}
-                  />
-                : <ApplicationFormOps
-                    onSubmit={onSubmit}
-                    previousPage={this.previousPage}
-                    nextButtonLabel="Submit"
-                  />,
+                ? <Suspense fallback={fallbackElement}>
+                    <ApplicationFormCode
+                      onSubmit={this.nextPage}
+                      previousPage={this.previousPage}
+                      nextButtonLabel={isInterestedInOps ? "Next" : "Submit"}
+                    />
+                  </Suspense>
+                : <Suspense fallback={fallbackElement}>
+                    <ApplicationFormOps
+                      onSubmit={onSubmit}
+                      previousPage={this.previousPage}
+                      nextButtonLabel="Submit"
+                    />
+                  </Suspense>,
             3: isInterestedInCode && isInterestedInOps
-                ? <ApplicationFormOps
-                    onSubmit={onSubmit}
-                    previousPage={this.previousPage}
-                    nextButtonLabel="Submit"
-                   />
-                : <ApplicationFormThanks />,
-            4: <ApplicationFormThanks />,
+                ? <Suspense fallback={fallbackElement}>
+                    <ApplicationFormOps
+                      onSubmit={onSubmit}
+                      previousPage={this.previousPage}
+                      nextButtonLabel="Submit"
+                     />
+                  </Suspense>
+                : <Suspense fallback={fallbackElement}>
+                    <ApplicationFormThanks />
+                  </Suspense>,
+            4: <Suspense fallback={fallbackElement}>
+                 <ApplicationFormThanks />
+              </Suspense>,
         };
 
         return (
