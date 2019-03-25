@@ -15,8 +15,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "build:staging": "REACT_APP_NODE_ENV=STAGING react-scripts build && mv build staging",
-    "build:production": "REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-scripts build && mv build production",
+    "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-scripts build && mv build staging",
+    "build:production": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-scripts build && mv build production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
