@@ -1,0 +1,95 @@
+---
+version: 2
+jobs:
+  build_test:
+    docker:
+      - image: circleci/node:11.12
+        REACT_APP_NODE_ENV: STAGING
+    working_directory: ~/cyf-forms
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies for lint and test
+          command: yarn
+       - run:
+           name: Lint project & run test
+           command: yarn test
+      - run:
+          name: Set env variables
+          command: 
+            echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: build staging
+          command: yarn build:staging
+      - run:
+          name: build production
+          command: yarn build:production
+
+  deploy_staging:
+    docker:
+      - image: circleci/python:3.6-jessie
+    working_directory: ~/repo
+    steps:
+      - run:
+          name: Set env variables
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Update s3 deployment
+          command: |
+            aws configure set preview.cloudfront true
+            aws s3 sync staging/ s3://${STAGING_BUCKET} \
+              --acl public-read --delete \
+              --cache-control max-age=3600
+
+  deploy_production:
+    docker:
+      - image: circleci/python:3.6-jessie
+    working_directory: ~/repo
+    steps:
+      - run:
+          name: Set env variables
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - run:
+          name: Update s3 deployment
+          command: |
+            aws configure set preview.cloudfront true
+            aws s3 sync production/ s3://${PRODUCTION_BUCKET} \
+              --acl public-read --delete \
+              --cache-control max-age=3600
+
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build_test:
+          context: build
+          filters:
+            branches:
+              only:
+                - staging       
+                - master
+      - deploy_staging:
+          context: deployments_staging
+          requires:
+            - build_test
+          filters:
+            branches:
+              only:
+                - staging
+      - deploy_production:
+          context: deployments
+          requires:
+            - build_test
+          filters:
+            branches:
+              only:
+                - master

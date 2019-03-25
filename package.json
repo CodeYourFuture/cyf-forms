@@ -2,7 +2,6 @@
   "name": "cyf-forms",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://s3.eu-west-2.amazonaws.com/cyf-test-application-form/",
   "dependencies": {
     "normalize.css": "^8.0.1",
     "react": "^16.8.3",
@@ -16,6 +15,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build:staging": "REACT_APP_NODE_ENV=STAGING react-scripts build && mv build staging",
+    "build:production": "REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-scripts build && mv build production",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
