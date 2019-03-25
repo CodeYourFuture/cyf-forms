@@ -43,7 +43,7 @@ jobs:
           name: Update s3 deployment
           command: |
             aws configure set preview.cloudfront true
-            aws s3 sync staging/ s3://${STAGING_BUCKET} \
+            aws s3 sync staging/ s3://staging.forms.codeyourfuture.io \
               --acl public-read --delete \
               --cache-control max-age=3600
 
@@ -62,7 +62,7 @@ jobs:
           name: Update s3 deployment
           command: |
             aws configure set preview.cloudfront true
-            aws s3 sync production/ s3://${PRODUCTION_BUCKET} \
+            aws s3 sync production/ s3://forms.codeyourfuture.io \
               --acl public-read --delete \
               --cache-control max-age=3600
 
