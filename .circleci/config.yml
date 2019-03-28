@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: circleci/node:11.12
         REACT_APP_NODE_ENV: STAGING
-    working_directory: ~/cyf-forms
+    working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
