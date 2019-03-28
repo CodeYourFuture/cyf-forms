@@ -1,0 +1,23 @@
+.question_shortAnswer {
+    display: block;
+    width: 100%;
+    font-family: inherit;
+    color: rgb(52, 113, 130);
+    -webkit-appearance: none;
+    transform: translateZ(0);
+    font-size: 16px;
+    line-height: 1.2em;
+    -webkit-font-smoothing: antialiased;
+    padding: 0 0 8px;
+    border-width: initial;
+    border-style: none;
+    border-color: initial;
+    border-image: initial;
+    outline: none;
+    border-radius: 0;
+    transition: box-shadow 0.2s ease 0s;
+    background: none;
+}
+.question_shortAnswer:not(:focus) {
+    box-shadow: rgba(52, 113, 130, 0.3) 0 1px;
+}

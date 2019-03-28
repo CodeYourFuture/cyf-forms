@@ -1,0 +1,20 @@
+.question_choices {
+    display: inline-block;
+}
+.question_choice {
+    display: flex;
+    min-width: 150px;
+    font-size: 16px;
+    color: rgb(52, 113, 130);
+}
+
+.question_choice + .question_choice {
+    margin-top: 20px;
+}
+
+.question_choice input {
+    margin-right: 10px;
+    flex-grow: 0;
+    flex-shrink: 0;
+    align-self: center;
+}

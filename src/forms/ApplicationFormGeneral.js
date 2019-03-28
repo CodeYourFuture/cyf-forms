@@ -4,7 +4,7 @@ import { reduxForm } from 'redux-form';
 
 import ShortAnswerQuestion from '../components/ShortAnswerQuestion';
 import EmailQuestion from '../components/EmailQuestion';
-import CheckboxesQuestion from '../components/CheckboxesQuestion';
+import CheckboxesQuestion from '../components/MultipleAnswerQuestion';
 import DropdownQuestion from '../components/DropdownQuestion';
 import Button from '../components/Button';
 import ButtonGroup from "../components/ButtonGroup";

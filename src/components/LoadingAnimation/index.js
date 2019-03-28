@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './index.css';
 import loadingAnimation from './loadingAnimation.svg';
+import './index.css';
 
 const LoadingAnimation = ({ isVisible = false }) => (
     <img
