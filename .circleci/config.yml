@@ -60,7 +60,7 @@ jobs:
     working_directory: ~/deploy
     steps:
       - attach_workspace:
-          at: production
+          at: .
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV

@@ -1,0 +1,35 @@
+.question_grid {
+    width: 100%;
+    min-width: 550px;
+    text-align: left;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.question_grid_label {
+    display: block;
+}
+
+.question_grid td,
+.question_grid th {
+    padding: 15px;
+}
+
+.question_grid thead th,
+.question_grid tbody td {
+    width: 10%;
+    text-align: center;
+}
+
+.question_grid thead th {
+    vertical-align: top;
+}
+
+.question_grid tbody tr:nth-child(even) td,
+.question_grid tbody tr:nth-child(even) th {
+    background-color: #eee;
+}
+
+.question_grid label {
+    display: block;
+}

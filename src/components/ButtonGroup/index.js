@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ButtonGroup.css';
-import LoadingAnimation from "./LoadingAnimation";
+import './index.css';
+import LoadingAnimation from '../LoadingAnimation';
 
 const ButtonGroup = ({ children, isSubmissionInProgress = false }) => (
     <div className="buttonGroup">

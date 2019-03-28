@@ -1,0 +1,28 @@
+.question {
+    padding: 20px 0;
+    page-break-inside: avoid;
+    line-height: 1em;
+}
+.question_title {
+    display: block;
+    margin-bottom: 15px;
+    font-size: 24px;
+    line-height: 1.5em;
+    max-width: 100%;
+    font-weight: unset;
+    color: rgb(77, 77, 77);
+    overflow-wrap: break-word;
+    hyphens: auto;
+}
+.question-isRequired .question_title::after {
+    content: '*';
+    display: inline-block;
+    margin-left: 10px;
+    color: #c5221f;
+}
+.question_description {
+    display: block;
+    margin-bottom: 20px;
+    font-size: 16px;
+    color: rgb(52, 113, 130);
+}
