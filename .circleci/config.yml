@@ -27,8 +27,11 @@ jobs:
       - run:
           name: build production
           command: yarn build:production
+      - run:
+          name: Output folder structure
+          command: ls -lah
       - persist_to_workspace:
-          root: .
+          root: ~/repo
           paths:
             - staging
             - production
@@ -36,10 +39,13 @@ jobs:
   deploy_staging:
     docker:
       - image: circleci/python:3.6-jessie
-    working_directory: ~/repo
+    working_directory: ~/deploy
     steps:
       - attach_workspace:
           at: staging
+      - run:
+          name: Output folder structure
+          command: find . -maxdepth 2 -mindepth 2
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
@@ -57,7 +63,7 @@ jobs:
   deploy_production:
     docker:
       - image: circleci/python:3.6-jessie
-    working_directory: ~/repo
+    working_directory: ~/deploy
     steps:
       - attach_workspace:
           at: production
