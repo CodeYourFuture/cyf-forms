@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Field } from 'redux-form';
 import Question from '../Question';
 import TableResponsive from '../TableResponsive';
-import { Field } from 'redux-form';
 import './index.css';
 
 const GridQuestion = ({title, name, options, scaleLabelLowest, scaleLabelHighest}) => (

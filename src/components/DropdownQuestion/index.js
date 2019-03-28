@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Question from '../Question';
 import { Field } from 'redux-form';
+import Question from '../Question';
 import './index.css';
 
 const DropdownQuestion = ({title, name, options, isRequired}) => (
