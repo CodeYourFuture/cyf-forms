@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './Question.css';
+import './index.css';
 
 const Question = ({ title, description, isRequired, children }) => (
     <div className={"question" + (isRequired ? " question-isRequired" : "")}>

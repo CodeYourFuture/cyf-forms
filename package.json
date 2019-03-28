@@ -13,11 +13,11 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-scripts build && mv build staging",
-    "build:production": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-scripts build && mv build production",
-    "test": "react-scripts test",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-app-rewired build && mv build staging",
+    "build:production": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-app-rewired build && mv build production",
+    "test": "react-app-rewired test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -31,6 +31,8 @@
   ],
   "devDependencies": {
     "enzyme": "^3.9.0",
-    "enzyme-adapter-react-16": "^1.11.2"
+    "enzyme-adapter-react-16": "^1.11.2",
+    "react-app-rewired": "^2.1.1",
+    "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }

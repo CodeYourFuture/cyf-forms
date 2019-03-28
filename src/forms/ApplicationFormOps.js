@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 
-import CheckboxesQuestion from '../components/CheckboxesQuestion';
+import CheckboxesQuestion from '../components/MultipleAnswerQuestion';
 import Button from '../components/Button';
 import SubmitButtonGroup from "../containers/SubmitButtonGroup";
 
