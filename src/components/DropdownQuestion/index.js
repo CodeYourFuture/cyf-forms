@@ -4,8 +4,8 @@ import { Field } from 'redux-form';
 import Question from '../Question';
 import './index.css';
 
-const DropdownQuestion = ({title, name, options, isRequired}) => (
-    <Question title={title} isRequired={isRequired}>
+const DropdownQuestion = ({title, description, name, options, isRequired}) => (
+    <Question title={title} description={description} isRequired={isRequired}>
         <Field name={name} component="select" className="question_dropdownAnswer" required={isRequired}>
             <option value="" disabled={true}>Choose an option</option>
             {options.map((value, n) => (

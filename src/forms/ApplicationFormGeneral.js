@@ -20,8 +20,10 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid }) => (
         <ShortAnswerQuestion title="And what's your last name?" name="lastName" />
         <DropdownQuestion
             title="Which CYF city would you like to volunteer for?"
+            description="Are you interested in bringing CYF to your city? Email us at contact@codeyourfuture.io."
             name="city"
             options={[
+                'Cape Town (South Africa)',
                 'London (UK)',
                 'Manchester (UK)',
                 'Glasgow (UK)',
