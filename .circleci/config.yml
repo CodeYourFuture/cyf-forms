@@ -1,10 +1,32 @@
 ---
-version: 2
+version: 2.1
+
+commands:
+  s3deploy:
+    description: "Deploy to S3 and invalidate cache"
+    parameters:
+      to:
+        type: string
+      cf_distribution_id:
+        type: string
+    steps:
+      - run: |
+          aws configure set preview.cloudfront true
+          aws s3 sync staging/ s3://<< parameters.to >> \
+            --acl public-read --delete
+          aws s3 sync staging/static s3://<< parameters.to >>/static \
+            --acl public-read --delete \
+            --cache-control max-age=31536000
+          aws cloudfront create-invalidation \
+              --distribution-id << parameters.cf_distribution_id >> \
+              --paths /index.html /asset-manifest.json
+
 jobs:
   test:
     docker:
       - image: circleci/node:11.12
-        REACT_APP_NODE_ENV: STAGING
+        environment:
+          REACT_APP_NODE_ENV: STAGING
     working_directory: ~/repo
     steps:
       - checkout
@@ -19,7 +41,7 @@ jobs:
           command: yarn test
       - run:
           name: Set env variables
-          command: 
+          command:
             echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build staging
@@ -37,6 +59,8 @@ jobs:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/deploy
+    environment:
+      PUBLIC_URL: https://staging.forms.codeyourfuture.io
     steps:
       - attach_workspace:
           at: .
@@ -46,18 +70,16 @@ jobs:
       - run:
           name: Install awscli
           command: sudo pip install awscli
-      - run:
-          name: Update s3 deployment
-          command: |
-            aws configure set preview.cloudfront true
-            aws s3 sync staging/ s3://staging.forms.codeyourfuture.io \
-              --acl public-read --delete \
-              --cache-control max-age=3600
+      - s3deploy:
+          to: "staging.forms.codeyourfuture.io"
+          cf_distribution_id: E3MJAA9E60TZUB
 
   deploy_production:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/deploy
+    environment:
+      PUBLIC_URL: https://forms.codeyourfuture.io
     steps:
       - attach_workspace:
           at: .
@@ -67,13 +89,9 @@ jobs:
       - run:
           name: Install awscli
           command: sudo pip install awscli
-      - run:
-          name: Update s3 deployment
-          command: |
-            aws configure set preview.cloudfront true
-            aws s3 sync production/ s3://forms.codeyourfuture.io \
-              --acl public-read --delete \
-              --cache-control max-age=3600
+      - s3deploy:
+          to: "forms.codeyourfuture.io"
+          cf_distribution_id: E3MHHTOV68A76Q
 
 workflows:
   version: 2
