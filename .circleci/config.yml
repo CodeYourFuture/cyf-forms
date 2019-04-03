@@ -82,7 +82,9 @@ commands:
             aws configure set preview.cloudfront true
             aws s3 sync staging/ s3://<< parameters.to >> \
               --acl public-read --delete \
-              --cache-control max-age=3600
+            aws s3 sync staging/static s3://<< parameters.to >>/static \
+              --acl public-read --delete \
+              --cache-control max-age=31536000
             aws cloudfront create-invalidation \
                 --distribution-id $CLOUDFRONT_DISTRO_ID \
                 --paths /index.html /asset-manifest.json
