@@ -23,7 +23,8 @@ jobs:
   test:
     docker:
       - image: circleci/node:11.12
-        REACT_APP_NODE_ENV: STAGING
+        environment:
+          REACT_APP_NODE_ENV: STAGING
     working_directory: ~/repo
     steps:
       - checkout
