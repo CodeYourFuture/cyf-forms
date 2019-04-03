@@ -37,6 +37,8 @@ jobs:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/deploy
+    environment:
+      PUBLIC_URL: https://staging.forms.codeyourfuture.io
     steps:
       - attach_workspace:
           at: .
@@ -58,6 +60,8 @@ jobs:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/deploy
+    environment:
+      PUBLIC_URL: https://forms.codeyourfuture.io
     steps:
       - attach_workspace:
           at: .

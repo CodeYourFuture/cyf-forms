@@ -13,5 +13,14 @@ module.exports = {
                 exclude: /Conflicting order between/,
             }),
         ]),
+        optimization: {
+            ...config.optimization,
+            runtimeChunk: false,
+            splitChunks: {
+                cacheGroups: {
+                    default: false
+                },
+            },
+        },
     }),
 };
