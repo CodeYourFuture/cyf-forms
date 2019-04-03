@@ -1,5 +1,24 @@
 ---
-version: 2
+version: 2.1
+
+commands:
+  s3deploy:
+    description: "Deploy to S3 and invalidate cache"
+    parameters:
+      to:
+        type: string
+    steps:
+      - run: |
+          aws configure set preview.cloudfront true
+          aws s3 sync staging/ s3://<< parameters.to >> \
+            --acl public-read --delete \
+          aws s3 sync staging/static s3://<< parameters.to >>/static \
+            --acl public-read --delete \
+            --cache-control max-age=31536000
+          aws cloudfront create-invalidation \
+              --distribution-id $CLOUDFRONT_DISTRO_ID \
+              --paths /index.html /asset-manifest.json
+
 jobs:
   test:
     docker:
@@ -48,13 +67,8 @@ jobs:
       - run:
           name: Install awscli
           command: sudo pip install awscli
-      - run:
-          name: Update s3 deployment
-          command: |
-            aws configure set preview.cloudfront true
-            aws s3 sync staging/ s3://staging.forms.codeyourfuture.io \
-              --acl public-read --delete \
-              --cache-control max-age=3600
+      - s3deploy:
+          to: "staging.forms.codeyourfuture.io"
 
   deploy_production:
     docker:
@@ -71,13 +85,8 @@ jobs:
       - run:
           name: Install awscli
           command: sudo pip install awscli
-      - run:
-          name: Update s3 deployment
-          command: |
-            aws configure set preview.cloudfront true
-            aws s3 sync production/ s3://forms.codeyourfuture.io \
-              --acl public-read --delete \
-              --cache-control max-age=3600
+      - s3deploy:
+          to: "forms.codeyourfuture.io"
 
 workflows:
   version: 2
