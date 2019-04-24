@@ -17,7 +17,8 @@ const ApplicationFormCode = ({ handleSubmit, previousPage, invalid, nextButtonLa
             options={[
                 'HTML/CSS',
                 'JavaScript',
-                'Backend/Database',
+                'React',
+                'Node/SQL',
                 'Agile Methodologies',
             ]}
             scaleLabelLowest="Novice"
