@@ -19,7 +19,7 @@ commands:
             --cache-control max-age=31536000
           aws cloudfront create-invalidation \
               --distribution-id << parameters.cf_distribution_id >> \
-              --paths /index.html /asset-manifest.json
+              --paths /\*
 
 jobs:
   test:
