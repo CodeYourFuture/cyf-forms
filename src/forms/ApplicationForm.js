@@ -41,7 +41,7 @@ class ApplicationForm extends Component {
             2: isInterestedInCode
                 ? <Suspense fallback={fallbackElement}>
                     <ApplicationFormCode
-                      onSubmit={this.nextPage}
+                      onSubmit={isInterestedInOps ? this.nextPage : onSubmit}
                       previousPage={this.previousPage}
                       nextButtonLabel={isInterestedInOps ? "Next" : "Submit"}
                     />
