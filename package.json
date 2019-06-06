@@ -14,10 +14,15 @@
   },
   "scripts": {
     "start": "react-app-rewired start",
+    "start:test": "cross-env REACT_APP_NODE_ENV=TESTING react-app-rewired start",
     "build": "react-app-rewired build",
     "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-app-rewired build && mv build staging",
     "build:production": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-app-rewired build && mv build production",
     "test": "react-app-rewired test",
+    "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn start:test\" \"yarn e2e:mock\" \"yarn e2e:run\"",
+    "e2e:mock": "node ./e2e/fixtures/server.js",
+    "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
+    "lint": "eslint .",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -30,9 +35,16 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^4.1.0",
+    "cross-env": "^5.2.0",
+    "cypress": "^3.3.1",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
+    "eslint-plugin-cypress": "^2.2.1",
+    "express": "^4.17.1",
     "react-app-rewired": "^2.1.1",
+    "wait-on": "^3.2.0",
     "webpack-filter-warnings-plugin": "^1.2.1"
   }
 }

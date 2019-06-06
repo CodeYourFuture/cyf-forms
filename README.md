@@ -40,3 +40,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
+
+### `yarn e2e`
+
+Runs the [Cypress] end-to-end tests, which means:
+
+ - Starting a mock for the Google server on port 3100
+ - Starting the forms app in TESTING mode on port 3000
+ - Waiting for the app to start then running the tests
+
+[Cypress]: https://www.cypress.io/
