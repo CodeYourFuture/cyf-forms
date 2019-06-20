@@ -29,14 +29,6 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid, cities }) => (
       description="If you're interested in bringing CYF to your city email us at contact@codeyourfuture.io."
       name="city"
       options={cities}
-      // {[
-      //     'Cape Town (South Africa)',
-      //     'London (UK)',
-      //     'Manchester (UK)',
-      //     'Glasgow (UK)',
-      //     'Rome (Italy)',
-      //     'Medellín (Colombia)',
-      // ].sort()}
       isRequired={true}
     />
     <EmailQuestion

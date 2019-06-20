@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "chalk": "^2.4.2",
     "normalize.css": "^8.0.1",
     "react": "^16.8.3",
     "react-dom": "^16.8.3",
@@ -11,11 +10,10 @@
     "react-scripts": "2.1.5",
     "redux": "^4.0.1",
     "redux-form": "^8.1.0",
-    "redux-thunk": "^2.3.0",
-    "yarn": "^1.16.0"
+    "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "REACT_APP_NODE_ENV=TESTING react-app-rewired start",
+    "start": "REACT_APP_NODE_ENV=LOCAL react-app-rewired start",
     "start:test": "cross-env REACT_APP_NODE_ENV=TESTING react-app-rewired start",
     "build": "react-app-rewired build",
     "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-app-rewired build && mv build staging",

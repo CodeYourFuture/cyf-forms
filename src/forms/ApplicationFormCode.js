@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { reduxForm } from "redux-form";
-
+import { expertiseAreas } from "./ExpertiseAreas";
 import GridQuestion from "../components/GridQuestion";
 import MultipleChoiceQuestion from "../components/MultipleChoiceQuestion";
 import Button from "../components/Button";
@@ -19,13 +19,7 @@ const ApplicationFormCode = ({
     <GridQuestion
       title="What is your level of expertise in the following areas?"
       name="codeExpertise"
-      options={[
-        "HTML/CSS",
-        "JavaScript",
-        "React",
-        "Node/SQL",
-        "Agile Methodologies"
-      ]}
+      options={expertiseAreas}
       scaleLabelLowest="Novice"
       scaleLabelHighest="Expert"
     />

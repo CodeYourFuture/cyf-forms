@@ -21,7 +21,6 @@ const DropdownQuestion = ({
       <option value="" disabled={true}>
         Choose an option
       </option>
-      {console.log(options)}
       {options.map((value, n) => (
         <option key={n} value={value._id}>
           {value.name}
