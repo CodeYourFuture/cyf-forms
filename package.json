@@ -13,7 +13,7 @@
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "react-app-rewired start",
+    "start": "REACT_APP_NODE_ENV=LOCAL react-app-rewired start",
     "start:test": "cross-env REACT_APP_NODE_ENV=TESTING react-app-rewired start",
     "build": "react-app-rewired build",
     "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-app-rewired build && mv build staging",
