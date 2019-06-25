@@ -1,9 +1,9 @@
-
 import { apiEndpoints } from "../utils/apiEndpoints"
 import axios from "axios"
 import { domain, appPath } from "../utils/apiPath"
 export const START_FORM_SUBMISSION = "START_FORM_SUBMISSION"
 export const END_FORM_SUBMISSION = "END_FORM_SUBMISSION"
+export const GET_CITIES = "GET_CITIES"
 const path = `${domain()}${appPath}`
 export const startFormSubmission = () => ({
   type: START_FORM_SUBMISSION
@@ -45,15 +45,28 @@ export const postForm = (name, values) => async dispatch => {
     await postVolunteerFormToSpritSheet(name, values)
     dispatch(endFormSubmission(true))
   } catch (err) {
-    console.log({ err })
     dispatch(endFormSubmission(false))
   }
 }
-});
 
+export const getCitiesFromApi = async () => {
+  try {
+    const cities = await axios.get(`${domain()}/cities`)
+    return cities.data && cities.data.cities && cities.data.cities
+  } catch (err) {
+    return err
+  }
+}
+
+export const setCitiesToStore = cities => {
+  return {
+    type: GET_CITIES,
+    cities
+  }
+}
 export const getCities = () => {
-  return fetch(`http://cyf-api.codeyourfuture.io/cities`)
-    .then(response => response.json())
-    .then(response => (response.cities ? response.cities : []))
-    .catch(err => console.log(err));
-};
+  return async dispatch => {
+    const data = await getCitiesFromApi()
+    dispatch(setCitiesToStore(data))
+  }
+}

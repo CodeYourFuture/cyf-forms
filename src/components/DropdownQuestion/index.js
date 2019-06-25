@@ -22,7 +22,7 @@ const DropdownQuestion = ({
         Choose an option
       </option>
       {options.map((value, n) => (
-        <option key={n} value={value._id}>
+        <option key={n} value={value.name}>
           {value.name}
         </option>
       ))}
