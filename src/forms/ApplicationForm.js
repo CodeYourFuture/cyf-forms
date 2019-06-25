@@ -1,44 +1,43 @@
-import React, { lazy, Suspense, Component } from "react";
-import PropTypes from "prop-types";
-import LoadingAnimation from "../components/LoadingAnimation";
-import { getCities } from "../actions";
-const ApplicationFormGeneral = lazy(() => import("./ApplicationFormGeneral"));
-const ApplicationFormCode = lazy(() => import("./ApplicationFormCode"));
-const ApplicationFormOps = lazy(() => import("./ApplicationFormOps"));
-const ApplicationFormThanks = lazy(() => import("./ApplicationFormThanks"));
+import React, { lazy, Suspense, Component } from "react"
+import PropTypes from "prop-types"
+import LoadingAnimation from "../components/LoadingAnimation"
+import { connect } from "react-redux"
+import { getCities } from "../actions"
+const ApplicationFormGeneral = lazy(() => import("./ApplicationFormGeneral"))
+const ApplicationFormCode = lazy(() => import("./ApplicationFormCode"))
+const ApplicationFormOps = lazy(() => import("./ApplicationFormOps"))
+const ApplicationFormThanks = lazy(() => import("./ApplicationFormThanks"))
 
 class ApplicationForm extends Component {
   state = {
-    page: 1,
-    cities: []
-  };
+    page: 1
+  }
 
   componentWillMount = async () => {
-    const cities = await getCities();
-    this.setState({ cities: cities });
-  };
+    this.props.getCities()
+  }
 
   nextPage = () => {
-    this.setState({ page: this.state.page + 1 });
-  };
+    this.setState({ page: this.state.page + 1 })
+  }
 
   previousPage = () => {
-    this.setState({ page: this.state.page - 1 });
-  };
+    this.setState({ page: this.state.page - 1 })
+  }
 
   render() {
-    const { onSubmit, values, hasSubmissionSucceeded } = this.props;
-    const { page, cities } = this.state;
-
-    const stage = hasSubmissionSucceeded === true ? 4 : page;
+    const { onSubmit, values, hasSubmissionSucceeded } = this.props
+    const { page } = this.state
+    const { cities } = this.props
+    const stage = hasSubmissionSucceeded === true ? 4 : page
     const isInterestedInCode =
       values.fieldsOfInterest &&
-      values.fieldsOfInterest["Teaching code or agile methodologies"] === true;
+      values.fieldsOfInterest["Teaching code or agile methodologies"] === true
     const isInterestedInOps =
       values.fieldsOfInterest &&
-      values.fieldsOfInterest["Running and growing the organisation"] === true;
+      values.fieldsOfInterest["Running and growing the organisation"] === true
 
-    const fallbackElement = <LoadingAnimation isVisible={true} />;
+    const fallbackElement = <LoadingAnimation isVisible={true} />
 
     const stages = {
       1: (
@@ -82,14 +81,14 @@ class ApplicationForm extends Component {
           <ApplicationFormThanks />
         </Suspense>
       )
-    };
+    }
 
     return (
       <div>
         <h1>CYF Volunteer Application Form</h1>
         {stages[stage]}
       </div>
-    );
+    )
   }
 }
 
@@ -98,6 +97,16 @@ ApplicationForm.propTypes = {
   values: PropTypes.object.isRequired,
   isSubmissionInProgress: PropTypes.bool.isRequired,
   hasSubmissionSucceeded: PropTypes.bool.isRequired
-};
+}
 
-export default ApplicationForm;
+function mapStateToProps(store) {
+  const { cities } = store.api
+  return {
+    cities
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  { getCities }
+)(ApplicationForm)
