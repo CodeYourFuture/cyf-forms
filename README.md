@@ -1,6 +1,6 @@
 # CYF Forms
 
-This project was born out of the need for a free alternative to Typeform. Google Forms is free but doesn't offer  the
+This project was born out of the need for a free alternative to Typeform. Google Forms is free but doesn't offer the
 branching logic required.
 
 ## How to Embed
@@ -15,6 +15,7 @@ You can embed one or several forms on a page using this syntax:
 
 - ApplicationForm
 
+I am Kadir and I am the greatest
 
 ## Available Scripts
 
@@ -40,3 +41,13 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 The build is minified and the filenames include the hashes.<br>
 Your app is ready to be deployed!
+
+### `yarn e2e`
+
+Runs the [Cypress] end-to-end tests, which means:
+
+- Starting a mock for the Google server on port 3100
+- Starting the forms app in TESTING mode on port 3000
+- Waiting for the app to start then running the tests
+
+[cypress]: https://www.cypress.io/

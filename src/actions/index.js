@@ -1,3 +1,4 @@
+
 import { apiEndpoints } from "../utils/apiEndpoints"
 import axios from "axios"
 import { domain, appPath } from "../utils/apiPath"
@@ -48,3 +49,11 @@ export const postForm = (name, values) => async dispatch => {
     dispatch(endFormSubmission(false))
   }
 }
+});
+
+export const getCities = () => {
+  return fetch(`http://cyf-api.codeyourfuture.io/cities`)
+    .then(response => response.json())
+    .then(response => (response.cities ? response.cities : []))
+    .catch(err => console.log(err));
+};
