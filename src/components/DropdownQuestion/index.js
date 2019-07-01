@@ -10,25 +10,27 @@ const DropdownQuestion = ({
   name,
   options,
   isRequired
-}) => (
-  <Question title={title} description={description} isRequired={isRequired}>
-    <Field
-      name={name}
-      component="select"
-      className="question_dropdownAnswer"
-      required={isRequired}
-    >
-      <option value="" disabled={true}>
-        Choose an option
+}) => {
+  return (
+    <Question title={title} description={description} isRequired={isRequired}>
+      <Field
+        name={name}
+        component="select"
+        className="question_dropdownAnswer"
+        required={isRequired}
+      >
+        <option value="" disabled={true}>
+          Choose an option
       </option>
-      {options.map((value, n) => (
-        <option key={n} value={value.name}>
-          {value.name}
-        </option>
-      ))}
-    </Field>
-  </Question>
-);
+        {options && options.map((value, n) => (
+          <option key={n} value={value.name}>
+            {value.name}
+          </option>
+        ))}
+      </Field>
+    </Question>
+  )
+};
 
 DropdownQuestion.propTypes = {
   isRequired: PropTypes.bool

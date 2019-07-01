@@ -1,4 +1,5 @@
 export const appPath = "/volunteer";
+const mockServerURL = "http://localhost:3001"
 export const domain = () => {
   switch (process.env.REACT_APP_NODE_ENV) {
     case "LOCAL":
@@ -8,6 +9,6 @@ export const domain = () => {
     case "PRODUCTION":
       return "https://cyf-api.codeyourfuture.io";
     default:
-      return "No env";
+      return mockServerURL;
   }
 };

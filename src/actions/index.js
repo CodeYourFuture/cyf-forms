@@ -51,8 +51,12 @@ export const postForm = (name, values) => async dispatch => {
 
 export const getCitiesFromApi = async () => {
   try {
-    const cities = await axios.get(`${domain()}/cities`)
-    return cities.data && cities.data.cities && cities.data.cities
+    let cities
+    cities = await axios.get(`https://cyf-api.codeyourfuture.io/cities`)
+    if (cities.data && cities.data.cities) {
+      return cities.data.cities
+    }    
+    return []
   } catch (err) {
     return err
   }
