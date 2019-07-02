@@ -25,8 +25,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:11.12
-        environment:
-          REACT_APP_NODE_ENV: STAGING
     working_directory: ~/repo
     steps:
       - checkout
@@ -49,10 +47,10 @@ jobs:
             echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build staging
-          command: yarn build:staging
+          command: REACT_APP_NODE_ENV=STAGING yarn build:staging
       - run:
           name: build production
-          command: yarn build:production
+          command: REACT_APP_NODE_ENV=PRODUCTION yarn build:production
       - persist_to_workspace:
           root: .
           paths:
