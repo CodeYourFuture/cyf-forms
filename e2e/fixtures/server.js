@@ -1,17 +1,19 @@
-const bodyParser = require('body-parser');
 const express = require('express');
+const cors = require('cors')
 
 const port = parseInt(process.env.MOCK_PORT || '3001');
 
-const app = express();
-
-app.use(bodyParser.text());
+const app = express().use(cors()).use(express.json());
 
 const calls = [];
 
 app.post('/', (req, res) => {
+    console.log({
+        body: req.body,
+        headers: req.headers
+    })
     calls.push({
-        body: JSON.parse(req.body),
+        body: req.body,
         headers: req.headers,
     });
     res.sendStatus(204);
@@ -19,11 +21,11 @@ app.post('/', (req, res) => {
 
 app.post('/volunteer', (req, res) => {
     console.log({
-        body: JSON.parse(req.body),
+        body: req.body,
         headers: req.headers
     })
     calls.push({
-        body: JSON.parse(req.body),
+        body: req.body,
         headers: req.headers,
     });
     res.sendStatus(204);

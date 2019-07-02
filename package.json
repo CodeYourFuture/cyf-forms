@@ -23,6 +23,7 @@
     "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn start:test\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
+    "e2e:open": "wait-on -l http-get://localhost:3000 && cypress open",
     "lint": "eslint .",
     "eject": "react-scripts eject"
   },
@@ -36,8 +37,8 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "body-parser": "^1.19.0",
     "concurrently": "^4.1.0",
+    "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "cypress": "^3.3.1",
     "enzyme": "^3.9.0",

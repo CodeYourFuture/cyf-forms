@@ -50,13 +50,11 @@ it('can submit a code-only form', () => {
     cy.fillInitialForm({ ...initialData, ...extra }, 'Next');
     cy.fillCodeForm(codeData, 'Submit');
     cy.log(`submitting data: ${JSON.stringify(codeData)}`)
-
     cy.get('.applicationForm_thankYou').should('contains.text', thanks);
 
     cy.request(`${mockServerURL}/_calls`).then((response) => {
         cy.log(JSON.stringify(response.body))
         expect(response.body[0].body).to.deep.eq({
-            Authorization: `Timestamp ${timestamp}`,
             ...initialData,
             ...extra,
             ...codeData
