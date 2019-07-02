@@ -9,6 +9,8 @@ export const startFormSubmission = () => ({
   type: START_FORM_SUBMISSION
 })
 
+axios.defaults.headers.common.application = 'volunteer-form'
+
 export const endFormSubmission = hasSucceeded => ({
   type: END_FORM_SUBMISSION,
   hasSucceeded
@@ -22,16 +24,9 @@ export const postVolunteerForm = async volunteer => {
 }
 export const postVolunteerFormToSpritSheet = (name, values) => {
   try {
-    return fetch(apiEndpoints[name], {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        Authorization: `Timestamp ${Date.now()}`,
-        ...values
-      })
+    return axios.post(apiEndpoints[name], {
+      Authorization: `Timestamp ${Date.now()}`,
+      ...values
     })
   } catch (err) {
     throw new Error(err)
@@ -55,7 +50,7 @@ export const getCitiesFromApi = async () => {
     cities = await axios.get(`https://cyf-api.codeyourfuture.io/cities`)
     if (cities.data && cities.data.cities) {
       return cities.data.cities
-    }    
+    }
     return []
   } catch (err) {
     return err
