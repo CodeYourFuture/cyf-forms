@@ -10,8 +10,8 @@ Cypress.Commands.add("fillInitialForm", (data, button) => {
     cy.get('[name="city"]').select(data.city);
     cy.get('[name="email"]').type(data.email);
     cy.get('[name="phone"]').type(data.phone);
-    Object.keys(data.fieldsOfInterest).forEach((field) => {
-        cy.get(`[name="fieldsOfInterest[${field}]"]`).check();
+    Object.keys(data.interests).forEach((field) => {
+        cy.get(`[name="interests[${field}]"]`).check();
     });
     cy.get('button').contains(button).click();
 });

@@ -43,7 +43,7 @@ const ApplicationFormGeneral = ({ handleSubmit, invalid, cities }) => (
     />
     <CheckboxesQuestion
       title="Cool. What are you interested in helping with?"
-      name="fieldsOfInterest"
+      name="interests"
       options={[
         "Teaching code or agile methodologies",
         "Running and growing the organisation"
@@ -64,9 +64,9 @@ const validate = values => ({
   firstName: validators.required(values.firstName),
   email: validators.required(values.email),
   city: validators.required(values.city),
-  fieldsOfInterest: {
+  interests: {
     "Teaching code or agile methodologies": validators.required(
-      values.fieldsOfInterest
+      values.interests
     )
   }
 });
