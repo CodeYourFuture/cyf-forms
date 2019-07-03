@@ -10,6 +10,7 @@ export const startFormSubmission = () => ({
 })
 
 axios.defaults.headers.common.application = 'volunteer-form'
+axios.defaults.headers.common['Content-Type'] = 'application/json'
 
 export const endFormSubmission = hasSucceeded => ({
   type: END_FORM_SUBMISSION,
