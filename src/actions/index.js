@@ -23,12 +23,16 @@ export const postVolunteerForm = async volunteer => {
     throw new Error(err)
   }
 }
-export const postVolunteerFormToSpritSheet = (name, values) => {
+export const postVolunteerFormToGoogleSheet = (name, values) => {
   try {
     return axios.post(apiEndpoints[name], {
       Authorization: `Timestamp ${Date.now()}`,
       ...values
-    })
+    }, {
+        headers: {
+          'Content-Type': 'text/plain;charset=utf-8',
+        },
+      })
   } catch (err) {
     throw new Error(err)
   }
@@ -38,7 +42,7 @@ export const postForm = (name, values) => async dispatch => {
   try {
     dispatch(startFormSubmission())
     await postVolunteerForm(values)
-    await postVolunteerFormToSpritSheet(name, values)
+    await postVolunteerFormToGoogleSheet(name, values)
     dispatch(endFormSubmission(true))
   } catch (err) {
     dispatch(endFormSubmission(false))
