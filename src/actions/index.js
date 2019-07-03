@@ -25,14 +25,18 @@ export const postVolunteerForm = async volunteer => {
 }
 export const postVolunteerFormToGoogleSheet = (name, values) => {
   try {
-    return axios.post(apiEndpoints[name], {
-      Authorization: `Timestamp ${Date.now()}`,
-      ...values
-    }, {
-        headers: {
-          'Content-Type': 'text/plain;charset=utf-8',
-        },
+    return fetch(apiEndpoints[name], {
+      method: "POST",
+      mode: "no-cors",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        Authorization: `Timestamp ${Date.now()}`,
+        ...values
       })
+    }
+    )
   } catch (err) {
     throw new Error(err)
   }
