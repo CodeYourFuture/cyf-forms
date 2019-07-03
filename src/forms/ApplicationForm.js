@@ -31,11 +31,11 @@ class ApplicationForm extends Component {
     const { cities } = this.props
     const stage = hasSubmissionSucceeded === true ? 4 : page
     const isInterestedInCode =
-      values.fieldsOfInterest &&
-      values.fieldsOfInterest["Teaching code or agile methodologies"] === true
+      values.interests &&
+      values.interests["Teaching code or agile methodologies"] === true
     const isInterestedInOps =
-      values.fieldsOfInterest &&
-      values.fieldsOfInterest["Running and growing the organisation"] === true
+      values.interests &&
+      values.interests["Running and growing the organisation"] === true
 
     const fallbackElement = <LoadingAnimation isVisible={true} />
 

@@ -53,7 +53,6 @@ it("can submit a code-only form", () => {
   cy.get(".applicationForm_thankYou").should("contains.text", thanks);
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
-    cy.log(JSON.stringify(response.body));
     expect(response.body[0].body).to.deep.eq({
       ...initialData,
       ...extra,
@@ -108,7 +107,6 @@ it("can submit both", () => {
   cy.get(".applicationForm_thankYou").should("contains.text", thanks);
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
-    debugger;
     expect(response.body[0].body).to.deep.eq({
       ...initialData,
       ...extra,
