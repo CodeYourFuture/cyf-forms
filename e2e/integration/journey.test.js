@@ -42,7 +42,7 @@ beforeEach(() => {
 
 it("can submit a code-only form", () => {
   const extra = {
-    fieldsOfInterest: {
+    interests: {
       "Teaching code or agile methodologies": true
     }
   };
@@ -70,7 +70,7 @@ it("can submit a code-only form", () => {
 
 it("can submit an org-only form", () => {
   const extra = {
-    fieldsOfInterest: { "Running and growing the organisation": true }
+    interests: { "Running and growing the organisation": true }
   };
 
   cy.fillInitialForm({ ...initialData, ...extra }, "Next");
@@ -95,7 +95,7 @@ it("can submit an org-only form", () => {
 
 it("can submit both", () => {
   const extra = {
-    fieldsOfInterest: {
+    interests: {
       "Running and growing the organisation": true,
       "Teaching code or agile methodologies": true
     }
