@@ -20,7 +20,7 @@
     "build:staging": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=STAGING react-app-rewired build && mv build staging",
     "build:production": "INLINE_RUNTIME_CHUNK=false REACT_APP_NODE_ENV=PRODUCTION GENERATE_SOURCEMAP=false react-app-rewired build && mv build production",
     "test": "react-app-rewired test",
-    "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn start:test\" \"yarn e2e:mock\" \"yarn e2e:run\"",
+    "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn start:test\" \"yarn e2e:mock\" \"yarn e2e:open\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
     "e2e:open": "wait-on -l http-get://localhost:3000 && cypress open",
