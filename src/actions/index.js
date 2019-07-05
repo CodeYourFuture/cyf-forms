@@ -1,80 +1,82 @@
-import { apiEndpoints } from "../utils/apiEndpoints"
-import axios from "axios"
-import { domain, appPath } from "../utils/apiPath"
-export const START_FORM_SUBMISSION = "START_FORM_SUBMISSION"
-export const END_FORM_SUBMISSION = "END_FORM_SUBMISSION"
-export const GET_CITIES = "GET_CITIES"
-const path = `${domain()}${appPath}`
+import { env, apiEndpoints } from "../utils/apiEndpoints";
+import axios from "axios";
+import { domain, appPath } from "../utils/apiPath";
+export const START_FORM_SUBMISSION = "START_FORM_SUBMISSION";
+export const END_FORM_SUBMISSION = "END_FORM_SUBMISSION";
+export const GET_CITIES = "GET_CITIES";
+const path = `${domain()}${appPath}`;
 export const startFormSubmission = () => ({
   type: START_FORM_SUBMISSION
-})
+});
 
-axios.defaults.headers.common.application = 'volunteer-form'
-axios.defaults.headers.common['Content-Type'] = 'application/json'
+axios.defaults.headers.common.application = "volunteer-form";
+axios.defaults.headers.common["Content-Type"] = "application/json";
 
 export const endFormSubmission = hasSucceeded => ({
   type: END_FORM_SUBMISSION,
   hasSucceeded
-})
+});
 export const postVolunteerForm = async volunteer => {
   try {
-    return await axios.post(`${path}`, volunteer)
+    return await axios.post(`${path}`, volunteer);
   } catch (err) {
-    throw new Error(err)
+    throw new Error(err);
   }
-}
+};
 export const postVolunteerFormToGoogleSheet = (name, values) => {
   try {
-    return fetch(apiEndpoints[name], {
-      method: "POST",
-      mode: "no-cors",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        Authorization: `Timestamp ${Date.now()}`,
-        ...values
-      })
+    if (env !== "LOCAL") {
+      return fetch(apiEndpoints[name], {
+        method: "POST",
+        mode: "no-cors",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          Authorization: `Timestamp ${Date.now()}`,
+          ...values
+        })
+      });
     }
-    )
   } catch (err) {
-    throw new Error(err)
+    throw new Error(err);
   }
-}
+};
 
 export const postForm = (name, values) => async dispatch => {
   try {
-    dispatch(startFormSubmission())
-    await postVolunteerForm(values)
-    await postVolunteerFormToGoogleSheet(name, values)
-    dispatch(endFormSubmission(true))
+    dispatch(startFormSubmission());
+    await postVolunteerForm(values);
+  console.log("actions-index", values)
+    await postVolunteerFormToGoogleSheet(name, values);
+    dispatch(endFormSubmission(true));
   } catch (err) {
-    dispatch(endFormSubmission(false))
+    dispatch(endFormSubmission(false));
   }
-}
+};
 
 export const getCitiesFromApi = async () => {
   try {
-    let cities
-    cities = await axios.get(`https://cyf-api.codeyourfuture.io/cities`)
+    let cities;
+    cities = await axios.get(`https://cyf-api.codeyourfuture.io/cities`);
     if (cities.data && cities.data.cities) {
-      return cities.data.cities
+      return cities.data.cities;
     }
-    return []
+    return [];
   } catch (err) {
-    return err
+    return err;
   }
-}
+};
 
 export const setCitiesToStore = cities => {
   return {
     type: GET_CITIES,
     cities
-  }
-}
+  };
+};
 export const getCities = () => {
   return async dispatch => {
-    const data = await getCitiesFromApi()
-    dispatch(setCitiesToStore(data))
-  }
-}
+    const data = await getCitiesFromApi();
+    dispatch(setCitiesToStore(data));
+  };
+};

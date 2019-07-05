@@ -25,11 +25,11 @@ const codeData = {
 
 const orgData = {
   skillSets: {
-    "Accounting / Bookkeeping": true,
-    "Event Management": true
+    "accounting": true,
+    "events": true
   },
   availability: {
-    "During our classes on Saturdays/Sundays": true
+    "weekend": true
   }
 };
 
@@ -43,10 +43,10 @@ beforeEach(() => {
 it("can submit a code-only form", () => {
   const extra = {
     interests: {
-      "Teaching code or agile methodologies": true
+      "teachingCode": true
     }
   };
-
+  
   cy.fillInitialForm({ ...initialData, ...extra }, "Next");
   cy.fillCodeForm(codeData, "Submit");
   cy.log(`submitting data: ${JSON.stringify(codeData)}`);
@@ -69,7 +69,7 @@ it("can submit a code-only form", () => {
 
 it("can submit an org-only form", () => {
   const extra = {
-    interests: { "Running and growing the organisation": true }
+    interests: { "runningOrganisation": true }
   };
 
   cy.fillInitialForm({ ...initialData, ...extra }, "Next");
@@ -95,8 +95,8 @@ it("can submit an org-only form", () => {
 it("can submit both", () => {
   const extra = {
     interests: {
-      "Running and growing the organisation": true,
-      "Teaching code or agile methodologies": true
+      "runningOrganisation": true,
+      "teachingCode": true
     }
   };
 
