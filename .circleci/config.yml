@@ -3,20 +3,22 @@ version: 2.1
 
 commands:
   s3deploy:
-    description: "Deploy to S3 and invalidate cache"
+    description: "Deploy to S3"
     parameters:
       to:
         type: string
       cf_distribution_id:
         type: string
+      dir:
+        type: string
     steps:
       - run: |
           aws configure set preview.cloudfront true
-          aws s3 sync staging/ s3://<< parameters.to >> \
-            --acl public-read --delete
-          aws s3 sync staging/static s3://<< parameters.to >>/static \
+      - run: |
+          aws s3 sync ./<< parameters.dir >> s3://<< parameters.to >> \
             --acl public-read --delete \
             --cache-control max-age=31536000
+      - run: |
           aws cloudfront create-invalidation \
               --distribution-id << parameters.cf_distribution_id >> \
               --paths /\*
@@ -25,8 +27,6 @@ jobs:
   test:
     docker:
       - image: circleci/node:11.12
-        environment:
-          REACT_APP_NODE_ENV: STAGING
     working_directory: ~/repo
     steps:
       - checkout
@@ -49,10 +49,10 @@ jobs:
             echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build staging
-          command: yarn build:staging
+          command: REACT_APP_NODE_ENV=STAGING yarn build:staging
       - run:
           name: build production
-          command: yarn build:production
+          command: REACT_APP_NODE_ENV=PRODUCTION yarn build:production
       - persist_to_workspace:
           root: .
           paths:
@@ -75,6 +75,7 @@ jobs:
           name: Install awscli
           command: sudo pip install awscli
       - s3deploy:
+          dir: staging
           to: "staging.forms.codeyourfuture.io"
           cf_distribution_id: E3MJAA9E60TZUB
 
@@ -94,6 +95,7 @@ jobs:
           name: Install awscli
           command: sudo pip install awscli
       - s3deploy:
+          dir: production
           to: "forms.codeyourfuture.io"
           cf_distribution_id: E3MHHTOV68A76Q
 
