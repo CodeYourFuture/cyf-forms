@@ -1,0 +1,108 @@
+.navbar-div {
+  background: #ffffff;
+  box-shadow: 0px 2px 0px rgba(130, 130, 130, 0.2);
+}
+.navbar-text {
+  align-self: flex-end;
+}
+.nav-btn-help {
+  background: #27ae60 !important;
+  color: #fafafa !important;
+  border-radius: 0.35em;
+  font-size: 1em !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  box-shadow: 0em 0.15em 0.65em 0em rgba(0, 0, 0, 0.25);
+  margin-right: 35px !important;
+  line-height: 24px !important;
+  cursor: pointer;
+}
+.dropdown-menu {
+  left: -220% !important;
+  top: 60% !important;
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0) !important;
+  border: none !important;
+}
+.dropdown-menu-items {
+  padding: 0.5rem 0;
+  margin: 0.125rem 0 0;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 0.25rem;
+}
+.arrow-up-div {
+  width: 100%;
+  padding-left: 75%;
+}
+.arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgb(194, 194, 194);
+}
+.nav-btn-help:hover {
+  background: #fafafa !important;
+  color: #27ae60 !important;
+}
+.navbar-text .btn-link {
+  background-color: cadetblue;
+  color: white;
+  border-radius: 4px;
+  border: transparent;
+}
+
+.navbar-text .btn-link:hover {
+  text-decoration: none;
+  cursor: pointer;
+  filter: brightness(85%);
+}
+
+.nav-item {
+  margin: 0 10px;
+  min-width: fit-content;
+}
+.nav-btn {
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: rgba(0, 0, 0, 1) !important;
+  cursor: pointer;
+}
+.nav-btn:hover {
+  color: #27ae60 !important;
+}
+.logout-btn {
+  font-family: inherit !important;
+  font-size: 1em !important;
+  font-style: normal !important;
+  font-weight: 700 !important;
+  line-height: 1 !important;
+  color: rgba(0, 0, 0, 1) !important;
+  cursor: pointer;
+}
+.logout-btn:hover {
+  font-size: 19px;
+  color: rgb(0, 0, 255) !important;
+}
+.profile-icon {
+  cursor: pointer;
+}
+.desktop-display-none {
+  display: none;
+}
+@media screen and (max-width: 990px) {
+  .navbar-div {
+    width: '70%';
+  }
+  .media-display-none {
+    display: none;
+  }
+  .desktop-display-none {
+    display: block;
+  }
+}

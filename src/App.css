@@ -1,0 +1,303 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: 'Roboto', sans-serif !important;
+  margin-bottom: 0px;
+  font-size: 16px;
+  min-height: 100%;
+}
+
+.main {
+  position: relative;
+  margin-bottom: 100px;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #25ad60;
+  border-bottom: 16px solid #25ad60;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+  }
+  100% {
+    -webkit-transform: rotate(360deg);
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+.go-back-and-forward-btn {
+  width: 50%;
+}
+.errors {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+}
+.error {
+  color: red;
+  font-size: 24px;
+  text-align: center;
+}
+.success {
+  color: green;
+  text-align: center;
+}
+.loading-png {
+  padding: 5% 20%;
+}
+
+.clearfix:after {
+  content: ' '; /* Older browser do not support empty content */
+  visibility: hidden;
+  display: block;
+  height: 0;
+  clear: both;
+}
+/* .progress-step {
+	border-top: 1px solid grey;
+} */
+.steps-constrainer {
+  /* word-break: break-all; */
+  word-break: break-word;
+  border: 1px solid #d6d5d5;
+  margin: 15px 0;
+  padding: 10px;
+}
+.step-header {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+  padding-top: 0;
+}
+.applicant-details {
+  display: flex;
+}
+.applicant-details-btn {
+  background-color: #3f3f3f;
+  color: #ddd;
+  font-size: 28px;
+  width: 100%;
+  border: 0;
+}
+
+.status-approved {
+  color: green;
+}
+.errors {
+  color: red;
+  text-align: center;
+}
+.success {
+  color: green;
+  text-align: center;
+}
+.status-submitted {
+  color: blue;
+}
+
+.messenger {
+  width: 100%;
+  padding: 0.5%;
+  display: inline-block;
+}
+.message:hover {
+  color: #ff2b2b;
+}
+.status-rejected {
+  color: red;
+}
+
+fieldset.applicant-detail {
+  border: 1px solid #ddd;
+  margin: 0;
+  padding: 15px;
+  background-color: #f5f5f5;
+}
+.applicant-detail legend {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 0px;
+  width: 40%;
+  text-align: center;
+  border: 1px solid #ddd;
+  padding: 10px;
+  background-color: #3f3f3f;
+  color: white;
+  margin-left: 29%;
+}
+
+.progress-heading {
+  margin-top: 50px;
+  padding: 10px;
+  margin: 0;
+  padding: 20px 30px;
+}
+.panel-body {
+  padding-bottom: 15px;
+}
+.panel-body {
+  padding: 5px 25px;
+}
+.show-steps {
+  background: #f5f5f5;
+  margin-top: 50px;
+  border: 1px solid #ddd;
+}
+/* new design */
+.comments-btn {
+  width: 197px;
+  height: 42px;
+  background: #27ae60;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+}
+.comments-btn-show {
+  width: 201px;
+  height: 40px;
+  background: #ffffff;
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  border-radius: 5px 5px 0px 0px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #219653;
+}
+.comments-btn-show i {
+  margin-left: 10px;
+}
+.comments-btn i {
+  margin-left: 10px;
+}
+.comment-submit-btn {
+  width: 197px;
+  height: 42px;
+  background: #27ae60;
+  border-radius: 5px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 25px;
+  text-align: center;
+  color: #ffffff;
+  margin-top: 10px;
+}
+.comments-container {
+  width: 80%;
+  word-break: break-word;
+}
+.comments-container hr {
+  background: #000000;
+  border-radius: 3px;
+  transform: matrix(1, 0, 0, -1, 0, 0);
+}
+.comments-message-header {
+  display: flex;
+}
+.comments-date {
+  font-style: normal;
+  font-size: 12px;
+  margin-left: 20px;
+  color: #7e7e7e;
+  line-height: 28px;
+}
+.comments-name {
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  color: #323233;
+}
+.messages {
+  overflow: auto;
+  max-height: 450px;
+  min-height: 40px;
+  padding: 4px 20px;
+  margin: 0 0 20px 0;
+  list-style: none;
+}
+.comments-message {
+  background: #ecebeb;
+  border-radius: 20px;
+  padding: 15px;
+  margin: 0 0 4% 1%;
+  max-height: fit-content;
+  max-width: fit-content;
+  min-width: 100px;
+}
+.comments-message p {
+  margin: 0;
+}
+.comments-message-sender {
+  background: #d3d1d1 !important;
+}
+.comment-arrow-up-div {
+  width: 100%;
+  padding-left: 50px;
+  display: flex;
+}
+.comment-arrow-up {
+  width: 0;
+  height: 0;
+  border-left: 0px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 25px solid #ecebeb;
+}
+.comment-arrow-up-sender {
+  border-bottom: 25px solid #d3d1d1 !important;
+}
+.comment-arrow-up-div-sender {
+  padding-left: 30px;
+}
+@media screen and (max-width: 1000px) {
+  .applicant-detail legend {
+    width: 100%;
+  }
+  .applicant-details {
+    display: block;
+  }
+}
+
+.expenses-form-container,
+.expense_submit-container {
+  display: flex;
+  justify-content: space-around;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.expenses-form,
+.expense-submit {
+  width: 45%;
+  background-color: rgb(217, 247, 173);
+  padding: 30px;
+  margin-top: 30px;
+  box-shadow: 0em 0.15em 0.65em 0em rgba(0, 0, 0, 0.25);
+  font-family: Arial, Helvetica, sans-serif;
+}
+.form-control-file {
+  margin-top: 10px;
+}
