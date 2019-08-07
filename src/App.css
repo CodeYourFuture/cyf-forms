@@ -6,12 +6,12 @@ body {
   font-family: 'Roboto', sans-serif !important;
   margin-bottom: 0px;
   font-size: 16px;
-  min-height: 100%;
+  min-height: 60%;
 }
 
 .main {
   position: relative;
-  margin-bottom: 100px;
+  margin-bottom: 60px;
 }
 .loader {
   border: 16px solid #f3f3f3;

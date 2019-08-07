@@ -1,25 +1,18 @@
 import React, { Component } from 'react'
-import './ApplicationForm.css'
 import { connect } from 'react-redux'
-
 import { loadCities, createUserHandler } from '../../Redux/action'
+import UserForm from './userForm'
 import { initialState, getAgeFromBirthday } from './helper'
-import ApplicationInputs from './inputs'
 
-import 'react-day-picker/lib/style.css'
-
-class ApplicationForm extends Component {
+class Forms extends Component {
   state = initialState
 
   componentWillMount() {
     this.props.loadCities()
   }
 
-  componentWillReceiveProps() {
-    const { user } = this.props
-    if (user._id && !user.userExist) {
-      this.props.history.replace(`/teams/${user._id}`)
-    }
+  componentWillReceiveProps(newProps) {
+    console.log(newProps)
   }
 
   telOnChange = tel => {
@@ -56,7 +49,7 @@ class ApplicationForm extends Component {
     return validated
   }
 
-  handleSubmit = async e => {
+  userHandleSubmit = async e => {
     e.preventDefault()
     this.setState({ submitted: true })
     const { firstName, lastName, email, city, tel, cityId } = this.state
@@ -90,44 +83,21 @@ class ApplicationForm extends Component {
   }
 
   render() {
-    const { submitted } = this.state
-    const { err } = this.props
+    const formPages = [
+      <UserForm
+        {...this.props}
+        {...this.state}
+        dateOfBirthOnChange={this.dateOfBirthOnChange}
+        userHandleSubmit={this.userHandleSubmit}
+        onChange={this.onChange}
+        telOnChange={this.telOnChange}
+      />
+    ]
     return (
-      <div className="form-container container">
-        <div>
-          <div className="sign-in">
-            <h1 className="font-bold">CYF Volunteer Application Form</h1>
-            <p>
-              So, you are interested in volunteering for CodeYourFuture?
-              Fantastic! We just need a few pieces of information to help us get
-              organised and welcome you.
-            </p>
-            {err && (
-              <p className="error">
-                {err}
-                {window.scrollTo(0, 0)}
-              </p>
-            )}
-            <form className="mb-4" onSubmit={this.handleSubmit} method="post">
-              <ApplicationInputs
-                onChange={this.onChange}
-                {...this.state}
-                {...this.props}
-                dateOfBirthOnChange={this.dateOfBirthOnChange}
-                telOnChange={this.telOnChange}
-              />
-              <div />
-              <button
-                id="email-exist"
-                disabled={submitted}
-                className="btn sign-up-btn"
-                type="submit"
-              >
-                Next
-              </button>
-            </form>
-          </div>
-        </div>
+      <div>
+        {formPages.map(FormPage => {
+          return FormPage
+        })}
       </div>
     )
   }
@@ -144,4 +114,4 @@ export function mapStateToProps(store) {
 export default connect(
   mapStateToProps,
   { loadCities, createUserHandler }
-)(ApplicationForm)
+)(Forms)
