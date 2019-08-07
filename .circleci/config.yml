@@ -59,28 +59,6 @@ jobs:
             - staging
             - production
 
-  e2e:
-    docker:
-      - image: cypress/base:10
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - e2e-dependencies-{{ checksum "yarn.lock" }}
-            - e2e-dependencies-
-      - run:
-          name: Install dependencies
-          command: yarn
-      - save_cache:
-          key: e2e-dependencies-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run:
-          name: End-to-end test
-          command: yarn e2e
-
   deploy_staging:
     docker:
       - image: circleci/python:3.6-jessie
@@ -125,13 +103,10 @@ workflows:
     jobs:
       - test:
           context: build
-      - e2e:
-          context: build
       - deploy_staging:
           context: deployments_staging
           requires:
             - test
-            - e2e
           filters:
             branches:
               only:
@@ -140,7 +115,6 @@ workflows:
           context: deployments
           requires:
             - test
-            - e2e
           filters:
             branches:
               only:
