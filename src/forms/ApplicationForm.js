@@ -82,7 +82,6 @@ class ApplicationForm extends Component {
         </Suspense>
       )
     }
-
     return (
       <div>
         <h1>CYF Volunteer Application Form</h1>
