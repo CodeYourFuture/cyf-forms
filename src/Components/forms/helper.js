@@ -57,7 +57,8 @@ const otherSkillList = [
     name: '',
     level: '',
     label: 'Pedagogy / Learning Environments'
-  }
+  },
+  { name: '', level: '', label: 'Other' }
 ]
 export const initialState = {
   firstName: '',

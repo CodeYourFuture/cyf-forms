@@ -65,9 +65,13 @@
 .border-none {
   border: 1px solid #fff0 !important;
 }
+.form-table {
+  width: 80%;
+}
 .form-table-td {
   padding: 0% !important;
   padding-left: 45px !important;
+  border: none !important;
 }
 @media screen and (max-width: 1000px) {
 }
