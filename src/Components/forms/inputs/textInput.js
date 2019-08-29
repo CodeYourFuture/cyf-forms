@@ -1,18 +1,27 @@
 import React from 'react'
 
-export default ({ email, onChange, isEmpty, emailExist }) => {
+export default ({
+  value,
+  onChange,
+  isEmpty,
+  emailExist,
+  label,
+  name,
+  placeholder,
+  type
+}) => {
   return (
-    <div className="form-group application-form-section-one-items">
-      <label htmlFor="email" className="lead">
-        Email
+    <div className="form-group">
+      <label htmlFor={name} className="lead">
+        {label}
       </label>
       <input
-        type="text"
-        name="email"
-        id="email"
+        type={type}
+        name={name}
+        id={name}
         className={`form-control ${isEmpty && 'is-empty'}`}
-        placeholder="Example@example.example"
-        value={email}
+        placeholder={placeholder}
+        value={value}
         onChange={onChange}
       />
       {emailExist && (

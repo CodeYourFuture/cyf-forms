@@ -1,0 +1,73 @@
+.form-container {
+  width: 80%;
+}
+.form-header {
+  font-weight: 300;
+  font-size: 60px;
+  line-height: 82px;
+  letter-spacing: -0.5px;
+}
+.form-description {
+  font-size: 24px;
+  line-height: 33px;
+}
+.form-section-one {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.form-group {
+  min-width: 45%;
+  max-width: 45%;
+}
+.form-control {
+  border: 1px solid #e8e8e8 !important;
+  height: 55px;
+  border-radius: 2px;
+}
+.form-control-text-area {
+  height: 100px !important;
+}
+.form-control:hover {
+  border: 1px solid rgb(194, 193, 193) !important;
+}
+.form-control:active {
+  border: 1px solid rgb(194, 193, 193) !important;
+}
+.react-phone-number-input__icon {
+  width: 2em !important;
+  height: 1.5em !important;
+  border: none !important;
+  box-sizing: content-box;
+}
+.tel-preview {
+  font-size: 14px;
+  margin-left: 30px;
+  color: rgb(109, 101, 101);
+}
+.is-empty {
+  border: 1px solid rgb(250, 26, 26) !important;
+}
+.is-invalid.outline-container {
+  border: 1px solid red !important;
+}
+.date--input {
+  width: 50px !important;
+}
+.contact-interested {
+  font-size: 20px;
+  line-height: 24px;
+}
+.contact-interested a {
+  color: green;
+}
+.border-none {
+  border: 1px solid #fff0 !important;
+}
+.form-table-td {
+  padding: 0% !important;
+  padding-left: 45px !important;
+}
+@media screen and (max-width: 1000px) {
+}

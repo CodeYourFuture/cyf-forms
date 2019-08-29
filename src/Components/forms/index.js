@@ -1,19 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadCities, createUserHandler } from '../../Redux/action'
-import UserForm from './userForm'
-import { initialState, getAgeFromBirthday } from './helper'
-
+import { initialState } from './helper'
+import Inputs from './inputs'
+import './index.css'
 class Forms extends Component {
   state = initialState
 
-  componentWillMount() {
-    this.props.loadCities()
-  }
+  // UNSAFE_componentWillMount() {
+  //   this.props.loadCities()
+  // }
 
-  componentWillReceiveProps(newProps) {
-    console.log(newProps)
-  }
+  // componentWillReceiveProps(newProps) {
+  //   // console.log(newProps)
+  // }
 
   telOnChange = tel => {
     const { errors } = this.state
@@ -52,14 +52,27 @@ class Forms extends Component {
   userHandleSubmit = async e => {
     e.preventDefault()
     this.setState({ submitted: true })
-    const { firstName, lastName, email, city, tel, cityId } = this.state
+    const {
+      firstName,
+      lastName,
+      email,
+      tel,
+      cityId,
+      interestedInVolunteer,
+      interestedInCYF,
+      industry,
+      hearAboutCYF
+    } = this.state
     const validatedInputs = this.validateForm({
       firstName,
       lastName,
       email,
-      city,
       tel,
-      cityId
+      cityId,
+      interestedInVolunteer,
+      interestedInCYF,
+      industry,
+      hearAboutCYF
     })
     const emptyValues = validatedInputs.includes(true)
     if (!emptyValues) {
@@ -67,37 +80,166 @@ class Forms extends Component {
         firstName,
         lastName,
         email,
-        city,
         tel,
-        cityId
+        cityId,
+        interestedInVolunteer,
+        interestedInCYF,
+        industry,
+        hearAboutCYF
       })
     }
   }
 
   dateOfBirthOnChange = dateOfBirth => {
-    const age = getAgeFromBirthday(dateOfBirth)
     this.setState({
-      dateOfBirth,
-      isEighteen: age >= 18
+      dateOfBirth
     })
+  }
+  onChangeCheckList = e => {
+    var newGuidePeople
+    const { checked, value, name } = e.target
+    const nValue = value.split('-')
+    const { guidePeople } = this.state
+    newGuidePeople = guidePeople.map(guidePeopleItem => {
+      if (name === guidePeopleItem.label) {
+        if (nValue[0] === 'checkBox') {
+          return {
+            name: checked ? name : '',
+            level: checked ? guidePeopleItem.level : '',
+            label: guidePeopleItem.label,
+            id: guidePeopleItem.id
+          }
+        }
+        if (nValue[0] === 'radioButton') {
+          return {
+            name: checked ? name : '',
+            level: checked ? nValue[1] : '',
+            label: guidePeopleItem.label,
+            id: guidePeopleItem.id
+          }
+        } else {
+          return {
+            name: name,
+            level: value,
+            label: guidePeopleItem.label,
+            id: guidePeopleItem.id
+          }
+        }
+      } else return guidePeopleItem
+    })
+    this.setState({ guidePeople: newGuidePeople })
+  }
+
+  onChangeTechSkill = e => {
+    var newTechSkill
+    const { checked, value, name } = e.target
+    const nValue = value.split('-')
+    const { techSkill } = this.state
+    newTechSkill = techSkill.map(techSkillItem => {
+      if (name === techSkillItem.label) {
+        if (nValue[0] === 'checkBox') {
+          return {
+            name: checked ? name : '',
+            level: checked ? techSkillItem.level : '',
+            label: techSkillItem.label,
+            id: techSkillItem.id
+          }
+        }
+        if (nValue[0] === 'radioButton') {
+          return {
+            name: checked ? name : '',
+            level: checked ? nValue[1] : '',
+            label: techSkillItem.label,
+            id: techSkillItem.id
+          }
+        } else {
+          return {
+            name: name,
+            level: value,
+            label: techSkillItem.label,
+            id: techSkillItem.id
+          }
+        }
+      } else return techSkillItem
+    })
+    this.setState({ techSkill: newTechSkill })
+  }
+
+  onChangeOtherSkill = e => {
+    var newOtherSkill
+    const { checked, value, name } = e.target
+    const nValue = value.split('-')
+    const { otherSkill } = this.state
+    newOtherSkill = otherSkill.map(otherSkillItem => {
+      if (name === otherSkillItem.label) {
+        if (nValue[0] === 'checkBox') {
+          return {
+            name: checked ? name : '',
+            level: checked ? otherSkillItem.level : '',
+            label: otherSkillItem.label,
+            id: otherSkillItem.id
+          }
+        }
+        if (nValue[0] === 'radioButton') {
+          return {
+            name: checked ? name : '',
+            level: checked ? nValue[1] : '',
+            label: otherSkillItem.label,
+            id: otherSkillItem.id
+          }
+        } else {
+          return {
+            name: name,
+            level: value,
+            label: otherSkillItem.label,
+            id: otherSkillItem.id
+          }
+        }
+      } else return otherSkillItem
+    })
+    this.setState({ otherSkill: newOtherSkill })
   }
 
   render() {
-    const formPages = [
-      <UserForm
-        {...this.props}
-        {...this.state}
-        dateOfBirthOnChange={this.dateOfBirthOnChange}
-        userHandleSubmit={this.userHandleSubmit}
-        onChange={this.onChange}
-        telOnChange={this.telOnChange}
-      />
-    ]
+    const { err } = this.props
+    const { disabled } = this.state
     return (
-      <div>
-        {formPages.map(FormPage => {
-          return FormPage
-        })}
+      <div className="form-container container">
+        <div className="sign-in">
+          <h1 className="form-header">
+            Code Your Future volunteer application form
+          </h1>
+          <p className="form-description">
+            Thank you for your interest. In order to ensure we’re a great fit,
+            please complete the form below:
+          </p>
+          {err && (
+            <p className="error">
+              {err}
+              {window.scrollTo(0, 0)}
+            </p>
+          )}
+          <form className="mb-4" onSubmit={this.userHandleSubmit} method="post">
+            <Inputs
+              {...this.props}
+              {...this.state}
+              dateOfBirthOnChange={this.dateOfBirthOnChange}
+              userHandleSubmit={this.userHandleSubmit}
+              onChange={this.onChange}
+              telOnChange={this.telOnChange}
+              onChangeCheckList={this.onChangeCheckList}
+              onChangeTechSkill={this.onChangeTechSkill}
+              onChangeOtherSkill={this.onChangeOtherSkill}
+            />
+            <button
+              disabled={disabled}
+              className="btn sign-up-btn"
+              type="submit"
+            >
+              Submit
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
@@ -106,7 +248,7 @@ class Forms extends Component {
 export function mapStateToProps(store) {
   const { cities, volunteer } = store
   return {
-    cities,
+    cities: cities.cities && cities.cities,
     user: volunteer && volunteer.user,
     err: volunteer && volunteer.err
   }

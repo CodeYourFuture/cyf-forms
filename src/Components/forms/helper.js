@@ -1,5 +1,64 @@
-import moment from 'moment'
-
+const guidePeopleSkillList = [
+  {
+    name: '',
+    level: '',
+    label: 'Coaching / Mentoring'
+  },
+  { name: '', level: '', label: 'Public Speaking' }
+]
+const techSkillList = [
+  {
+    name: '',
+    level: '',
+    label: 'NodeJS'
+  },
+  { name: '', level: '', label: 'ReactJS' },
+  { name: '', level: '', label: 'Databases' },
+  { name: '', level: '', label: 'JavaScript' },
+  { name: '', level: '', label: 'HTML, CSS ' },
+  { name: '', level: '', label: 'UX Design' },
+  { name: '', level: '', label: 'Other' }
+]
+const otherSkillList = [
+  { name: '', level: '', label: 'Blogging / Writing' },
+  {
+    name: '',
+    level: '',
+    label: 'Photography / Videography'
+  },
+  {
+    name: '',
+    level: '',
+    label: 'Growth Marketing / Social Media Strategy'
+  },
+  {
+    name: '',
+    level: '',
+    label: 'Speaking to NGOs and corporate partners '
+  },
+  {
+    name: '',
+    level: '',
+    label: 'Accounting / Bookkeeping'
+  },
+  { name: '', level: '', label: 'Business Analysis', id: 'BusinessAnalysis' },
+  {
+    name: '',
+    level: '',
+    label: 'Project Management '
+  },
+  {
+    name: '',
+    level: '',
+    label: 'Help with job search / CV & interview prep'
+  },
+  { name: '', level: '', label: 'Running events', id: 'RunningEvents' },
+  {
+    name: '',
+    level: '',
+    label: 'Pedagogy / Learning Environments'
+  }
+]
 export const initialState = {
   firstName: '',
   lastName: '',
@@ -7,6 +66,13 @@ export const initialState = {
   city: '',
   tel: '',
   cityId: '',
+  interestedInVolunteer: '',
+  interestedInCYF: '',
+  industry: '',
+  hearAboutCYF: '',
+  guidePeople: guidePeopleSkillList,
+  techSkill: techSkillList,
+  otherSkill: otherSkillList,
   submitted: false,
   err: null,
   msg: null,
@@ -16,23 +82,12 @@ export const initialState = {
     email: false,
     city: false,
     tel: false,
-    cityId: false
+    cityId: false,
+    interestedInVolunteer: false,
+    interestedInCYF: false,
+    industry: false,
+    hearAboutCYF: false
   }
-}
-
-export const getAgeFromBirthday = birthday => {
-  if (birthday) {
-    const date = moment(birthday).format('DD/MM/YYYY')
-    const totalMonths = moment().diff(date, 'months')
-    // eslint-disable-next-line radix
-    const years = parseInt(totalMonths / 12)
-    const months = totalMonths % 12
-    if (months !== 0) {
-      return parseFloat(`${years}.${months}`)
-    }
-    return years
-  }
-  return null
 }
 
 export const skillSets = [
@@ -48,4 +103,20 @@ export const skillSets = [
   'events',
   'wellbeing',
   'pedagogy'
+]
+export const industryList = [
+  { name: 'one', _id: 'one' },
+  { name: 'two', _id: 'two' },
+  { name: 'tree', _id: 'tree' }
+]
+export const hearAboutCYFList = [
+  { name: 'one', _id: 'one' },
+  { name: 'two', _id: 'two' },
+  { name: 'tree', _id: 'tree' }
+]
+
+export const radioButtonList = [
+  { value: 'none', _id: 'none' },
+  { value: 'some', _id: 'some' },
+  { value: 'partOfAJob', _id: 'partOfAJob' }
 ]
