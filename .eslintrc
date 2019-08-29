@@ -7,7 +7,7 @@
   },
   "rules": {
     "prettier": [
-      true
+      0
     ]
   },
   "plugins": ["prettier"],
