@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
-import { radioButtonList } from '../helper'
+import ListsData from '../data.json'
+
 import CheckBox from './CheckBox'
 import RadioButton from './radioButton'
 
@@ -8,7 +9,11 @@ export default ({ onChange, list }) => {
     <Fragment>
       {list.map(listItem => {
         return (
-          <tr key={listItem.label}>
+          <tr
+            key={listItem.label}
+            className={`form-table-tr ${listItem.level === "It's empty" &&
+              'form-table-tr-is-empty'}`}
+          >
             <td className="form-table-td row">
               <CheckBox
                 value={`checkBox-${listItem.id}`}
@@ -16,6 +21,7 @@ export default ({ onChange, list }) => {
                 label={listItem.label}
                 name={listItem.label}
                 checked={listItem.name === listItem.label}
+                id={listItem.id}
               />
               {listItem.label === 'Other' && (
                 <input
@@ -29,7 +35,7 @@ export default ({ onChange, list }) => {
               )}
             </td>
             {listItem.label !== 'Other' &&
-              radioButtonList.map(item => (
+              ListsData.radioButtonList.map(item => (
                 <td className="form-table-td" key={item._id}>
                   <RadioButton
                     value={`radioButton-${item._id}`}

@@ -5,7 +5,7 @@ import PhoneInput, { formatPhoneNumberIntl } from 'react-phone-number-input'
 export default ({ onChange, tel, isEmpty }) => {
   return (
     <div className="form-group">
-      <label htmlor="tel" className="lead">
+      <label htmlFor="tel" className="lead">
         <span>Phone number </span>
         <span className="tel-preview">{formatPhoneNumberIntl(tel)}</span>
       </label>

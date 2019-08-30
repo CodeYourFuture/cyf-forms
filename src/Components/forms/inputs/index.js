@@ -1,11 +1,12 @@
 import React, { Component, Fragment } from 'react'
-import { industryList, hearAboutCYFList } from '../helper'
+import ListsData from '../data.json'
 import PhoneNumber from './phoneNumber'
 import DropDown from './dropDown'
 import TextInput from './textInput'
 import TextArea from './textArea'
 import Table from './table'
 import TableTb from './tableTb'
+import TableTh from './tableTh'
 
 export default class VolunteerForm extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class VolunteerForm extends Component {
       email,
       telOnChange,
       errors,
-      user,
+      volunteer,
       interestedInVolunteer,
       interestedInCYF,
       industry,
@@ -32,36 +33,15 @@ export default class VolunteerForm extends Component {
       onChangeOtherSkill
     } = this.props
 
-    const GuidePeopleTh = (
-      <tr>
-        <th className="border-none w-50">A. Guide people</th>
-        <th className="border-none">None</th>
-        <th className="border-none">Some</th>
-        <th className="border-none">Part of a job</th>
-      </tr>
-    )
+    const GuidePeopleTh = <TableTh list={ListsData.GuidePeopleThList} />
     const GuidePeopleTb = (
       <TableTb onChange={onChangeCheckList} list={guidePeople} />
     )
-    const TechSkillTh = (
-      <tr>
-        <th className="border-none w-50">B. Teach people coding or UX</th>
-        <th className="border-none">None</th>
-        <th className="border-none">Some</th>
-        <th className="border-none">Part of a job</th>
-      </tr>
-    )
+    const TechSkillTh = <TableTh list={ListsData.TechSkillThList} />
     const TechSkillTb = (
       <TableTb onChange={onChangeTechSkill} list={techSkill} />
     )
-    const OtherSkillTh = (
-      <tr>
-        <th className="border-none w-50">B. Teach people coding or UX</th>
-        <th className="border-none">None</th>
-        <th className="border-none">Some</th>
-        <th className="border-none">Part of a job</th>
-      </tr>
-    )
+    const OtherSkillTh = <TableTh list={ListsData.OtherSkillThList} />
     const OtherSkillTb = (
       <TableTb onChange={onChangeOtherSkill} list={otherSkill} />
     )
@@ -91,7 +71,7 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={email}
             isEmpty={errors.email}
-            emailExist={user.userExist}
+            emailExist={volunteer.userExist}
             label="Email"
             name="email"
             placeholder="example@example.example"
@@ -139,7 +119,7 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={industry}
           name="industry"
-          arrayList={industryList}
+          arrayList={ListsData.industryList}
           isEmpty={errors.industry}
           label="What industry are you in?"
         />
@@ -147,7 +127,7 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={hearAboutCYF}
           name="hearAboutCYF"
-          arrayList={hearAboutCYFList}
+          arrayList={ListsData.hearAboutCYFList}
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />

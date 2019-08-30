@@ -1,15 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadCities, createUserHandler } from '../../Redux/action'
-import { initialState } from './helper'
+import { loadCities, createVolunteerHandler } from '../../Redux/action'
+import { initialState, arrayOnchange, filterEmptyValue } from './helper'
 import Inputs from './inputs'
+import Acknowledgement from './Acknowledgement'
 import './index.css'
 class Forms extends Component {
   state = initialState
 
-  // UNSAFE_componentWillMount() {
-  //   this.props.loadCities()
-  // }
+  UNSAFE_componentWillMount() {
+    this.props.loadCities()
+  }
 
   // componentWillReceiveProps(newProps) {
   //   // console.log(newProps)
@@ -33,6 +34,18 @@ class Forms extends Component {
       })
     }
   }
+  onChangeAcknowledgement = e => {
+    const { name, checked } = e.target
+    const { errors } = this.state
+    errors[name] = false
+    if (e && e.target) {
+      this.setState({
+        [name]: checked,
+        submitted: false,
+        errors
+      })
+    }
+  }
 
   validateForm = values => {
     const { errors } = this.state
@@ -49,9 +62,26 @@ class Forms extends Component {
     return validated
   }
 
-  userHandleSubmit = async e => {
+  validateArray = values => {
+    Object.keys(values).map(value => {
+      const newValue = values[value].map(item => {
+        if (item.name !== '' && item.level === '') {
+          this.setState({ valuationError: true })
+          return {
+            id: item.id,
+            name: item.name,
+            level: "It's empty",
+            label: item.label
+          }
+        } else return item
+      })
+      return this.setState({ [value]: newValue })
+    })
+  }
+
+  handleSubmit = async e => {
     e.preventDefault()
-    this.setState({ submitted: true })
+    this.setState({ submitted: true, valuationError: false })
     const {
       firstName,
       lastName,
@@ -61,7 +91,12 @@ class Forms extends Component {
       interestedInVolunteer,
       interestedInCYF,
       industry,
-      hearAboutCYF
+      hearAboutCYF,
+      guidePeople,
+      techSkill,
+      otherSkill,
+      valuationError,
+      acknowledgement
     } = this.state
     const validatedInputs = this.validateForm({
       firstName,
@@ -72,11 +107,13 @@ class Forms extends Component {
       interestedInVolunteer,
       interestedInCYF,
       industry,
-      hearAboutCYF
+      hearAboutCYF,
+      acknowledgement
     })
+    this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
-    if (!emptyValues) {
-      this.props.createUserHandler({
+    if (!emptyValues && !valuationError) {
+      this.props.createVolunteerHandler({
         firstName,
         lastName,
         email,
@@ -85,118 +122,29 @@ class Forms extends Component {
         interestedInVolunteer,
         interestedInCYF,
         industry,
-        hearAboutCYF
+        hearAboutCYF,
+        guidePeople: filterEmptyValue(guidePeople),
+        techSkill: filterEmptyValue(techSkill),
+        otherSkill: filterEmptyValue(otherSkill)
       })
     }
   }
 
-  dateOfBirthOnChange = dateOfBirth => {
-    this.setState({
-      dateOfBirth
-    })
-  }
   onChangeCheckList = e => {
-    var newGuidePeople
-    const { checked, value, name } = e.target
-    const nValue = value.split('-')
     const { guidePeople } = this.state
-    newGuidePeople = guidePeople.map(guidePeopleItem => {
-      if (name === guidePeopleItem.label) {
-        if (nValue[0] === 'checkBox') {
-          return {
-            name: checked ? name : '',
-            level: checked ? guidePeopleItem.level : '',
-            label: guidePeopleItem.label,
-            id: guidePeopleItem.id
-          }
-        }
-        if (nValue[0] === 'radioButton') {
-          return {
-            name: checked ? name : '',
-            level: checked ? nValue[1] : '',
-            label: guidePeopleItem.label,
-            id: guidePeopleItem.id
-          }
-        } else {
-          return {
-            name: name,
-            level: value,
-            label: guidePeopleItem.label,
-            id: guidePeopleItem.id
-          }
-        }
-      } else return guidePeopleItem
-    })
+    var newGuidePeople = arrayOnchange(e, guidePeople)
     this.setState({ guidePeople: newGuidePeople })
   }
 
   onChangeTechSkill = e => {
-    var newTechSkill
-    const { checked, value, name } = e.target
-    const nValue = value.split('-')
     const { techSkill } = this.state
-    newTechSkill = techSkill.map(techSkillItem => {
-      if (name === techSkillItem.label) {
-        if (nValue[0] === 'checkBox') {
-          return {
-            name: checked ? name : '',
-            level: checked ? techSkillItem.level : '',
-            label: techSkillItem.label,
-            id: techSkillItem.id
-          }
-        }
-        if (nValue[0] === 'radioButton') {
-          return {
-            name: checked ? name : '',
-            level: checked ? nValue[1] : '',
-            label: techSkillItem.label,
-            id: techSkillItem.id
-          }
-        } else {
-          return {
-            name: name,
-            level: value,
-            label: techSkillItem.label,
-            id: techSkillItem.id
-          }
-        }
-      } else return techSkillItem
-    })
+    var newTechSkill = arrayOnchange(e, techSkill)
     this.setState({ techSkill: newTechSkill })
   }
 
   onChangeOtherSkill = e => {
-    var newOtherSkill
-    const { checked, value, name } = e.target
-    const nValue = value.split('-')
     const { otherSkill } = this.state
-    newOtherSkill = otherSkill.map(otherSkillItem => {
-      if (name === otherSkillItem.label) {
-        if (nValue[0] === 'checkBox') {
-          return {
-            name: checked ? name : '',
-            level: checked ? otherSkillItem.level : '',
-            label: otherSkillItem.label,
-            id: otherSkillItem.id
-          }
-        }
-        if (nValue[0] === 'radioButton') {
-          return {
-            name: checked ? name : '',
-            level: checked ? nValue[1] : '',
-            label: otherSkillItem.label,
-            id: otherSkillItem.id
-          }
-        } else {
-          return {
-            name: name,
-            level: value,
-            label: otherSkillItem.label,
-            id: otherSkillItem.id
-          }
-        }
-      } else return otherSkillItem
-    })
+    var newOtherSkill = arrayOnchange(e, otherSkill)
     this.setState({ otherSkill: newOtherSkill })
   }
 
@@ -206,9 +154,9 @@ class Forms extends Component {
     return (
       <div className="form-container container">
         <div className="sign-in">
-          <h1 className="form-header">
+          <span className="form-header">
             Code Your Future volunteer application form
-          </h1>
+          </span>
           <p className="form-description">
             Thank you for your interest. In order to ensure we’re a great fit,
             please complete the form below:
@@ -219,21 +167,24 @@ class Forms extends Component {
               {window.scrollTo(0, 0)}
             </p>
           )}
-          <form className="mb-4" onSubmit={this.userHandleSubmit} method="post">
+          <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
               {...this.props}
               {...this.state}
-              dateOfBirthOnChange={this.dateOfBirthOnChange}
-              userHandleSubmit={this.userHandleSubmit}
               onChange={this.onChange}
               telOnChange={this.telOnChange}
               onChangeCheckList={this.onChangeCheckList}
               onChangeTechSkill={this.onChangeTechSkill}
               onChangeOtherSkill={this.onChangeOtherSkill}
             />
+            <Acknowledgement
+              onChange={this.onChangeAcknowledgement}
+              checked={this.state.acknowledgement}
+              isEmpty={this.state.errors.acknowledgement}
+            />
             <button
               disabled={disabled}
-              className="btn sign-up-btn"
+              className="btn volunteer-submit-btn"
               type="submit"
             >
               Submit
@@ -249,11 +200,11 @@ export function mapStateToProps(store) {
   const { cities, volunteer } = store
   return {
     cities: cities.cities && cities.cities,
-    user: volunteer && volunteer.user,
+    volunteer: volunteer && volunteer.volunteer,
     err: volunteer && volunteer.err
   }
 }
 export default connect(
   mapStateToProps,
-  { loadCities, createUserHandler }
+  { loadCities, createVolunteerHandler }
 )(Forms)

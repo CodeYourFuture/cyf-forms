@@ -1,21 +1,21 @@
-import { CREAT_USER } from '../action/types'
+import { CREAT_VOLUNTEER } from '../action/types'
 
 const INITIAL_STATE = {
-  user: {},
+  volunteer: {},
   err: ''
 }
 export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CREAT_USER:
-      if (action.user && action.user.err) {
+    case CREAT_VOLUNTEER:
+      if (action.volunteer && action.volunteer.err) {
         return {
           ...state,
-          err: action.user.err
+          err: action.volunteer.err
         }
       }
       return {
         ...state,
-        user: action.user.user
+        volunteer: action.volunteer.volunteer
       }
     default:
       return state

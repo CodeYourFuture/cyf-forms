@@ -1,65 +1,4 @@
-const guidePeopleSkillList = [
-  {
-    name: '',
-    level: '',
-    label: 'Coaching / Mentoring'
-  },
-  { name: '', level: '', label: 'Public Speaking' }
-]
-const techSkillList = [
-  {
-    name: '',
-    level: '',
-    label: 'NodeJS'
-  },
-  { name: '', level: '', label: 'ReactJS' },
-  { name: '', level: '', label: 'Databases' },
-  { name: '', level: '', label: 'JavaScript' },
-  { name: '', level: '', label: 'HTML, CSS ' },
-  { name: '', level: '', label: 'UX Design' },
-  { name: '', level: '', label: 'Other' }
-]
-const otherSkillList = [
-  { name: '', level: '', label: 'Blogging / Writing' },
-  {
-    name: '',
-    level: '',
-    label: 'Photography / Videography'
-  },
-  {
-    name: '',
-    level: '',
-    label: 'Growth Marketing / Social Media Strategy'
-  },
-  {
-    name: '',
-    level: '',
-    label: 'Speaking to NGOs and corporate partners '
-  },
-  {
-    name: '',
-    level: '',
-    label: 'Accounting / Bookkeeping'
-  },
-  { name: '', level: '', label: 'Business Analysis', id: 'BusinessAnalysis' },
-  {
-    name: '',
-    level: '',
-    label: 'Project Management '
-  },
-  {
-    name: '',
-    level: '',
-    label: 'Help with job search / CV & interview prep'
-  },
-  { name: '', level: '', label: 'Running events', id: 'RunningEvents' },
-  {
-    name: '',
-    level: '',
-    label: 'Pedagogy / Learning Environments'
-  },
-  { name: '', level: '', label: 'Other' }
-]
+import ListsData from './data.json'
 export const initialState = {
   firstName: '',
   lastName: '',
@@ -71,12 +10,14 @@ export const initialState = {
   interestedInCYF: '',
   industry: '',
   hearAboutCYF: '',
-  guidePeople: guidePeopleSkillList,
-  techSkill: techSkillList,
-  otherSkill: otherSkillList,
+  guidePeople: ListsData.guidePeopleSkillList,
+  techSkill: ListsData.techSkillList,
+  otherSkill: ListsData.otherSkillList,
   submitted: false,
   err: null,
   msg: null,
+  valuationError: false,
+  acknowledgement: false,
   errors: {
     firstName: false,
     lastName: false,
@@ -87,37 +28,45 @@ export const initialState = {
     interestedInVolunteer: false,
     interestedInCYF: false,
     industry: false,
-    hearAboutCYF: false
+    hearAboutCYF: false,
+    acknowledgement: false
   }
 }
 
-export const skillSets = [
-  'coaching',
-  'journalism',
-  'photography',
-  'marketing',
-  'partnerships',
-  'accounting',
-  'community',
-  'projectManagement',
-  'placement',
-  'events',
-  'wellbeing',
-  'pedagogy'
-]
-export const industryList = [
-  { name: 'one', _id: 'one' },
-  { name: 'two', _id: 'two' },
-  { name: 'tree', _id: 'tree' }
-]
-export const hearAboutCYFList = [
-  { name: 'one', _id: 'one' },
-  { name: 'two', _id: 'two' },
-  { name: 'tree', _id: 'tree' }
-]
+export const arrayOnchange = (e, array) => {
+  let newArray
+  const { checked, value, name } = e.target
+  const nValue = value.split('-')
+  newArray = array.map(item => {
+    if (name === item.label) {
+      if (nValue[0] === 'checkBox') {
+        return {
+          name: checked ? name : '',
+          level: checked ? item.level : '',
+          label: item.label,
+          id: item.id
+        }
+      }
+      if (nValue[0] === 'radioButton') {
+        return {
+          name: checked ? name : '',
+          level: checked ? nValue[1] : '',
+          label: item.label,
+          id: item.id
+        }
+      } else {
+        return {
+          name: name,
+          level: value,
+          label: item.label,
+          id: item.id
+        }
+      }
+    } else return item
+  })
+  return newArray
+}
 
-export const radioButtonList = [
-  { value: 'none', _id: 'none' },
-  { value: 'some', _id: 'some' },
-  { value: 'partOfAJob', _id: 'partOfAJob' }
-]
+export const filterEmptyValue = values => {
+  return values.filter(value => value.name !== '')
+}

@@ -1,0 +1,142 @@
+{
+  "industryList": [
+    {
+      "name": "Consulting/ Business Services",
+      "_id": "Consulting/ Business Services"
+    },
+    { "name": "Creative", "_id": "Creative" },
+    { "name": "Charities", "_id": "Charities" },
+    { "name": "Education", "_id": "Education" },
+    {
+      "name": "Engineering and Construction",
+      "_id": "Engineering and Construction"
+    },
+    {
+      "name": "Financial Services, Banking and Insurance",
+      "_id": "Financial Services, Banking and Insurance"
+    },
+    {
+      "name": "Government and Public Services",
+      "_id": "Government and Public Services"
+    },
+    {
+      "name": "Healthcare and Pharmaceutical",
+      "_id": "Healthcare and Pharmaceutical"
+    },
+    { "name": "Hospitality and Leisure", "_id": "Hospitality and Leisure" },
+    { "name": "Human Resources", "_id": "Human Resources" },
+    { "name": "Legal", "_id": "Legal" },
+    { "name": "Manufacturing", "_id": "Manufacturing" },
+    { "name": "Media and Entertainment", "_id": "Media and Entertainment" },
+    { "name": "Real Estate", "_id": "Real Estate" },
+    { "name": "Retail and Consumer", "_id": "Retail and Consumer" },
+    { "name": "Technology", "_id": "Technology" },
+    { "name": "Telecommunications", "_id": "Telecommunications" },
+    { "name": "Transport and Logistics", "_id": "Transport and Logistics" },
+    { "name": "Other", "_id": "Other" }
+  ],
+  "hearAboutCYFList": [
+    { "name": "Search engine", "_id": "Search engine" },
+    { "name": "Colleague or friend", "_id": "Colleague or friend" },
+    { "name": "Conference", "_id": "Conference" },
+    { "name": "Social media", "_id": "Social media" },
+    { "name": "News article", "_id": "News article" },
+    { "name": "Blog post", "_id": "Blog post" },
+    { "name": "Other", "_id": "Other" }
+  ],
+
+  "radioButtonList": [
+    { "value": "none", "_id": "none" },
+    { "value": "some", "_id": "some" },
+    { "value": "Part of a job", "_id": "Part of a job" }
+  ],
+  "guidePeopleSkillList": [
+    {
+      "id": "98y439hf934",
+      "name": "",
+      "level": "",
+      "label": "Coaching / Mentoring"
+    },
+    { "id": "09u03uifnc", "name": "", "level": "", "label": "Public Speaking" }
+  ],
+  "techSkillList": [
+    {
+      "id": "8976tygsbhj3e",
+      "name": "",
+      "level": "",
+      "label": "NodeJS"
+    },
+    { "id": "23edcs3h3j3", "name": "", "level": "", "label": "ReactJS" },
+    { "id": "9087ihncwqd", "name": "", "level": "", "label": "Databases" },
+    { "id": "opiuygtbnc2", "name": "", "level": "", "label": "JavaScript" },
+    { "id": "234edcxzzzx", "name": "", "level": "", "label": "HTML, CSS " },
+    { "id": "34refw43efe", "name": "", "level": "", "label": "UX Design" },
+    { "id": "232dwjouhv8", "name": "", "level": "", "label": "Other" }
+  ],
+  "otherSkillList": [
+    {
+      "id": "8hyuhe22uhh",
+      "name": "",
+      "level": "",
+      "label": "Blogging / Writing"
+    },
+    {
+      "id": "2fwcsoh97y7",
+      "name": "",
+      "level": "",
+      "label": "Photography / Videography"
+    },
+    {
+      "id": "ouiygu2hews",
+      "name": "",
+      "level": "",
+      "label": "Growth Marketing / Social Media Strategy"
+    },
+    {
+      "id": "2iouh3iyewd",
+      "name": "",
+      "level": "",
+      "label": "Speaking to NGOs and corporate partners"
+    },
+    {
+      "id": "iouhiy23wed",
+      "name": "",
+      "level": "",
+      "label": "Accounting / Bookkeeping"
+    },
+    {
+      "id": "o23ijuhwess",
+      "name": "",
+      "level": "",
+      "label": "Business Analysis"
+    },
+    {
+      "id": "o23iuhew232",
+      "name": "",
+      "level": "",
+      "label": "Project Management "
+    },
+    {
+      "id": "ijouh2y3www",
+      "name": "",
+      "level": "",
+      "label": "Help with job search / CV & interview prep"
+    },
+    {
+      "id": "klhygtf3232",
+      "name": "",
+      "level": "",
+      "label": "Running events"
+    },
+    {
+      "id": "bhhihgxucf88",
+      "name": "",
+      "level": "",
+      "label": "Pedagogy / Learning Environments"
+    },
+    { "id": "iuhiygutf4w3", "name": "", "level": "", "label": "Other" }
+  ],
+  "GuidePeopleThList": ["A. Guide people", "None", "Some", "Part of a job"],
+  "TechSkillThList": ["B. Teach people coding or UX", "", "", ""],
+  "OtherSkillThList": ["C. Help run Code Your Future", "", "", ""]
+}

@@ -1,10 +1,11 @@
 import axios from 'axios'
-import { domain } from '../../config'
-import { CREAT_USER } from './types'
+import { domain, appPath } from '../../config'
+import { CREAT_VOLUNTEER } from './types'
+const path = `${domain()}${appPath}`
 
-export const createUser = async user => {
+export const createVolunteer = async volunteer => {
   try {
-    const response = await axios.post(`${domain()}/register`, user)
+    const response = await axios.post(`${path}`, volunteer)
     return response.data
   } catch (err) {
     return {
@@ -13,15 +14,15 @@ export const createUser = async user => {
   }
 }
 
-export const setUserToStore = user => {
+export const setVolunteerToStore = volunteer => {
   return {
-    type: CREAT_USER,
-    user
+    type: CREAT_VOLUNTEER,
+    volunteer
   }
 }
-export const createUserHandler = user => {
+export const createVolunteerHandler = volunteer => {
   return async dispatch => {
-    const data = await createUser(user)
-    dispatch(setUserToStore(data))
+    const data = await createVolunteer(volunteer)
+    dispatch(setVolunteerToStore(data))
   }
 }
