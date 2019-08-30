@@ -28,3 +28,20 @@ yarn-error.log*
 
 # JetBrains
 .idea/
+node_modules
+node_modules/*
+keys/*
+flow-typed/*
+config/*
+scripts/*
+.vscode/*
+build/*
+staging/*
+production/*
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+package-lock.json
+yarn.lock

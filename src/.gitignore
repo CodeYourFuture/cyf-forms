@@ -1,0 +1,16 @@
+node_modules/*
+keys/*
+flow-typed/*
+config/*
+scripts/*
+.vscode/*
+build/*
+staging/*
+production/*
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.env
+package-lock.json
+.env.example
