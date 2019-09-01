@@ -28,22 +28,28 @@ export default class VolunteerForm extends Component {
       onChangeCheckList,
       guidePeople,
       techSkill,
-      onChangeTechSkill,
-      otherSkill,
-      onChangeOtherSkill
+      otherSkill
     } = this.props
 
     const GuidePeopleTh = <TableTh list={ListsData.GuidePeopleThList} />
     const GuidePeopleTb = (
-      <TableTb onChange={onChangeCheckList} list={guidePeople} />
+      <TableTb
+        onChange={onChangeCheckList}
+        list={guidePeople}
+        name="guidePeople"
+      />
     )
     const TechSkillTh = <TableTh list={ListsData.TechSkillThList} />
     const TechSkillTb = (
-      <TableTb onChange={onChangeTechSkill} list={techSkill} />
+      <TableTb onChange={onChangeCheckList} list={techSkill} name="techSkill" />
     )
     const OtherSkillTh = <TableTh list={ListsData.OtherSkillThList} />
     const OtherSkillTb = (
-      <TableTb onChange={onChangeOtherSkill} list={otherSkill} />
+      <TableTb
+        onChange={onChangeCheckList}
+        list={otherSkill}
+        name="otherSkill"
+      />
     )
     return (
       <Fragment>

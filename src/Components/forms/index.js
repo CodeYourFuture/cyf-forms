@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadCities, createVolunteerHandler } from '../../Redux/action'
-import { initialState, arrayOnchange, filterEmptyValue } from './helper'
+import { initialState, arrayOnChange, filterEmptyValue } from './helper'
+import Header from './header'
 import Inputs from './inputs'
 import Acknowledgement from './Acknowledgement'
 import './index.css'
@@ -11,10 +12,6 @@ class Forms extends Component {
   UNSAFE_componentWillMount() {
     this.props.loadCities()
   }
-
-  // componentWillReceiveProps(newProps) {
-  //   // console.log(newProps)
-  // }
 
   telOnChange = tel => {
     const { errors } = this.state
@@ -130,22 +127,21 @@ class Forms extends Component {
     }
   }
 
-  onChangeCheckList = e => {
-    const { guidePeople } = this.state
-    var newGuidePeople = arrayOnchange(e, guidePeople)
-    this.setState({ guidePeople: newGuidePeople })
-  }
-
-  onChangeTechSkill = e => {
-    const { techSkill } = this.state
-    var newTechSkill = arrayOnchange(e, techSkill)
-    this.setState({ techSkill: newTechSkill })
-  }
-
-  onChangeOtherSkill = e => {
-    const { otherSkill } = this.state
-    var newOtherSkill = arrayOnchange(e, otherSkill)
-    this.setState({ otherSkill: newOtherSkill })
+  onChangeCheckList = (e, name) => {
+    const { guidePeople, techSkill, otherSkill } = this.state
+    switch (name) {
+      case 'guidePeople':
+        let newGuidePeople = arrayOnChange(e, guidePeople)
+        return this.setState({ guidePeople: newGuidePeople })
+      case 'techSkill':
+        let newTechSkill = arrayOnChange(e, techSkill)
+        return this.setState({ techSkill: newTechSkill })
+      case 'otherSkill':
+        let newOtherSkill = arrayOnChange(e, otherSkill)
+        return this.setState({ otherSkill: newOtherSkill })
+      default:
+        return ''
+    }
   }
 
   render() {
@@ -154,19 +150,7 @@ class Forms extends Component {
     return (
       <div className="form-container container">
         <div className="sign-in">
-          <span className="form-header">
-            Code Your Future volunteer application form
-          </span>
-          <p className="form-description">
-            Thank you for your interest. In order to ensure we’re a great fit,
-            please complete the form below:
-          </p>
-          {err && (
-            <p className="error">
-              {err}
-              {window.scrollTo(0, 0)}
-            </p>
-          )}
+          <Header err={err} />
           <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
               {...this.props}
@@ -174,8 +158,6 @@ class Forms extends Component {
               onChange={this.onChange}
               telOnChange={this.telOnChange}
               onChangeCheckList={this.onChangeCheckList}
-              onChangeTechSkill={this.onChangeTechSkill}
-              onChangeOtherSkill={this.onChangeOtherSkill}
             />
             <Acknowledgement
               onChange={this.onChangeAcknowledgement}

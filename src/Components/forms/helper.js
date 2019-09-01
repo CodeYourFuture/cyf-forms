@@ -33,7 +33,7 @@ export const initialState = {
   }
 }
 
-export const arrayOnchange = (e, array) => {
+export const arrayOnChange = (e, array) => {
   let newArray
   const { checked, value, name } = e.target
   const nValue = value.split('-')

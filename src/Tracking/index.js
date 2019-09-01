@@ -9,7 +9,7 @@ import { env, GA_CONFIG } from '../config'
  */
 const recordEvent = (action, label) => {
   ReactGA.event({
-    category: `Application Process`,
+    category: `Volunteer form`,
     action,
     label
   })

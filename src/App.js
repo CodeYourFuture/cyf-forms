@@ -6,13 +6,8 @@ import ReduxThunk from 'redux-thunk'
 import './App.css'
 import Footer from './Components/Footer'
 import Navbar from './Components/Navbar'
-import * as AuthService from './Layout/AuthService'
 import reducers from './Redux/Reducer'
 import Routes from './Routes'
-
-if (AuthService.getToken()) {
-  AuthService.setDefaultAxiosHeaders(AuthService.getToken())
-}
 
 const store = createStore(reducers, applyMiddleware(ReduxThunk))
 const App = () => (

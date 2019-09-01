@@ -4,7 +4,7 @@ import ListsData from '../data.json'
 import CheckBox from './CheckBox'
 import RadioButton from './radioButton'
 
-export default ({ onChange, list }) => {
+export default ({ onChange, list, name }) => {
   return (
     <Fragment>
       {list.map(listItem => {
@@ -17,7 +17,7 @@ export default ({ onChange, list }) => {
             <td className="form-table-td row">
               <CheckBox
                 value={`checkBox-${listItem.id}`}
-                onChange={onChange}
+                onChange={e => onChange(e, name)}
                 label={listItem.label}
                 name={listItem.label}
                 checked={listItem.name === listItem.label}
@@ -30,7 +30,7 @@ export default ({ onChange, list }) => {
                   placeholder=""
                   className="ml-5"
                   value={listItem.level}
-                  onChange={onChange}
+                  onChange={e => onChange(e, name)}
                 />
               )}
             </td>
@@ -39,7 +39,7 @@ export default ({ onChange, list }) => {
                 <td className="form-table-td" key={item._id}>
                   <RadioButton
                     value={`radioButton-${item._id}`}
-                    onChange={onChange}
+                    onChange={e => onChange(e, name)}
                     name={listItem.label}
                     checked={listItem.level === item._id}
                   />
