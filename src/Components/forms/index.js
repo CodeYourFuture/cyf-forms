@@ -145,11 +145,21 @@ class Forms extends Component {
   }
 
   render() {
-    const { err } = this.props
-    const { disabled } = this.state
+    const { err, volunteer } = this.props
+    const { disabled, acknowledgement } = this.state
+    if (volunteer && volunteer._id) {
+      return (
+        <div className="form-container container p-4">
+          <h4>
+            Welcome {volunteer.firstName} {volunteer.lastName}
+          </h4>
+          <p>CODE YOUR FUTURE will contact as soon as possible.</p>
+        </div>
+      )
+    }
     return (
       <div className="form-container container">
-        <div className="sign-in">
+        <div>
           <Header err={err} />
           <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
@@ -165,9 +175,9 @@ class Forms extends Component {
               isEmpty={this.state.errors.acknowledgement}
             />
             <button
-              disabled={disabled}
               className="btn volunteer-submit-btn"
               type="submit"
+              disabled={disabled || !acknowledgement}
             >
               Submit
             </button>
