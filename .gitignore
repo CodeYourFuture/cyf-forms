@@ -34,7 +34,7 @@ keys/*
 flow-typed/*
 config/*
 scripts/*
-.vscode/*
+# .vscode/*
 build/*
 staging/*
 production/*

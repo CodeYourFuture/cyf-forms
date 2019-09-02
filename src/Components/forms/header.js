@@ -4,8 +4,10 @@ export default ({ err }) => {
   return (
     <Fragment>
       <span className="form-header">
-        Code Your Future volunteer application form
+        Code Your Future
+        <br /> Volunteer Application Form
       </span>
+      <hr />
       <p className="form-description">
         Thank you for your interest. In order to ensure we’re a great fit,
         please complete the form below:
