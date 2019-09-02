@@ -3,10 +3,7 @@ import React, { Fragment } from 'react'
 export default ({ err }) => {
   return (
     <Fragment>
-      <span className="form-header">
-        Code Your Future
-        <br /> Volunteer Application Form
-      </span>
+      <span className="form-header">Volunteer Application Form</span>
       <hr />
       <p className="form-description">
         Thank you for your interest. In order to ensure we’re a great fit,
