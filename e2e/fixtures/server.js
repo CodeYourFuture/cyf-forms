@@ -1,49 +1,49 @@
-const express = require("express");
-const cors = require("cors");
+const express = require('express')
+const cors = require('cors')
 
-const port = parseInt(process.env.MOCK_PORT || "3001");
+const port = parseInt(process.env.MOCK_PORT || '3001')
 
 const app = express()
   .use(cors())
-  .use(express.json({ type: "*/*" }));
+  .use(express.json({ type: '*/*' }))
 
-const calls = [];
+const calls = []
 
-app.post("/google", (req, res) => {
+app.post('/google', (req, res) => {
   console.log({
     body: req.body,
     headers: req.headers
-  });
+  })
   calls.push({
     body: req.body,
     headers: req.headers
-  });
-  res.sendStatus(204);
-});
+  })
+  res.sendStatus(204)
+})
 
-app.post("/volunteer", (req, res) => {
+app.post('/volunteer', (req, res) => {
   console.log({
     body: req.body,
     headers: req.headers
-  });
+  })
   calls.push({
     body: req.body,
     headers: req.headers
-  });
-  res.sendStatus(204);
-});
+  })
+  res.sendStatus(204)
+})
 
-app.get("/_calls", (req, res) => {
-  res.json(calls);
-});
+app.get('/_calls', (req, res) => {
+  res.json(calls)
+})
 
-app.post("/_reset", (req, res) => {
+app.post('/_reset', (req, res) => {
   while (calls.length > 0) {
-    calls.pop();
+    calls.pop()
   }
-  res.sendStatus(204);
-});
+  res.sendStatus(204)
+})
 
 app.listen(port, () => {
-  console.log(`Listening on ${port}`);
-});
+  console.log(`Listening on ${port}`)
+})
