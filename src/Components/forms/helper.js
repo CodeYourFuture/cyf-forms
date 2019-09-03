@@ -23,12 +23,9 @@ export const initialState = {
     lastName: false,
     email: false,
     city: false,
-    tel: false,
     cityId: false,
     interestedInVolunteer: false,
     interestedInCYF: false,
-    industry: false,
-    hearAboutCYF: false,
     acknowledgement: false
   }
 }

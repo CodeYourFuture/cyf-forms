@@ -6,7 +6,7 @@ export default ({ onChange, checked, isEmpty }) => {
       <span className="form-acknowledgement-header">
         Acknowledgement: (* Required)
       </span>
-      <div className={`form-check ml-4 pl-4 ${isEmpty && 'is-empty'}`}>
+      <div className={`form-check ml-4 pl-4 mt-2 ${isEmpty && 'is-empty'}`}>
         <input
           className={`form-check-input`}
           type="checkbox"
