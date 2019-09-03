@@ -99,12 +99,9 @@ class Forms extends Component {
       firstName,
       lastName,
       email,
-      tel,
       cityId,
       interestedInVolunteer,
       interestedInCYF,
-      industry,
-      hearAboutCYF,
       acknowledgement
     })
     this.validateArray({ guidePeople, techSkill, otherSkill })

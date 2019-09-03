@@ -58,7 +58,7 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={firstName}
             isEmpty={errors.firstName}
-            label="First Name"
+            label="First Name *"
             name="firstName"
             placeholder="Your first name..."
             type="text"
@@ -67,22 +67,22 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={lastName}
             isEmpty={errors.lastName}
-            label="Last Name"
+            label="Last Name *"
             name="lastName"
             placeholder="Your first name..."
             type="text"
           />
-          <PhoneNumber onChange={telOnChange} tel={tel} isEmpty={errors.tel} />
           <TextInput
             onChange={onChange}
             value={email}
             isEmpty={errors.email}
             emailExist={volunteer.userExist}
-            label="Email"
+            label="Email *"
             name="email"
             placeholder="example@example.example"
             type="email"
           />
+          <PhoneNumber onChange={telOnChange} tel={tel} isEmpty={errors.tel} />
         </div>
         <DropDown
           onChange={onChange}
@@ -90,7 +90,7 @@ export default class VolunteerForm extends Component {
           name="cityId"
           arrayList={cities}
           isEmpty={errors.cityId}
-          label="What CYF city do you want to work with?"
+          label="What CYF city do you want to work with? *"
         />
         <p className="contact-interested">
           If you're interested in bringing CYF to your city, email us at
@@ -107,7 +107,7 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={interestedInVolunteer}
           isEmpty={errors.interestedInVolunteer}
-          label="Why are you interested in volunteering?"
+          label="Why are you interested in volunteering? *"
           name="interestedInVolunteer"
           placeholder="Text..."
           type="text"
@@ -116,7 +116,7 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={interestedInCYF}
           isEmpty={errors.interestedInCYF}
-          label="Why are you interested in Code Your Future?"
+          label="Why are you interested in Code Your Future? *"
           name="interestedInCYF"
           placeholder="Text..."
           type="text"
