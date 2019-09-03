@@ -4,7 +4,6 @@ export default ({
   value,
   onChange,
   isEmpty,
-  emailExist,
   label,
   name,
   placeholder,
@@ -24,12 +23,7 @@ export default ({
         value={value}
         onChange={onChange}
       />
-      {emailExist && (
-        <span style={{ color: '#dc0000' }}>
-          This email already exist.
-          {window.scrollTo(0, 200)}
-        </span>
-      )}
+      {isEmpty && <span>{window.scrollTo(0, 200)}</span>}
     </div>
   )
 }

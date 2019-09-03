@@ -32,11 +32,10 @@ export const initialState = {
 
 export const arrayOnChange = (e, array) => {
   let newArray
-  const { checked, value, name } = e.target
-  const nValue = value.split('-')
+  const { checked, value, name, type } = e.target
   newArray = array.map(item => {
     if (name === item.label) {
-      if (nValue[0] === 'checkBox') {
+      if (type === 'checkbox') {
         return {
           name: checked ? name : '',
           level: checked ? item.level : '',
@@ -44,10 +43,10 @@ export const arrayOnChange = (e, array) => {
           id: item.id
         }
       }
-      if (nValue[0] === 'radioButton') {
+      if (type === 'radio') {
         return {
           name: checked ? name : '',
-          level: checked ? nValue[1] : '',
+          level: checked ? value : '',
           label: item.label,
           id: item.id
         }
