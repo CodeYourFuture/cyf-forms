@@ -79,7 +79,6 @@
 }
 .form-table-tr-is-empty {
   border-bottom: 1px solid rgb(250, 26, 26);
-  border-left: 1px solid rgb(250, 26, 26);
 }
 .form-table-td {
   padding: 0% !important;

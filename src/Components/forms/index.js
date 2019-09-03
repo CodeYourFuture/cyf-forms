@@ -20,24 +20,12 @@ class Forms extends Component {
   }
 
   onChange = e => {
-    const { name, value } = e.target
+    const { name, value, type, checked } = e.target
     const { errors } = this.state
     errors[name] = false
     if (e && e.target) {
       this.setState({
-        [name]: value,
-        submitted: false,
-        errors
-      })
-    }
-  }
-  onChangeAcknowledgement = e => {
-    const { name, checked } = e.target
-    const { errors } = this.state
-    errors[name] = false
-    if (e && e.target) {
-      this.setState({
-        [name]: checked,
+        [name]: type === 'checkbox' ? checked : value,
         submitted: false,
         errors
       })
@@ -62,7 +50,10 @@ class Forms extends Component {
   validateArray = values => {
     Object.keys(values).map(value => {
       const newValue = values[value].map(item => {
-        if (item.name !== '' && item.level === '') {
+        if (
+          (item.name !== '' && item.level === '') ||
+          item.level === "It's empty"
+        ) {
           this.setState({ valuationError: true })
           return {
             id: item.id,
@@ -104,7 +95,7 @@ class Forms extends Component {
       interestedInCYF,
       acknowledgement
     })
-    this.validateArray({ guidePeople, techSkill, otherSkill })
+    await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
     if (!emptyValues && !valuationError) {
       this.props.createVolunteerHandler({
@@ -167,7 +158,7 @@ class Forms extends Component {
               onChangeCheckList={this.onChangeCheckList}
             />
             <Acknowledgement
-              onChange={this.onChangeAcknowledgement}
+              onChange={this.onChange}
               checked={this.state.acknowledgement}
               isEmpty={this.state.errors.acknowledgement}
             />
