@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 export default ({ list }) => {
   return (
     <Fragment>
-      <tr>
+      <tr className="desktop">
         {list &&
           list.map((item, i) => (
             <th
@@ -14,6 +14,9 @@ export default ({ list }) => {
               {item}
             </th>
           ))}
+      </tr>
+      <tr className="media">
+        {list && <th className="border-none">{list[0]}</th>}
       </tr>
     </Fragment>
   )

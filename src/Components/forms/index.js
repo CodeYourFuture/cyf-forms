@@ -141,7 +141,11 @@ class Forms extends Component {
           <h4>
             Welcome {volunteer.firstName} {volunteer.lastName}
           </h4>
-          <p>CODE YOUR FUTURE will contact as soon as possible.</p>
+          <p>
+            Thank you for submitting your application to Code Your Future to
+            become a volunteer. We will review your application and contact you
+            via email within 10 days.
+          </p>
         </div>
       )
     }

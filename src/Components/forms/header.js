@@ -6,8 +6,8 @@ export default ({ err }) => {
       <span className="form-header">Volunteer Application Form</span>
       <hr />
       <p className="form-description">
-        Thank you for your interest. In order to ensure we’re a great fit,
-        please complete the form below:
+        Thank you for your interest! To ensure we’re a great fit, please
+        complete the form below:
       </p>
       {err && (
         <p className="error">

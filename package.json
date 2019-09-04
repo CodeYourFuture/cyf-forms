@@ -27,6 +27,7 @@
     "react-rte": "^0.16.1",
     "react-scripts": "^3.0.1",
     "react-show-more-list": "^0.5.2",
+    "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },
