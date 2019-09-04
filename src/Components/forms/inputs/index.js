@@ -109,8 +109,8 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.interestedInVolunteer}
           label="Why are you interested in volunteering? *"
           name="interestedInVolunteer"
-          placeholder="Text..."
-          type="text"
+          placeholder="Just a sentence or two requested..."
+          type="textarea"
         />
         <TextArea
           onChange={onChange}
@@ -118,8 +118,8 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.interestedInCYF}
           label="Why are you interested in Code Your Future? *"
           name="interestedInCYF"
-          placeholder="Text..."
-          type="text"
+          placeholder="Just a sentence or two requested..."
+          type="textarea"
         />
         <DropDown
           onChange={onChange}

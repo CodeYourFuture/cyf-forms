@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { FormGroup, Label, Input } from 'reactstrap'
 export default ({
   value,
   onChange,
@@ -10,11 +10,9 @@ export default ({
   type
 }) => {
   return (
-    <div className="form-group">
-      <label htmlFor={name} className="lead">
-        {label}
-      </label>
-      <input
+    <FormGroup>
+      <Label htmlFor={name}>{label}</Label>
+      <Input
         type={type}
         name={name}
         id={name}
@@ -24,6 +22,6 @@ export default ({
         onChange={onChange}
       />
       {isEmpty && <span>{window.scrollTo(0, 200)}</span>}
-    </div>
+    </FormGroup>
   )
 }
