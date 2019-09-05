@@ -88,9 +88,9 @@ class Forms extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      valuationError,
       acknowledgement
     } = this.state
+
     const validatedInputs = this.validateForm({
       firstName,
       lastName,
@@ -102,6 +102,7 @@ class Forms extends Component {
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
+    const { valuationError } = this.state
     if (emptyValues || valuationError) {
       this.setState({ formInComplete: true })
     }

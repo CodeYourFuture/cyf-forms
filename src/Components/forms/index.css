@@ -78,7 +78,7 @@
   border-bottom: 0.01px solid rgb(194, 193, 193);
 }
 .form-table-tr-is-empty {
-  border-bottom: 1px solid rgb(250, 26, 26);
+  border: 1px solid rgb(250, 26, 26) !important;
 }
 .form-table-td {
   padding: 0% !important;
@@ -165,7 +165,7 @@
     width: 30%;
   }
   .form-table-tr-media {
-    border: 1px solid rgb(194, 193, 193) !important;
+    border: 1px solid rgb(194, 193, 193);
     width: 100% !important;
     margin: 10px 0;
     padding: 20px;
