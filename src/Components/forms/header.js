@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 
-export default ({ err }) => {
+export default ({ err, formInComplete }) => {
   return (
     <Fragment>
       <span className="form-header">Volunteer Application Form</span>
@@ -10,10 +10,18 @@ export default ({ err }) => {
         complete the form below:
       </p>
       {err && (
-        <p className="error">
+        <p className="errors">
           {err}
           {window.scrollTo(0, 0)}
         </p>
+      )}
+      {formInComplete ? (
+        <span className="errors container">
+          From is incomplete, please check all your details.
+          {window.scrollTo(0, 0)}
+        </span>
+      ) : (
+        ''
       )}
     </Fragment>
   )

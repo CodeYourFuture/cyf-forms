@@ -16,7 +16,7 @@ class Forms extends Component {
   telOnChange = tel => {
     const { errors } = this.state
     errors[`${'tel'}`] = false
-    this.setState({ tel, errors, submitted: false })
+    this.setState({ tel, errors, submitted: false, formInComplete: false })
   }
 
   onChange = e => {
@@ -27,7 +27,8 @@ class Forms extends Component {
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,
-        errors
+        errors,
+        formInComplete: false
       })
     }
   }
@@ -69,7 +70,11 @@ class Forms extends Component {
 
   handleSubmit = async e => {
     e.preventDefault()
-    this.setState({ submitted: true, valuationError: false })
+    this.setState({
+      submitted: true,
+      valuationError: false,
+      formInComplete: false
+    })
     const {
       firstName,
       lastName,
@@ -97,6 +102,9 @@ class Forms extends Component {
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
+    if (emptyValues || valuationError) {
+      this.setState({ formInComplete: true })
+    }
     if (!emptyValues && !valuationError) {
       this.props.createVolunteerHandler({
         firstName,
@@ -117,6 +125,7 @@ class Forms extends Component {
 
   onChangeCheckList = (e, name) => {
     const { guidePeople, techSkill, otherSkill } = this.state
+    this.setState({ formInComplete: false })
     switch (name) {
       case 'guidePeople':
         let newGuidePeople = arrayOnChange(e, guidePeople)
@@ -134,7 +143,7 @@ class Forms extends Component {
 
   render() {
     const { err, volunteer } = this.props
-    const { disabled, acknowledgement } = this.state
+    const { disabled, acknowledgement, formInComplete } = this.state
     if (volunteer && volunteer._id) {
       return (
         <div className="form-container container p-4">
@@ -152,7 +161,7 @@ class Forms extends Component {
     return (
       <div className="form-container container">
         <div>
-          <Header err={err} />
+          <Header err={err} formInComplete={formInComplete} />
           <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
               {...this.props}
