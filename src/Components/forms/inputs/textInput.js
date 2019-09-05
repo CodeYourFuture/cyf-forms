@@ -21,7 +21,6 @@ export default ({
         value={value}
         onChange={onChange}
       />
-      {isEmpty && <span>{window.scrollTo(0, 200)}</span>}
     </FormGroup>
   )
 }

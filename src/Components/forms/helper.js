@@ -18,6 +18,7 @@ export const initialState = {
   msg: null,
   valuationError: false,
   acknowledgement: false,
+  formInComplete: false,
   errors: {
     firstName: false,
     lastName: false,
