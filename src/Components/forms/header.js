@@ -17,7 +17,7 @@ export default ({ err, formInComplete }) => {
       )}
       {formInComplete ? (
         <span className="errors container">
-          From is incomplete, please check all your details.
+          Form is incomplete, please check all your details.
           {window.scrollTo(0, 0)}
         </span>
       ) : (

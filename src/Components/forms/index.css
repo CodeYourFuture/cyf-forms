@@ -122,6 +122,9 @@
   background-color: #ecdada;
   height: fit-content;
 }
+.modal-footer {
+  justify-content: space-around !important;
+}
 @media screen and (max-width: 1000px) {
   .media {
     display: block;

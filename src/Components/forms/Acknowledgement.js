@@ -74,10 +74,10 @@ export default ({ onChange, checked, isEmpty }) => {
                     </p>
                   </div>
                 </div>
-                <div className="modal-header">
-                  <button type="button" className="close" data-dismiss="modal">
-                    Become a Volunteer
-                  </button>
+                <div className="modal-footer">
+                  <span className="close" data-dismiss="modal">
+                    close
+                  </span>
                 </div>
               </div>
             </div>
