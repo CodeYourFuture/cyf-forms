@@ -1,17 +1,17 @@
 import React, { Fragment } from 'react'
-import ListsData from '../../data.json'
-import CheckBox from '../CheckBox'
+import ListsData from '../data.json'
+import CheckBox from './CheckBox'
 
 export default ({ onChange, list, name }) => {
   return (
     <Fragment>
       {list.map(listItem => (
-        <tr
+        <div
           key={listItem.label}
-          className={`media form-table-tr-media ${listItem.level ===
-            "It's empty" && 'form-table-tr-is-empty'}`}
+          className={`form-table ${listItem.level === "It's empty" &&
+            'form-table-tr-is-empty'}`}
         >
-          <td className="form-table-td-media">
+          <div className="form-table-single">
             <CheckBox
               value={listItem.id}
               onChange={e => onChange(e, name)}
@@ -21,13 +21,12 @@ export default ({ onChange, list, name }) => {
               id={`media${listItem.id}`}
             />
             {listItem.name === listItem.label ? (
-              <span className="media-radio-group">
-                <hr />
+              <span className="radio-group">
                 {listItem.label !== 'Other' ? (
                   ListsData.radioButtonList.map(item => (
                     <label
                       htmlFor={`media${listItem.id}${item._id}`}
-                      className="media media-radio-btn"
+                      className="btn radio-btn"
                       key={item._id}
                     >
                       <input
@@ -53,12 +52,15 @@ export default ({ onChange, list, name }) => {
                     onChange={e => onChange(e, name)}
                   />
                 )}
+                {listItem.label !== 'Other' && (
+                  <p className="check-list-single-footer">Choose your level</p>
+                )}
               </span>
             ) : (
               ''
             )}
-          </td>
-        </tr>
+          </div>
+        </div>
       ))}
     </Fragment>
   )

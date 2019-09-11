@@ -70,13 +70,14 @@
 .form-table {
   width: 80%;
 }
-.form-table-tr {
-  height: 30px;
-  margin: 60px 0 !important;
+.form-table-tr-desktop {
+  border: 1px solid rgb(194, 193, 193);
+  width: 100% !important;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 5px;
 }
-.form-table-tr:hover {
-  border-bottom: 0.01px solid rgb(194, 193, 193);
-}
+
 .form-table-tr-is-empty {
   border: 1px solid rgb(250, 26, 26) !important;
 }
@@ -103,11 +104,12 @@
   cursor: pointer;
   text-decoration: underline;
 }
-.desktop {
-  display: table-row;
-}
-.media {
-  display: none;
+.form-table {
+  border: 1px solid rgb(194, 193, 193);
+  width: 50%;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 5px;
 }
 .errors {
   color: #ff0b0b;
@@ -124,6 +126,25 @@
 }
 .modal-footer {
   justify-content: space-around !important;
+}
+.check-list-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+.check-list-single-footer {
+  font-size: 12px;
+  color: #575757;
+  margin: 0%;
+}
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.radio-btn {
+  border: 1px solid rgb(194, 193, 193);
+  width: 100%;
+  text-align: left;
 }
 @media screen and (max-width: 1000px) {
   .media {
@@ -161,13 +182,13 @@
   .form-table-thead {
     width: 100% !important;
   }
-  .media-radio-group {
+  .radio-group {
     width: 100%;
   }
   .media-radio-item {
     width: 30%;
   }
-  .form-table-tr-media {
+  .form-table {
     border: 1px solid rgb(194, 193, 193);
     width: 100% !important;
     margin: 10px 0;

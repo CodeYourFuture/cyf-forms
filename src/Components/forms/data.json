@@ -136,17 +136,7 @@
     },
     { "id": "iuhiygutf4w3", "name": "", "level": "", "label": "Other" }
   ],
-  "GuidePeopleThList": ["A. Guide people", "None", "Some", "Part of a job"],
-  "TechSkillThList": [
-    "B. Teach people coding or UX",
-    "None",
-    "Some",
-    "Part of a job"
-  ],
-  "OtherSkillThList": [
-    "C. Help run Code Your Future",
-    "None",
-    "Some",
-    "Part of a job"
-  ]
+  "GuidePeopleThList": ["A. Guide people"],
+  "TechSkillThList": ["B. Teach people coding or UX"],
+  "OtherSkillThList": ["C. Help run Code Your Future"]
 }

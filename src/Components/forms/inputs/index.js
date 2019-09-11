@@ -4,9 +4,8 @@ import PhoneNumber from './phoneNumber'
 import DropDown from './dropDown'
 import TextInput from './textInput'
 import TextArea from './textArea'
-import Table from './table'
-import TableTb from './tableTb'
-import TableTh from './tableTh'
+import CheckListB from './checkListB'
+import CheckListH from './checkListH'
 
 export default class VolunteerForm extends Component {
   render() {
@@ -31,26 +30,6 @@ export default class VolunteerForm extends Component {
       otherSkill
     } = this.props
 
-    const GuidePeopleTh = <TableTh list={ListsData.GuidePeopleThList} />
-    const GuidePeopleTb = (
-      <TableTb
-        onChange={onChangeCheckList}
-        list={guidePeople}
-        name="guidePeople"
-      />
-    )
-    const TechSkillTh = <TableTh list={ListsData.TechSkillThList} />
-    const TechSkillTb = (
-      <TableTb onChange={onChangeCheckList} list={techSkill} name="techSkill" />
-    )
-    const OtherSkillTh = <TableTh list={ListsData.OtherSkillThList} />
-    const OtherSkillTb = (
-      <TableTb
-        onChange={onChangeCheckList}
-        list={otherSkill}
-        name="otherSkill"
-      />
-    )
     return (
       <Fragment>
         <div className="form-section-one">
@@ -141,9 +120,30 @@ export default class VolunteerForm extends Component {
           What would you like help Code Your Future with, and what is your level
           of experience?
         </p>
-        <Table componentTb={GuidePeopleTb} componentTh={GuidePeopleTh} />
-        <Table componentTb={TechSkillTb} componentTh={TechSkillTh} />
-        <Table componentTb={OtherSkillTb} componentTh={OtherSkillTh} />
+        <div>
+          <CheckListH list={ListsData.GuidePeopleThList} />
+          <CheckListB
+            onChange={onChangeCheckList}
+            list={guidePeople}
+            name="guidePeople"
+          />
+        </div>
+        <div>
+          <CheckListH list={ListsData.TechSkillThList} />
+          <CheckListB
+            onChange={onChangeCheckList}
+            list={techSkill}
+            name="techSkill"
+          />
+        </div>
+        <div>
+          <CheckListH list={ListsData.OtherSkillThList} />
+          <CheckListB
+            onChange={onChangeCheckList}
+            list={otherSkill}
+            name="otherSkill"
+          />
+        </div>
       </Fragment>
     )
   }
