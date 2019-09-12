@@ -119,8 +119,7 @@ export default class VolunteerForm extends Component {
         />
         <span className="contact-interested">
           <span>
-            What would you like help Code Your Future with, and what is your
-            level of experience?
+            What would you like to help Code Your Future with and what is your level of experience?
           </span>
         </span>
         <div>
