@@ -69,10 +69,11 @@ export default class VolunteerForm extends Component {
           name="cityId"
           arrayList={cities}
           isEmpty={errors.cityId}
-          label="What CYF city do you want to work with? *"
+          label="What Code Your Future city do you want to work with? *"
         />
         <p className="contact-interested">
-          If you're interested in bringing CYF to your city, email us at
+          If you're interested in bringing Code Your Future to your city, email
+          us at
           <a
             href="mailto: contact@codeyourfuture.io"
             target="_blank"
@@ -116,10 +117,12 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
-        <p className="contact-interested">
-          What would you like help Code Your Future with, and what is your level
-          of experience?
-        </p>
+        <span className="contact-interested">
+          <span>
+            What would you like help Code Your Future with, and what is your
+            level of experience?
+          </span>
+        </span>
         <div>
           <CheckListH list={ListsData.GuidePeopleThList} />
           <CheckListB
