@@ -46,9 +46,9 @@
   ],
 
   "radioButtonList": [
-    { "value": "none", "_id": "none" },
-    { "value": "some", "_id": "some" },
-    { "value": "Part of a job", "_id": "Part of a job" }
+    { "value": "None", "_id": "None" },
+    { "value": "Nome", "_id": "Nome" },
+    { "value": "Professional experience", "_id": "Professional experience" }
   ],
   "guidePeopleSkillList": [
     {
