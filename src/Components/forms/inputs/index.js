@@ -89,7 +89,7 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.interestedInVolunteer}
           label="Why are you interested in volunteering? *"
           name="interestedInVolunteer"
-          placeholder="Just a sentence or two requested..."
+          placeholder="Just one or two sentences as required..."
           type="textarea"
         />
         <TextArea
@@ -98,7 +98,7 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.interestedInCYF}
           label="Why are you interested in Code Your Future? *"
           name="interestedInCYF"
-          placeholder="Just a sentence or two requested..."
+          placeholder="Just one or two sentences as required..."
           type="textarea"
         />
         <DropDown
