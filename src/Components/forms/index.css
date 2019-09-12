@@ -58,8 +58,10 @@
 }
 .contact-interested {
   font-size: 20px;
-  line-height: 24px;
   margin-bottom: 50px;
+}
+.contact-interested span {
+  line-height: 70px;
 }
 .contact-interested a {
   color: green;

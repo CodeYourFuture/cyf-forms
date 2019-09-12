@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Label } from 'reactstrap'
 function SelectOption(arrayList) {
   if (arrayList) {
     return arrayList.map(item => {
@@ -15,9 +15,7 @@ function SelectOption(arrayList) {
 export default ({ onChange, isEmpty, label, name, arrayList, value }) => {
   return (
     <div className="form-group">
-      <label htmlFor={name} className="lead">
-        {label}
-      </label>
+      <Label htmlFor={name}>{label}</Label>
       <select
         className={`form-control ${isEmpty && 'is-empty'}`}
         id={name}
