@@ -19,6 +19,8 @@ export const initialState = {
   valuationError: false,
   acknowledgement: false,
   formInComplete: false,
+  userId: '',
+  dashboardUrl: '',
   errors: {
     firstName: false,
     lastName: false,
