@@ -53,7 +53,9 @@ export default ({ onChange, list, name }) => {
                   />
                 )}
                 {listItem.label !== 'Other' && (
-                  <p className="check-list-single-footer">Choose your level</p>
+                  <p className="check-list-single-footer">
+                    Your level of experience
+                  </p>
                 )}
               </span>
             ) : (

@@ -10,6 +10,11 @@ class Forms extends Component {
   state = initialState
 
   UNSAFE_componentWillMount() {
+    const dashboardUrl = this.props.location.search
+    const { userId } = this.props.match.params
+    if (userId) {
+      this.setState({ userId, dashboardUrl: dashboardUrl.slice(1) })
+    }
     this.props.loadCities()
   }
 
@@ -88,7 +93,8 @@ class Forms extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      acknowledgement
+      acknowledgement,
+      userId
     } = this.state
 
     const validatedInputs = this.validateForm({
@@ -120,7 +126,8 @@ class Forms extends Component {
         hearAboutCYF,
         guidePeople: filterEmptyValue(guidePeople),
         techSkill: filterEmptyValue(techSkill),
-        otherSkill: filterEmptyValue(otherSkill)
+        otherSkill: filterEmptyValue(otherSkill),
+        userId
       })
     }
   }
@@ -145,25 +152,41 @@ class Forms extends Component {
 
   render() {
     const { err, volunteer } = this.props
-    const { disabled, acknowledgement, formInComplete } = this.state
+    const {
+      disabled,
+      acknowledgement,
+      formInComplete,
+      userId,
+      dashboardUrl
+    } = this.state
     if (volunteer && volunteer._id) {
       return (
         <div className="form-container container p-4">
           <h4>
             Welcome {volunteer.firstName} {volunteer.lastName}
           </h4>
-          <p>
-            Thank you for submitting your application to Code Your Future to
-            become a volunteer. We will review your application and contact you
-            via email within 10 days.
-          </p>
+          {userId ? (
+            <p>
+              Thank you for submitting your application to volunteer with Code
+              Your Future (CYF). If you are already a registered user of the CYF
+              Admin dashboard, here is a <a href={dashboardUrl}> link</a> to
+              login. For new registrants, we will review your application and
+              contact you via email, within 10 days.
+            </p>
+          ) : (
+            <p>
+              Thank you for submitting your application to Code Your Future to
+              become a volunteer. We will review your application and contact
+              you via email within 10 days.
+            </p>
+          )}
         </div>
       )
     }
     return (
       <div className="form-container container">
         <div>
-          <Header err={err} formInComplete={formInComplete} />
+          <Header err={err} formInComplete={formInComplete} userId={userId} />
           <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
               {...this.props}

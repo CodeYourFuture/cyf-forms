@@ -47,7 +47,7 @@
 
   "radioButtonList": [
     { "value": "None", "_id": "None" },
-    { "value": "Nome", "_id": "Nome" },
+    { "value": "Some", "_id": "Some" },
     { "value": "Professional experience", "_id": "Professional experience" }
   ],
   "guidePeopleSkillList": [
@@ -57,7 +57,12 @@
       "level": "",
       "label": "Coaching / Mentoring"
     },
-    { "id": "09u03uifnc", "name": "", "level": "", "label": "Public Speaking" }
+    {
+      "id": "09u03uifnc",
+      "name": "",
+      "level": "",
+      "label": "Help people learn public speaking"
+    }
   ],
   "techSkillList": [
     {
@@ -69,7 +74,7 @@
     { "id": "23edcs3h3j3", "name": "", "level": "", "label": "ReactJS" },
     { "id": "9087ihncwqd", "name": "", "level": "", "label": "Databases" },
     { "id": "opiuygtbnc2", "name": "", "level": "", "label": "JavaScript" },
-    { "id": "234edcxzzzx", "name": "", "level": "", "label": "HTML, CSS " },
+    { "id": "234edcxzzzx", "name": "", "level": "", "label": "HTML, CSS" },
     { "id": "34refw43efe", "name": "", "level": "", "label": "UX Design" },
     { "id": "232dwjouhv8", "name": "", "level": "", "label": "Other" }
   ],
