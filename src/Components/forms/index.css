@@ -1,0 +1,216 @@
+.form-container {
+  margin-top: 30px;
+  width: 70%;
+}
+.form-header {
+  font-weight: 300;
+  font-size: 60px;
+  line-height: 82px;
+  letter-spacing: -0.5px;
+}
+.form-description {
+  font-size: 24px;
+  line-height: 33px;
+}
+.form-section-one {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.form-group {
+  min-width: 45%;
+  max-width: 45%;
+}
+.form-control {
+  border: 1px solid #e8e8e8 !important;
+  height: 55px;
+  border-radius: 2px;
+}
+.form-control-text-area {
+  height: 100px !important;
+}
+.form-control:hover {
+  border: 1px solid rgb(194, 193, 193) !important;
+}
+.form-control:active {
+  border: 1px solid rgb(194, 193, 193) !important;
+}
+.react-phone-number-input__icon {
+  width: 2em !important;
+  height: 1.5em !important;
+  border: none !important;
+  box-sizing: content-box;
+}
+.tel-preview {
+  font-size: 14px;
+  margin-left: 30px;
+  color: rgb(109, 101, 101);
+}
+.is-empty {
+  border: 1px solid rgb(250, 26, 26) !important;
+}
+.is-invalid.outline-container {
+  border: 1px solid red !important;
+}
+.date--input {
+  width: 50px !important;
+}
+.contact-interested {
+  font-size: 20px;
+  margin-bottom: 50px;
+}
+.contact-interested span {
+  line-height: 70px;
+}
+.contact-interested a {
+  color: green;
+}
+.border-none {
+  border: 1px solid #fff0 !important;
+}
+.form-table {
+  width: 80%;
+}
+.form-table-tr-desktop {
+  border: 1px solid rgb(194, 193, 193);
+  width: 100% !important;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 5px;
+}
+
+.form-table-tr-is-empty {
+  border: 1px solid rgb(250, 26, 26) !important;
+}
+.form-table-td {
+  padding: 0% !important;
+  padding-left: 30px !important;
+  border: none !important;
+}
+.volunteer-submit-btn {
+  background: #03a9f4;
+  border-radius: 5px;
+  letter-spacing: 0.75px;
+  text-transform: capitalize;
+  color: #ffffff;
+  margin: 40px 0;
+  width: 140px;
+}
+.form-acknowledgement-header {
+  font-size: 24px;
+  line-height: 33px;
+}
+.form-acknowledgement-read-about {
+  color: #4daf50;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.form-table {
+  border: 1px solid rgb(194, 193, 193);
+  width: 50%;
+  margin: 10px 0;
+  padding: 20px;
+  border-radius: 5px;
+}
+.errors {
+  color: #ff0b0b;
+  text-align: center;
+  border: 1px solid #dadada;
+  font-size: 24px;
+  border-radius: 5px;
+  padding: 20px;
+  position: absolute;
+  top: 0px;
+  width: 92%;
+  background-color: #ecdada;
+  height: fit-content;
+}
+.modal-footer {
+  justify-content: space-around !important;
+}
+.check-list-header {
+  font-size: 20px;
+  font-weight: bold;
+}
+.check-list-single-footer {
+  font-size: 12px;
+  color: #575757;
+  margin: 0%;
+}
+.radio-group {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+.radio-btn {
+  border: 1px solid rgb(194, 193, 193);
+  width: 100%;
+  text-align: left;
+}
+@media screen and (max-width: 1000px) {
+  .media {
+    display: block;
+  }
+  .desktop {
+    display: none;
+  }
+  .form-container {
+    width: 100%;
+  }
+  .form-header {
+    font-size: 26px;
+    line-height: 22px;
+  }
+  .form-description {
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .form-section-one {
+    display: block;
+  }
+  .form-group {
+    max-height: 100%;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  .form-table {
+    width: 100% !important;
+    padding: 10px !important;
+  }
+  .form-table-tbody {
+    width: 100% !important;
+  }
+  .form-table-thead {
+    width: 100% !important;
+  }
+  .radio-group {
+    width: 100%;
+  }
+  .media-radio-item {
+    width: 30%;
+  }
+  .form-table {
+    border: 1px solid rgb(194, 193, 193);
+    width: 100% !important;
+    margin: 10px 0;
+    padding: 20px;
+    border-radius: 5px;
+  }
+  .form-table-td-media {
+    border: 0.01px solid rgba(194, 193, 193, 0) !important;
+    padding: 0 !important;
+    width: 500px !important;
+  }
+  .media-radio-btn {
+    border: 1px solid rgba(194, 193, 193);
+    width: 100%;
+    white-space: nowrap;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f5f5f5;
+  }
+  .form-table-td {
+    padding-left: 0px !important;
+  }
+}

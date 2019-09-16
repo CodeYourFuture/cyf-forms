@@ -3,7 +3,7 @@ version: 2.1
 
 commands:
   s3deploy:
-    description: "Deploy to S3"
+    description: 'Deploy to S3'
     parameters:
       to:
         type: string
@@ -30,23 +30,12 @@ jobs:
     working_directory: ~/repo
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - yarn-dependencies-{{ checksum "yarn.lock" }}
       - run:
           name: Install dependencies for lint and test
           command: yarn
-      - save_cache:
-          key: yarn-dependencies-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.npm
-      - run:
-          name: Lint project & run test
-          command: yarn test
       - run:
           name: Set env variables
-          command:
-            echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build staging
           command: REACT_APP_NODE_ENV=STAGING yarn build:staging
@@ -58,28 +47,6 @@ jobs:
           paths:
             - staging
             - production
-
-  e2e:
-    docker:
-      - image: cypress/base:10
-    working_directory: ~/repo
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - e2e-dependencies-{{ checksum "yarn.lock" }}
-            - e2e-dependencies-
-      - run:
-          name: Install dependencies
-          command: yarn
-      - save_cache:
-          key: e2e-dependencies-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.npm
-            - ~/.cache
-      - run:
-          name: End-to-end test
-          command: yarn e2e
 
   deploy_staging:
     docker:
@@ -98,7 +65,7 @@ jobs:
           command: sudo pip install awscli
       - s3deploy:
           dir: staging
-          to: "staging.forms.codeyourfuture.io"
+          to: 'staging.forms.codeyourfuture.io'
           cf_distribution_id: E3MJAA9E60TZUB
 
   deploy_production:
@@ -118,7 +85,7 @@ jobs:
           command: sudo pip install awscli
       - s3deploy:
           dir: production
-          to: "forms.codeyourfuture.io"
+          to: 'forms.codeyourfuture.io'
           cf_distribution_id: E3MHHTOV68A76Q
 
 workflows:
@@ -127,13 +94,10 @@ workflows:
     jobs:
       - test:
           context: build
-      - e2e:
-          context: build
       - deploy_staging:
           context: deployments_staging
           requires:
             - test
-            - e2e
           filters:
             branches:
               only:
@@ -142,7 +106,6 @@ workflows:
           context: deployments
           requires:
             - test
-            - e2e
           filters:
             branches:
               only:

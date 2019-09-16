@@ -1,110 +1,110 @@
-const mockServerURL = `http://localhost:3001`;
+const mockServerURL = `http://localhost:3001`
 
-const timestamp = 1559822173490;
-const thanks = "#NailedItThank you! Your submission is now on its way to us.";
+const timestamp = 1559822173490
+const thanks = '#NailedItThank you! Your submission is now on its way to us.'
 
 const initialData = {
-  firstName: "Jane",
-  lastName: "Doe",
-  city: "London",
-  email: "jane.doe@morgue.org",
-  phone: "01189998819991197253"
-};
+  firstName: 'Jane',
+  lastName: 'Doe',
+  city: 'London',
+  email: 'jane.doe@morgue.org',
+  phone: '01189998819991197253'
+}
 
 const codeData = {
   codeExpertise: {
-    "HTML/CSS": "5",
-    JavaScript: "4",
-    React: "3",
-    "SQL/Mongo": "2",
-    "Agile Methodologies": "1"
+    'HTML/CSS': '5',
+    JavaScript: '4',
+    React: '3',
+    'SQL/Mongo': '2',
+    'Agile Methodologies': '1'
   },
-  otherCodeExpertise: "Rock star developer, but humble",
-  availableOnWeekends: "Yes"
-};
+  otherCodeExpertise: 'Rock star developer, but humble',
+  availableOnWeekends: 'Yes'
+}
 
 const orgData = {
   skillSets: {
-    "accounting": true,
-    "events": true
+    accounting: true,
+    events: true
   },
   availability: {
-    "weekend": true
+    weekend: true
   }
-};
+}
 
 beforeEach(() => {
-  cy.request("POST", `${mockServerURL}/_reset`);
-  cy.clock(timestamp);
+  cy.request('POST', `${mockServerURL}/_reset`)
+  cy.clock(timestamp)
 
-  cy.visit("/");
-});
+  cy.visit('/')
+})
 
-it("can submit a code-only form", () => {
+it('can submit a code-only form', () => {
   const extra = {
     interests: {
-      "teachingCode": true
+      teachingCode: true
     }
-  };
-  
-  cy.fillInitialForm({ ...initialData, ...extra }, "Next");
-  cy.fillCodeForm(codeData, "Submit");
-  cy.log(`submitting data: ${JSON.stringify(codeData)}`);
-  cy.get(".applicationForm_thankYou").should("contains.text", thanks);
+  }
+
+  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
+  cy.fillCodeForm(codeData, 'Submit')
+  cy.log(`submitting data: ${JSON.stringify(codeData)}`)
+  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
     expect(response.body[0].body).to.deep.eq({
       ...initialData,
       ...extra,
       ...codeData
-    });
+    })
     expect(response.body[1].body).to.deep.eq({
       Authorization: `Timestamp ${timestamp}`,
       ...initialData,
       ...extra,
       ...codeData
-    });
-  });
-});
+    })
+  })
+})
 
-it("can submit an org-only form", () => {
+it('can submit an org-only form', () => {
   const extra = {
-    interests: { "runningOrganisation": true }
-  };
+    interests: { runningOrganisation: true }
+  }
 
-  cy.fillInitialForm({ ...initialData, ...extra }, "Next");
-  cy.fillOrgForm(orgData, "Submit");
+  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
+  cy.fillOrgForm(orgData, 'Submit')
 
-  cy.get(".applicationForm_thankYou").should("contains.text", thanks);
+  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
     expect(response.body[0].body).to.deep.eq({
       ...initialData,
       ...extra,
       ...orgData
-    });
+    })
     expect(response.body[1].body).to.deep.eq({
       Authorization: `Timestamp ${timestamp}`,
       ...initialData,
       ...extra,
       ...orgData
-    });
-  });
-});
+    })
+  })
+})
 
-it("can submit both", () => {
+it('can submit both', () => {
   const extra = {
     interests: {
-      "runningOrganisation": true,
-      "teachingCode": true
+      runningOrganisation: true,
+      teachingCode: true
     }
-  };
+  }
 
-  cy.fillInitialForm({ ...initialData, ...extra }, "Next");
-  cy.fillCodeForm(codeData, "Next");
-  cy.fillOrgForm(orgData, "Submit");
+  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
+  cy.fillCodeForm(codeData, 'Next')
+  cy.fillOrgForm(orgData, 'Submit')
 
-  cy.get(".applicationForm_thankYou").should("contains.text", thanks);
+  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
     expect(response.body[0].body).to.deep.eq({
@@ -112,13 +112,13 @@ it("can submit both", () => {
       ...extra,
       ...codeData,
       ...orgData
-    });
+    })
     expect(response.body[1].body).to.deep.eq({
       Authorization: `Timestamp ${timestamp}`,
       ...initialData,
       ...extra,
       ...codeData,
       ...orgData
-    });
-  });
-});
+    })
+  })
+})

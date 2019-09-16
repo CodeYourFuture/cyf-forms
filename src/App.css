@@ -1,0 +1,25 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  font-family: 'Roboto', sans-serif !important;
+  margin-bottom: 0px;
+  font-size: 16px;
+  min-height: 60%;
+}
+
+.main {
+  position: relative;
+  margin-bottom: 60px;
+}
+.loader {
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #25ad60;
+  border-bottom: 16px solid #25ad60;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
