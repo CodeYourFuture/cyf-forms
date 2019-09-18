@@ -7,8 +7,8 @@ export default ({ err, formInComplete, userId }) => {
       <hr />
       {userId ? (
         <p className="form-description">
-          Thank you for your interest in volunteering with Code Your Future! To
-          ensure we're a great fit, please complete the form below:
+          You have been re-directed to fill in this form, in order for you to
+          gain access to the Code Your Future Admin dashboard.
         </p>
       ) : (
         <p className="form-description">
