@@ -1,36 +1,17 @@
 const mockServerURL = `http://localhost:3001`
 
 const timestamp = 1559822173490
-const thanks = '#NailedItThank you! Your submission is now on its way to us.'
 
 const initialData = {
   firstName: 'Jane',
   lastName: 'Doe',
-  city: 'London',
+  cityName: 'London',
   email: 'jane.doe@morgue.org',
-  phone: '01189998819991197253'
-}
-
-const codeData = {
-  codeExpertise: {
-    'HTML/CSS': '5',
-    JavaScript: '4',
-    React: '3',
-    'SQL/Mongo': '2',
-    'Agile Methodologies': '1'
-  },
-  otherCodeExpertise: 'Rock star developer, but humble',
-  availableOnWeekends: 'Yes'
-}
-
-const orgData = {
-  skillSets: {
-    accounting: true,
-    events: true
-  },
-  availability: {
-    weekend: true
-  }
+  tel: '01189998819991197253',
+  interestedInVolunteer: 'just sounds interesting',
+  interestedInCYF: 'trying to do my bit',
+  industry: 'Education',
+  hearAboutCYF: 'Social media'
 }
 
 beforeEach(() => {
@@ -40,85 +21,26 @@ beforeEach(() => {
   cy.visit('/')
 })
 
-it('can submit a code-only form', () => {
-  const extra = {
-    interests: {
-      teachingCode: true
-    }
-  }
-
-  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
-  cy.fillCodeForm(codeData, 'Submit')
-  cy.log(`submitting data: ${JSON.stringify(codeData)}`)
-  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
-
-  cy.request(`${mockServerURL}/_calls`).then(response => {
-    expect(response.body[0].body).to.deep.eq({
-      ...initialData,
-      ...extra,
-      ...codeData
-    })
-    expect(response.body[1].body).to.deep.eq({
-      Authorization: `Timestamp ${timestamp}`,
-      ...initialData,
-      ...extra,
-      ...codeData
-    })
-  })
+const generateExpected = data => ({
+  firstName: data.firstName,
+  lastName: data.lastName,
+  email: data.email,
+  tel: `+${data.tel}`,
+  cityId: '123abc',
+  interestedInVolunteer: data.interestedInVolunteer,
+  interestedInCYF: data.interestedInCYF,
+  industry: data.industry || '',
+  hearAboutCYF: data.hearAboutCYF || '',
+  guidePeople: data.guidePeople || [],
+  techSkill: data.techSkill || [],
+  otherSkill: data.otherSkill || [],
+  userId: ''
 })
 
-it('can submit an org-only form', () => {
-  const extra = {
-    interests: { runningOrganisation: true }
-  }
-
-  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
-  cy.fillOrgForm(orgData, 'Submit')
-
-  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
+it('can submit a minimal form', () => {
+  cy.fillInitialForm(initialData)
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
-    expect(response.body[0].body).to.deep.eq({
-      ...initialData,
-      ...extra,
-      ...orgData
-    })
-    expect(response.body[1].body).to.deep.eq({
-      Authorization: `Timestamp ${timestamp}`,
-      ...initialData,
-      ...extra,
-      ...orgData
-    })
-  })
-})
-
-it('can submit both', () => {
-  const extra = {
-    interests: {
-      runningOrganisation: true,
-      teachingCode: true
-    }
-  }
-
-  cy.fillInitialForm({ ...initialData, ...extra }, 'Next')
-  cy.fillCodeForm(codeData, 'Next')
-  cy.fillOrgForm(orgData, 'Submit')
-
-  cy.get('.applicationForm_thankYou').should('contains.text', thanks)
-
-  cy.request(`${mockServerURL}/_calls`).then(response => {
-    expect(response.body[0].body).to.deep.eq({
-      ...initialData,
-      ...extra,
-      ...codeData,
-      ...orgData
-    })
-    expect(response.body[1].body).to.deep.eq({
-      Authorization: `Timestamp ${timestamp}`,
-      ...initialData,
-      ...extra,
-      ...codeData,
-      ...orgData
-    })
+    expect(response.body[0].body).to.deep.eq(generateExpected(initialData))
   })
 })

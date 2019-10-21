@@ -9,6 +9,10 @@ const app = express()
 
 const calls = []
 
+app.get('/cities', (_, res) => {
+  res.json({ cities: [{ _id: '123abc', name: 'London' }] })
+})
+
 app.post('/google', (req, res) => {
   console.log({
     body: req.body,
