@@ -24,15 +24,22 @@ commands:
               --paths /\*
 
 jobs:
-  test:
+  build:
     docker:
       - image: circleci/node:11.12
     working_directory: ~/repo
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - yarn-dependencies-{{ checksum "package.json" }}
       - run:
-          name: Install dependencies for lint and test
+          name: Install dependencies
           command: yarn
+      - save_cache:
+          key: yarn-dependencies-{{ checksum "package.json" }}
+          paths:
+            - ~/.cache
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
@@ -92,12 +99,12 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
-      - test:
+      - build:
           context: build
       - deploy_staging:
           context: deployments_staging
           requires:
-            - test
+            - build
           filters:
             branches:
               only:
@@ -105,7 +112,7 @@ workflows:
       - deploy_production:
           context: deployments
           requires:
-            - test
+            - build
           filters:
             branches:
               only:
