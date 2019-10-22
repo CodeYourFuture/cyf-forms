@@ -22,7 +22,7 @@ app.post('/volunteer', (req, res) => {
     body: req.body,
     headers: req.headers
   })
-  res.sendStatus(204)
+  res.json({ volunteer: req.body })
 })
 
 app.get('/_calls', (req, res) => {
