@@ -46,8 +46,8 @@ Your app is ready to be deployed!
 
 Runs the [Cypress] end-to-end tests, which means:
 
-- Starting a mock for the Google server on port 3100
-- Starting the forms app in TESTING mode on port 3000
+- Starting a mock for the backend server on port 3100
+- Starting the forms app in LOCAL mode on port 3000
 - Waiting for the app to start then running the tests
 
 [cypress]: https://www.cypress.io/

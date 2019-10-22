@@ -13,18 +13,6 @@ app.get('/cities', (_, res) => {
   res.json({ cities: [{ _id: '123abc', name: 'London' }] })
 })
 
-app.post('/google', (req, res) => {
-  console.log({
-    body: req.body,
-    headers: req.headers
-  })
-  calls.push({
-    body: req.body,
-    headers: req.headers
-  })
-  res.sendStatus(204)
-})
-
 app.post('/volunteer', (req, res) => {
   console.log({
     body: req.body,
