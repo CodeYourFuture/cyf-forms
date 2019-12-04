@@ -38,7 +38,6 @@ const CommunityExpectations = () => (
 )
 
 const Modal = ({ selectedModal }) => {
-  console.log({ selectedModal })
   return (
     <div>
       <div className="modal fade" id={`id-form-acknowledgement`} role="dialog">
@@ -62,7 +61,6 @@ const Modal = ({ selectedModal }) => {
 }
 
 const ExpectationCheckBox = ({ onChange, checkedExpectations, showModal }) => {
-  console.log({ onChange, checkedExpectations })
   return (
     <Fragment>
       <input
@@ -88,7 +86,6 @@ const ExpectationCheckBox = ({ onChange, checkedExpectations, showModal }) => {
 }
 
 const TermsCheckBox = ({ onChange, termsOfUseAndPrivacy, showModal }) => {
-  console.log({ onChange, termsOfUseAndPrivacy })
   return (
     <Fragment>
       <input
@@ -133,7 +130,6 @@ export default ({
   selectedModal,
   acknowledgementErrors
 }) => {
-  console.log({ onChange, checkedExpectations })
   return (
     <Fragment>
       <span className="form-acknowledgement-header">
