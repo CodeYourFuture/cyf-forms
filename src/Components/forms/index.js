@@ -29,7 +29,6 @@ class Forms extends Component {
     const { errors } = this.state
     errors[name] = false
     if (e && e.target) {
-      debugger
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,
@@ -159,7 +158,8 @@ class Forms extends Component {
     const { err, volunteer } = this.props
     const {
       disabled,
-      acknowledgement,
+      checkedExpectations,
+      termsOfUseAndPrivacy,
       formInComplete,
       userId,
       dashboardUrl
@@ -211,7 +211,9 @@ class Forms extends Component {
             <button
               className="btn volunteer-submit-btn"
               type="submit"
-              disabled={disabled || !acknowledgement}
+              disabled={
+                disabled || !checkedExpectations || !termsOfUseAndPrivacy
+              }
             >
               Submit
             </button>
