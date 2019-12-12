@@ -149,12 +149,17 @@ class Forms extends Component {
         return ''
     }
   }
-
+  showModal = e => {
+    if (e && e.target.id) {
+      this.setState({ selectedModal: e.target.id })
+    }
+  }
   render() {
     const { err, volunteer } = this.props
     const {
       disabled,
-      acknowledgement,
+      checkedExpectations,
+      termsOfUseAndPrivacy,
       formInComplete,
       userId,
       dashboardUrl
@@ -189,21 +194,26 @@ class Forms extends Component {
           <Header err={err} formInComplete={formInComplete} userId={userId} />
           <form className="mb-4" onSubmit={this.handleSubmit} method="post">
             <Inputs
-              {...this.props}
-              {...this.state}
               onChange={this.onChange}
               telOnChange={this.telOnChange}
               onChangeCheckList={this.onChangeCheckList}
+              {...this.props}
+              {...this.state}
             />
             <Acknowledgement
               onChange={this.onChange}
-              checked={this.state.acknowledgement}
-              isEmpty={this.state.errors.acknowledgement}
+              showModal={this.showModal}
+              selectedModal={this.state.selectedModal}
+              termsOfUseAndPrivacy={this.state.termsOfUseAndPrivacy}
+              checkedExpectations={this.state.checkedExpectations}
+              acknowledgementErrors={this.state.errors.acknowledgement}
             />
             <button
               className="btn volunteer-submit-btn"
               type="submit"
-              disabled={disabled || !acknowledgement}
+              disabled={
+                disabled || !checkedExpectations || !termsOfUseAndPrivacy
+              }
             >
               Submit
             </button>
@@ -222,7 +232,6 @@ export function mapStateToProps(store) {
     err: volunteer && volunteer.err
   }
 }
-export default connect(
-  mapStateToProps,
-  { loadCities, createVolunteerHandler }
-)(Forms)
+export default connect(mapStateToProps, { loadCities, createVolunteerHandler })(
+  Forms
+)
