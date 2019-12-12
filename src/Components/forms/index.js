@@ -93,8 +93,11 @@ class Forms extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      acknowledgement,
-      userId
+      userId,
+      termsOfUseAndPrivacy,
+      agreeToReceiveEmails,
+      agreeToReceivePhoneCall,
+      agreeToReceiveCYFNews
     } = this.state
 
     const validatedInputs = this.validateForm({
@@ -104,8 +107,11 @@ class Forms extends Component {
       cityId,
       interestedInVolunteer,
       tel,
-      interestedInCYF,
-      acknowledgement
+      termsOfUseAndPrivacy,
+      agreeToReceiveEmails,
+      agreeToReceivePhoneCall,
+      agreeToReceiveCYFNews,
+      interestedInCYF
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
@@ -113,6 +119,7 @@ class Forms extends Component {
     if (emptyValues || valuationError) {
       this.setState({ formInComplete: true })
     }
+
     if (!emptyValues && !valuationError) {
       this.props.createVolunteerHandler({
         firstName,
@@ -158,8 +165,10 @@ class Forms extends Component {
     const { err, volunteer } = this.props
     const {
       disabled,
-      checkedExpectations,
       termsOfUseAndPrivacy,
+      agreeToReceiveEmails,
+      agreeToReceivePhoneCall,
+      agreeToReceiveCYFNews,
       formInComplete,
       userId,
       dashboardUrl
@@ -190,35 +199,30 @@ class Forms extends Component {
     }
     return (
       <div className="form-container container">
-        <div>
-          <Header err={err} formInComplete={formInComplete} userId={userId} />
-          <form className="mb-4" onSubmit={this.handleSubmit} method="post">
-            <Inputs
-              onChange={this.onChange}
-              telOnChange={this.telOnChange}
-              onChangeCheckList={this.onChangeCheckList}
-              {...this.props}
-              {...this.state}
-            />
-            <Acknowledgement
-              onChange={this.onChange}
-              showModal={this.showModal}
-              selectedModal={this.state.selectedModal}
-              termsOfUseAndPrivacy={this.state.termsOfUseAndPrivacy}
-              checkedExpectations={this.state.checkedExpectations}
-              acknowledgementErrors={this.state.errors.acknowledgement}
-            />
-            <button
-              className="btn volunteer-submit-btn"
-              type="submit"
-              disabled={
-                disabled || !checkedExpectations || !termsOfUseAndPrivacy
-              }
-            >
-              Submit
-            </button>
-          </form>
-        </div>
+        <Header err={err} formInComplete={formInComplete} userId={userId} />
+        <form className="mb-4" onSubmit={this.handleSubmit} method="post">
+          <Inputs
+            onChange={this.onChange}
+            telOnChange={this.telOnChange}
+            onChangeCheckList={this.onChangeCheckList}
+            {...this.props}
+            {...this.state}
+          />
+          <Acknowledgement onChange={this.onChange} {...this.state} />
+          <button
+            className="btn volunteer-submit-btn"
+            type="submit"
+            disabled={
+              disabled ||
+              !termsOfUseAndPrivacy ||
+              !agreeToReceiveEmails ||
+              !agreeToReceivePhoneCall ||
+              !agreeToReceiveCYFNews
+            }
+          >
+            Submit
+          </button>
+        </form>
       </div>
     )
   }
