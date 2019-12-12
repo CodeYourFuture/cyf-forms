@@ -21,6 +21,10 @@ export const initialState = {
   formInComplete: false,
   userId: '',
   dashboardUrl: '',
+  termsOfUseAndPrivacy: false,
+  agreeToReceiveEmails: false,
+  agreeToReceivePhoneCall: false,
+  agreeToReceiveCYFNews: false,
   errors: {
     firstName: false,
     lastName: false,
@@ -29,7 +33,10 @@ export const initialState = {
     cityId: false,
     interestedInVolunteer: false,
     interestedInCYF: false,
-    acknowledgement: false
+    termsOfUseAndPrivacy: false,
+    agreeToReceiveEmails: false,
+    agreeToReceivePhoneCall: false,
+    agreeToReceiveCYFNews: false
   }
 }
 
