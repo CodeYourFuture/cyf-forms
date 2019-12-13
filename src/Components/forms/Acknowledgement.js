@@ -3,7 +3,7 @@ import { FormGroup, Label, Input } from 'reactstrap'
 
 export default ({
   onChange,
-  termsOfUseAndPrivacy,
+  agreeToTOU,
   agreeToReceiveEmails,
   agreeToReceivePhoneCall,
   agreeToReceiveCYFNews
@@ -15,14 +15,14 @@ export default ({
       </div>
       <hr className="mt-0" />
       <FormGroup check>
-        <Label check htmlFor="termsOfUseAndPrivacy">
+        <Label check htmlFor="agreeToTOU">
           <Input
             className={`form-check-input`}
             type="checkbox"
-            name="termsOfUseAndPrivacy"
+            name="agreeToTOU"
             onChange={onChange}
-            id="termsOfUseAndPrivacy"
-            checked={termsOfUseAndPrivacy}
+            id="agreeToTOU"
+            checked={agreeToTOU}
           />
           I have read and accepted to the{' '}
           <a

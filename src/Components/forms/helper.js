@@ -21,7 +21,7 @@ export const initialState = {
   formInComplete: false,
   userId: '',
   dashboardUrl: '',
-  termsOfUseAndPrivacy: false,
+  agreeToTOU: false,
   agreeToReceiveEmails: false,
   agreeToReceivePhoneCall: false,
   agreeToReceiveCYFNews: false,
@@ -33,7 +33,7 @@ export const initialState = {
     cityId: false,
     interestedInVolunteer: false,
     interestedInCYF: false,
-    termsOfUseAndPrivacy: false,
+    agreeToTOU: false,
     agreeToReceiveEmails: false,
     agreeToReceivePhoneCall: false,
     agreeToReceiveCYFNews: false
