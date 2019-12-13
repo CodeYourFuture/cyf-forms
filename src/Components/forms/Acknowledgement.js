@@ -10,9 +10,7 @@ export default ({
 }) => {
   return (
     <Fragment>
-      <div className="form-acknowledgement-header mt-4">
-        Acknowledgement: <strong className="text-danger">*</strong>
-      </div>
+      <div className="form-acknowledgement-header mt-4">Acknowledgement:</div>
       <hr className="mt-0" />
       <FormGroup check>
         <Label check htmlFor="agreeToTOU">
@@ -40,9 +38,10 @@ export default ({
           >
             privacy policy
           </a>{' '}
-          CodeYourFuture can:
+          <strong className="text-danger">*</strong>
         </Label>
       </FormGroup>
+      <p className="mt-2 mb-0">CodeYourFuture can:</p>
       <ul>
         <FormGroup check>
           <Label check htmlFor="agreeToReceiveEmails">
