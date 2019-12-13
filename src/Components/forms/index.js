@@ -94,7 +94,7 @@ class Forms extends Component {
       techSkill,
       otherSkill,
       userId,
-      termsOfUseAndPrivacy,
+      agreeToTOU,
       agreeToReceiveEmails,
       agreeToReceivePhoneCall,
       agreeToReceiveCYFNews
@@ -107,7 +107,7 @@ class Forms extends Component {
       cityId,
       interestedInVolunteer,
       tel,
-      termsOfUseAndPrivacy,
+      agreeToTOU,
       agreeToReceiveEmails,
       interestedInCYF
     })
@@ -133,7 +133,7 @@ class Forms extends Component {
         techSkill: filterEmptyValue(techSkill),
         otherSkill: filterEmptyValue(otherSkill),
         userId,
-        termsOfUseAndPrivacy,
+        agreeToTOU,
         agreeToReceiveEmails,
         agreeToReceivePhoneCall,
         agreeToReceiveCYFNews
@@ -167,7 +167,7 @@ class Forms extends Component {
     const { err, volunteer } = this.props
     const {
       disabled,
-      termsOfUseAndPrivacy,
+      agreeToTOU,
       agreeToReceiveEmails,
       formInComplete,
       userId,
@@ -212,9 +212,7 @@ class Forms extends Component {
           <button
             className="btn volunteer-submit-btn"
             type="submit"
-            disabled={
-              disabled || !termsOfUseAndPrivacy || !agreeToReceiveEmails
-            }
+            disabled={disabled || !agreeToTOU || !agreeToReceiveEmails}
           >
             Submit
           </button>
