@@ -39,48 +39,51 @@ export default ({
             rel="noopener noreferrer"
           >
             privacy policy
-          </a>
+          </a>{' '}
+          CodeYourFuture can:
         </Label>
       </FormGroup>
-      <FormGroup check>
-        <Label check htmlFor="agreeToReceiveEmails">
-          <Input
-            className={`form-check-input`}
-            type="checkbox"
-            name="agreeToReceiveEmails"
-            id="agreeToReceiveEmails"
-            onChange={onChange}
-            checked={agreeToReceiveEmails}
-          />
-          Send me emails relevant to my volunteering (mandatory)
-        </Label>
-      </FormGroup>
-      <FormGroup check>
-        <Label check htmlFor="agreeToReceivePhoneCall">
-          <Input
-            className={`form-check-input`}
-            type="checkbox"
-            name="agreeToReceivePhoneCall"
-            id="agreeToReceivePhoneCall"
-            onChange={onChange}
-            checked={agreeToReceivePhoneCall}
-          />
-          Contact me via telephone in regards to volunteering
-        </Label>
-      </FormGroup>
-      <FormGroup check>
-        <Label check htmlFor="agreeToReceiveCYFNews">
-          <Input
-            className={`form-check-input`}
-            type="checkbox"
-            name="agreeToReceiveCYFNews"
-            id="agreeToReceiveCYFNews"
-            onChange={onChange}
-            checked={agreeToReceiveCYFNews}
-          />
-          Contact me via email about events and other CYF news
-        </Label>
-      </FormGroup>
+      <ul>
+        <FormGroup check>
+          <Label check htmlFor="agreeToReceiveEmails">
+            <Input
+              className={`form-check-input`}
+              type="checkbox"
+              name="agreeToReceiveEmails"
+              id="agreeToReceiveEmails"
+              onChange={onChange}
+              checked={agreeToReceiveEmails}
+            />
+            Send me emails relevant to my volunteering (mandatory)
+          </Label>
+        </FormGroup>
+        <FormGroup check>
+          <Label check htmlFor="agreeToReceivePhoneCall">
+            <Input
+              className={`form-check-input`}
+              type="checkbox"
+              name="agreeToReceivePhoneCall"
+              id="agreeToReceivePhoneCall"
+              onChange={onChange}
+              checked={agreeToReceivePhoneCall}
+            />
+            Contact me via telephone in regards to volunteering
+          </Label>
+        </FormGroup>
+        <FormGroup check>
+          <Label check htmlFor="agreeToReceiveCYFNews">
+            <Input
+              className={`form-check-input`}
+              type="checkbox"
+              name="agreeToReceiveCYFNews"
+              id="agreeToReceiveCYFNews"
+              onChange={onChange}
+              checked={agreeToReceiveCYFNews}
+            />
+            Contact me via email about events and other CYF news
+          </Label>
+        </FormGroup>
+      </ul>
     </Fragment>
   )
 }
