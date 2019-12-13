@@ -109,8 +109,6 @@ class Forms extends Component {
       tel,
       termsOfUseAndPrivacy,
       agreeToReceiveEmails,
-      agreeToReceivePhoneCall,
-      agreeToReceiveCYFNews,
       interestedInCYF
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
@@ -134,7 +132,11 @@ class Forms extends Component {
         guidePeople: filterEmptyValue(guidePeople),
         techSkill: filterEmptyValue(techSkill),
         otherSkill: filterEmptyValue(otherSkill),
-        userId
+        userId,
+        termsOfUseAndPrivacy,
+        agreeToReceiveEmails,
+        agreeToReceivePhoneCall,
+        agreeToReceiveCYFNews
       })
     }
   }
@@ -167,8 +169,6 @@ class Forms extends Component {
       disabled,
       termsOfUseAndPrivacy,
       agreeToReceiveEmails,
-      agreeToReceivePhoneCall,
-      agreeToReceiveCYFNews,
       formInComplete,
       userId,
       dashboardUrl
@@ -213,11 +213,7 @@ class Forms extends Component {
             className="btn volunteer-submit-btn"
             type="submit"
             disabled={
-              disabled ||
-              !termsOfUseAndPrivacy ||
-              !agreeToReceiveEmails ||
-              !agreeToReceivePhoneCall ||
-              !agreeToReceiveCYFNews
+              disabled || !termsOfUseAndPrivacy || !agreeToReceiveEmails
             }
           >
             Submit

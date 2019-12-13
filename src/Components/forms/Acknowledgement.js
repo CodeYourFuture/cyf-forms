@@ -10,10 +10,10 @@ export default ({
 }) => {
   return (
     <Fragment>
-      <span className="form-acknowledgement-header">
-        Acknowledgement: (* Required)
-      </span>
-      <br />
+      <div className="form-acknowledgement-header mt-4">
+        Acknowledgement: <strong className="text-danger">*</strong>
+      </div>
+      <hr className="mt-0" />
       <FormGroup check>
         <Label check htmlFor="termsOfUseAndPrivacy">
           <Input
@@ -54,7 +54,8 @@ export default ({
               onChange={onChange}
               checked={agreeToReceiveEmails}
             />
-            Send me emails relevant to my volunteering (mandatory)
+            Send me emails relevant to my volunteering{' '}
+            <strong className="text-danger">*</strong>
           </Label>
         </FormGroup>
         <FormGroup check>
