@@ -22,9 +22,7 @@ export const initialState = {
   userId: '',
   dashboardUrl: '',
   agreeToTOU: false,
-  agreeToReceiveEmails: false,
-  agreeToReceivePhoneCall: false,
-  agreeToReceiveCYFNews: false,
+  agreeToReceiveCommunication: false,
   errors: {
     firstName: false,
     lastName: false,
@@ -34,9 +32,7 @@ export const initialState = {
     interestedInVolunteer: false,
     interestedInCYF: false,
     agreeToTOU: false,
-    agreeToReceiveEmails: false,
-    agreeToReceivePhoneCall: false,
-    agreeToReceiveCYFNews: false
+    agreeToReceiveCommunication: false
   }
 }
 
