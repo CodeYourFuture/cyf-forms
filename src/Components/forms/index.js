@@ -95,9 +95,7 @@ class Forms extends Component {
       otherSkill,
       userId,
       agreeToTOU,
-      agreeToReceiveEmails,
-      agreeToReceivePhoneCall,
-      agreeToReceiveCYFNews
+      agreeToReceiveCommunication
     } = this.state
 
     const validatedInputs = this.validateForm({
@@ -108,8 +106,8 @@ class Forms extends Component {
       interestedInVolunteer,
       tel,
       agreeToTOU,
-      agreeToReceiveEmails,
-      interestedInCYF
+      interestedInCYF,
+      agreeToReceiveCommunication
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
@@ -134,9 +132,7 @@ class Forms extends Component {
         otherSkill: filterEmptyValue(otherSkill),
         userId,
         agreeToTOU,
-        agreeToReceiveEmails,
-        agreeToReceivePhoneCall,
-        agreeToReceiveCYFNews
+        agreeToReceiveCommunication
       })
     }
   }
@@ -168,10 +164,10 @@ class Forms extends Component {
     const {
       disabled,
       agreeToTOU,
-      agreeToReceiveEmails,
       formInComplete,
       userId,
-      dashboardUrl
+      dashboardUrl,
+      agreeToReceiveCommunication
     } = this.state
     if (volunteer && volunteer._id) {
       return (
@@ -212,7 +208,7 @@ class Forms extends Component {
           <button
             className="btn volunteer-submit-btn"
             type="submit"
-            disabled={disabled || !agreeToTOU || !agreeToReceiveEmails}
+            disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
           >
             Submit
           </button>
