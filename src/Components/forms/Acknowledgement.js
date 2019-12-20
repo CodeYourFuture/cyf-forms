@@ -54,6 +54,9 @@ export default ({ onChange, agreeToTOU, agreeToReceiveCommunication }) => {
           <strong className="text-danger">*</strong>
         </Label>
       </FormGroup>
+      <p className="pt-2">
+        <strong className="text-danger">*</strong> fields are mandatory
+      </p>
     </Fragment>
   )
 }
