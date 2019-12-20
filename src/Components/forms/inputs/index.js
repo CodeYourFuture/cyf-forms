@@ -48,7 +48,7 @@ export default class VolunteerForm extends Component {
             isEmpty={errors.lastName}
             label="Last Name *"
             name="lastName"
-            placeholder="Your first name..."
+            placeholder="Your last name..."
             type="text"
           />
           <TextInput
