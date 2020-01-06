@@ -206,9 +206,9 @@ class Forms extends Component {
           />
           <Acknowledgement onChange={this.onChange} {...this.state} />
           <button
+            disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
             className="btn volunteer-submit-btn"
             type="submit"
-            disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
           >
             Submit
           </button>
