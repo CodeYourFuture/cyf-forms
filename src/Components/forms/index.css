@@ -89,12 +89,12 @@
   border: none !important;
 }
 .volunteer-submit-btn {
-  background: #03a9f4;
+  background-color: #03a9f4;
   border-radius: 5px;
   letter-spacing: 0.75px;
   text-transform: capitalize;
   color: #ffffff;
-  margin: 40px 0;
+  margin: 20px 0;
   width: 140px;
 }
 .form-acknowledgement-header {
@@ -120,9 +120,7 @@
   font-size: 24px;
   border-radius: 5px;
   padding: 20px;
-  position: absolute;
-  top: 0px;
-  width: 92%;
+  width: 100% !important;
   background-color: #ecdada;
   height: fit-content;
 }

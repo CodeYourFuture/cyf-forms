@@ -21,6 +21,8 @@ export const initialState = {
   formInComplete: false,
   userId: '',
   dashboardUrl: '',
+  agreeToTOU: false,
+  agreeToReceiveCommunication: false,
   errors: {
     firstName: false,
     lastName: false,
@@ -29,7 +31,8 @@ export const initialState = {
     cityId: false,
     interestedInVolunteer: false,
     interestedInCYF: false,
-    acknowledgement: false
+    agreeToTOU: false,
+    agreeToReceiveCommunication: false
   }
 }
 

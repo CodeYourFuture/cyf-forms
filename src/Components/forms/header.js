@@ -1,8 +1,24 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 
 export default ({ err, formInComplete, userId }) => {
   return (
-    <Fragment>
+    <div>
+      <div className="mb-2">
+        {err && (
+          <p className="errors">
+            {err}
+            {window.scrollTo(0, 0)}
+          </p>
+        )}
+        {formInComplete ? (
+          <p className="errors">
+            Form is incomplete, please check all your details.
+            {window.scrollTo(0, 0)}
+          </p>
+        ) : (
+          ''
+        )}
+      </div>
       <span className="form-header">Volunteer Application Form</span>
       <hr />
       {userId ? (
@@ -16,20 +32,6 @@ export default ({ err, formInComplete, userId }) => {
           complete the form below:
         </p>
       )}
-      {err && (
-        <p className="errors">
-          {err}
-          {window.scrollTo(0, 0)}
-        </p>
-      )}
-      {formInComplete ? (
-        <span className="errors container">
-          Form is incomplete, please check all your details.
-          {window.scrollTo(0, 0)}
-        </span>
-      ) : (
-        ''
-      )}
-    </Fragment>
+    </div>
   )
 }

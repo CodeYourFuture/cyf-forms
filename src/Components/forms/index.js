@@ -93,8 +93,9 @@ class Forms extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      acknowledgement,
-      userId
+      userId,
+      agreeToTOU,
+      agreeToReceiveCommunication
     } = this.state
 
     const validatedInputs = this.validateForm({
@@ -104,8 +105,9 @@ class Forms extends Component {
       cityId,
       interestedInVolunteer,
       tel,
+      agreeToTOU,
       interestedInCYF,
-      acknowledgement
+      agreeToReceiveCommunication
     })
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
@@ -113,6 +115,7 @@ class Forms extends Component {
     if (emptyValues || valuationError) {
       this.setState({ formInComplete: true })
     }
+
     if (!emptyValues && !valuationError) {
       this.props.createVolunteerHandler({
         firstName,
@@ -127,7 +130,9 @@ class Forms extends Component {
         guidePeople: filterEmptyValue(guidePeople),
         techSkill: filterEmptyValue(techSkill),
         otherSkill: filterEmptyValue(otherSkill),
-        userId
+        userId,
+        agreeToTOU,
+        agreeToReceiveCommunication
       })
     }
   }
@@ -149,15 +154,20 @@ class Forms extends Component {
         return ''
     }
   }
-
+  showModal = e => {
+    if (e && e.target.id) {
+      this.setState({ selectedModal: e.target.id })
+    }
+  }
   render() {
     const { err, volunteer } = this.props
     const {
       disabled,
-      acknowledgement,
+      agreeToTOU,
       formInComplete,
       userId,
-      dashboardUrl
+      dashboardUrl,
+      agreeToReceiveCommunication
     } = this.state
     if (volunteer && volunteer._id) {
       return (
@@ -185,30 +195,24 @@ class Forms extends Component {
     }
     return (
       <div className="form-container container">
-        <div>
-          <Header err={err} formInComplete={formInComplete} userId={userId} />
-          <form className="mb-4" onSubmit={this.handleSubmit} method="post">
-            <Inputs
-              {...this.props}
-              {...this.state}
-              onChange={this.onChange}
-              telOnChange={this.telOnChange}
-              onChangeCheckList={this.onChangeCheckList}
-            />
-            <Acknowledgement
-              onChange={this.onChange}
-              checked={this.state.acknowledgement}
-              isEmpty={this.state.errors.acknowledgement}
-            />
-            <button
-              className="btn volunteer-submit-btn"
-              type="submit"
-              disabled={disabled || !acknowledgement}
-            >
-              Submit
-            </button>
-          </form>
-        </div>
+        <Header err={err} formInComplete={formInComplete} userId={userId} />
+        <form className="mb-4" onSubmit={this.handleSubmit} method="post">
+          <Inputs
+            onChange={this.onChange}
+            telOnChange={this.telOnChange}
+            onChangeCheckList={this.onChangeCheckList}
+            {...this.props}
+            {...this.state}
+          />
+          <Acknowledgement onChange={this.onChange} {...this.state} />
+          <button
+            disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
+            className="btn volunteer-submit-btn"
+            type="submit"
+          >
+            Submit
+          </button>
+        </form>
       </div>
     )
   }
@@ -222,7 +226,6 @@ export function mapStateToProps(store) {
     err: volunteer && volunteer.err
   }
 }
-export default connect(
-  mapStateToProps,
-  { loadCities, createVolunteerHandler }
-)(Forms)
+export default connect(mapStateToProps, { loadCities, createVolunteerHandler })(
+  Forms
+)
