@@ -8,6 +8,15 @@ export const createVolunteer = async volunteer => {
     const response = await axios.post(`${path}`, volunteer)
     return response.data
   } catch (err) {
+    if (
+      err.response &&
+      err.response.data &&
+      err.response.data.error === 'EMAIL_EXIST'
+    ) {
+      return {
+        err: 'Volunteer account with this email address already exist.'
+      }
+    }
     return {
       err: 'Something went wrong, please try again later.'
     }
