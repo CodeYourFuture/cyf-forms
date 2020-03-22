@@ -20,7 +20,7 @@ class Forms extends Component {
       this.setState({ loading: true, err: '' })
       try {
         const magicLinkRequest = await axios.post(
-          `${path}/email/vitrifaction`,
+          `${path}/email/verification`,
           {
             email,
             userId
@@ -30,7 +30,7 @@ class Forms extends Component {
           this.setState({
             loading: false,
             msg:
-              'We have sent you a vitrifaction email, Please check your emails.'
+              'We have sent you a verification email, Please check your emails.'
           })
         }
       } catch (err) {
