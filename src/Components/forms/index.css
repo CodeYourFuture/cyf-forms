@@ -190,6 +190,10 @@
   color: #575757;
   background-color: #dadada;
 }
+.success-message-box {
+  margin: 5% 10%;
+  background-color: #e4e4e4;
+}
 .success {
   color: green;
   text-align: center;

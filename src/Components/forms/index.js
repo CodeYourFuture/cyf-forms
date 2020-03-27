@@ -44,7 +44,6 @@ class Forms extends Component {
             err: 'Email cannot be empty.'
           })
         }
-        console.log(err.response.data)
         if (err.response && err.response.data === 'NO_ACCOUNT') {
           return this.setState({
             loading: false,
@@ -245,7 +244,7 @@ class Forms extends Component {
     }
     if (msg) {
       return (
-        <div style={{ padding: '5%' }}>
+        <div className="success-message-box">
           <p className="success" style={{ fontSize: '24px' }}>
             {msg}
           </p>
@@ -276,6 +275,49 @@ class Forms extends Component {
         </div>
       )
     }
+    if (userId && showEmailBox) {
+      return (
+        <div className="form-container container">
+          {this.state.err && <p className="errors">{this.state.err}</p>}
+          <div className="forms-important-box">
+            <div>
+              <p>
+                <strong>Important: </strong>This form will send you an email
+                with a link to update your existing profile to alow us to see
+                your request to access admin dashboard.
+              </p>
+              <p>
+                <strong>
+                  Please entre the email you used for volunteer application form
+                  and click submit.
+                </strong>
+              </p>
+              <form
+                className="forms-important-box-form"
+                onSubmit={this.handleMagicLinkRequest}
+              >
+                <input
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  name="email"
+                  placeholder="example@example.example"
+                  type="email"
+                />
+                <button disabled={!this.state.email} type="submit">
+                  Submit
+                </button>
+              </form>
+              <span
+                style={{ cursor: 'pointer', color: '#0053ff' }}
+                onMouseDown={() => this.setState({ showEmailBox: false })}
+              >
+                Back
+              </span>
+            </div>
+          </div>
+        </div>
+      )
+    }
     return (
       <div className="form-container container">
         <Header
@@ -296,35 +338,6 @@ class Forms extends Component {
               </span>
               .
             </span>
-            {showEmailBox && (
-              <div>
-                <span>
-                  Please entre the email you used for volunteer application form
-                  and click submit.
-                </span>
-                <form
-                  className="forms-important-box-form"
-                  onSubmit={this.handleMagicLinkRequest}
-                >
-                  <input
-                    onChange={this.onChange}
-                    value={this.state.email}
-                    name="email"
-                    placeholder="example@example.example"
-                    type="email"
-                  />
-                  <button disabled={!this.state.email} type="submit">
-                    Submit
-                  </button>
-                </form>
-                <span
-                  style={{ cursor: 'pointer', color: '#0053ff' }}
-                  onMouseDown={() => this.setState({ showEmailBox: false })}
-                >
-                  Cancel
-                </span>
-              </div>
-            )}
           </div>
         )}
         {!showEmailBox && (
