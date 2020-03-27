@@ -9,16 +9,8 @@ const app = express()
 
 const calls = []
 
-app.post('/google', (req, res) => {
-  console.log({
-    body: req.body,
-    headers: req.headers
-  })
-  calls.push({
-    body: req.body,
-    headers: req.headers
-  })
-  res.sendStatus(204)
+app.get('/cities', (_, res) => {
+  res.json({ cities: [{ _id: '123abc', name: 'London' }] })
 })
 
 app.post('/volunteer', (req, res) => {
@@ -30,7 +22,7 @@ app.post('/volunteer', (req, res) => {
     body: req.body,
     headers: req.headers
   })
-  res.sendStatus(204)
+  res.json({ volunteer: req.body })
 })
 
 app.get('/_calls', (req, res) => {

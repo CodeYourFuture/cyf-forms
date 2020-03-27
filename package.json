@@ -40,6 +40,10 @@
     "delete-map-files": "find ./build -name '*.map' -delete",
     "delete-references-to-map-files": "find ./build -regex '.*\\.\\(js\\|css\\)' -exec sed -i -E '\\/[\\*\\/]#\\ssourceMappingURL=main(\\.[0-9a-f]+)?\\.(css|js)\\.map(\\*\\/)?/g' {} +",
     "test": "react-scripts test --env=jsdom",
+    "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open\"",
+    "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
+    "e2e:mock": "node ./e2e/fixtures/server.js",
+    "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
     "lint:fix": "./node_modules/.bin/eslint --fix src",
     "prettier": "./node_modules/.bin/prettier --config .prettierrc --write 'src/**/*.js'",
     "eject": "react-scripts eject"
@@ -62,6 +66,9 @@
   },
   "devDependencies": {
     "autoprefixer": "^9.6.1",
+    "concurrently": "^5.0.0",
+    "cors": "^2.8.5",
+    "cypress": "^3.4.1",
     "eslint": "^6.2.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.1.0",
@@ -71,7 +78,8 @@
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2"
+    "prettier": "^1.18.2",
+    "wait-on": "^3.3.0"
   },
   "browserslist": [
     ">0.2%",

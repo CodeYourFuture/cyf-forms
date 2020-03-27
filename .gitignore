@@ -7,7 +7,7 @@
 
 # testing
 /coverage
-/e2e/screenshot
+/e2e/screenshots
 
 # production
 /build

@@ -4,17 +4,28 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************//
 
-Cypress.Commands.add('fillInitialForm', (data, button) => {
+Cypress.Commands.add('fillInitialForm', data => {
+  // mandatory fields
   cy.get('[name="firstName"]').type(data.firstName)
   cy.get('[name="lastName"]').type(data.lastName)
-  cy.get('[name="city"]').select(data.city)
+  cy.get('[name="cityId"]').select(data.cityName)
   cy.get('[name="email"]').type(data.email)
-  cy.get('[name="phone"]').type(data.phone)
-  Object.keys(data.interests).forEach(field => {
-    cy.get(`[name="interests[${field}]"]`).check()
-  })
+  cy.get('input[type="tel"]').type(data.tel)
+  cy.get('[name="interestedInVolunteer"]').type(data.interestedInVolunteer)
+  cy.get('[name="interestedInCYF"]').type(data.interestedInCYF)
+
+  // optional fields
+  if (data.industry) {
+    cy.get('[name="industry"]').select(data.industry)
+  }
+  if (data.hearAboutCYF) {
+    cy.get('[name="hearAboutCYF"]').select(data.hearAboutCYF)
+  }
+
+  // submission
+  cy.get('[name="acknowledgement"]').click()
   cy.get('button')
-    .contains(button)
+    .contains('Submit')
     .click()
 })
 
