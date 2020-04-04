@@ -275,11 +275,17 @@ class Forms extends Component {
               contact you via email, within 10 days.
             </p>
           ) : (
-            <p>
-              Thank you for submitting your application to Code Your Future to
-              become a volunteer. We will review your application and contact
-              you via email within 10 days.
-            </p>
+            <div>
+              <p>
+                Thank you for submitting your application to Code Your Future to
+                become a volunteer. We will review your application and contact
+                you via email within 10 days.
+              </p>
+              <p>
+                While you wait, we encourage you to read our documentation
+                <a href="https://docs.codeyourfuture.io/volunteers">here</a>
+              </p>
+            </div>
           )}
         </div>
       )
