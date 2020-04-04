@@ -63,14 +63,15 @@ class Forms extends Component {
     const dashboardUrl = this.props.location.search
     const { userId, code } = this.props.match.params
     if (code === 'failed') {
-      this.setState({
+      return this.setState({
+        userId,
         showEmailBox: true,
         err:
           'Failed to verify your email address, due to expire token or server failure. Please use the box below and try again.'
       })
     }
     if (code === 'success') {
-      this.setState({
+      return this.setState({
         msg: `Thank you for your patient, we will review your application and contact you via email, within 10 days.`
       })
     }
