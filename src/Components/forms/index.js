@@ -222,8 +222,15 @@ class Forms extends Component {
       this.setState({ selectedModal: e.target.id })
     }
   }
+  UNSAFE_componentWillReceiveProps(newProps) {
+    const { volunteer, err } = newProps
+    this.setState({ err, volunteer })
+    const { userId } = this.props.match.params
+    if (userId && err === 'An account with this email address already exists') {
+      this.setState({ showEmailBox: true })
+    }
+  }
   render() {
-    const { err, volunteer } = this.props
     const {
       disabled,
       agreeToTOU,
@@ -233,7 +240,9 @@ class Forms extends Component {
       agreeToReceiveCommunication,
       showEmailBox,
       msg,
-      loading
+      loading,
+      err,
+      volunteer
     } = this.state
     if (loading) {
       return (
@@ -275,21 +284,24 @@ class Forms extends Component {
         </div>
       )
     }
-    if (userId && showEmailBox) {
-      return (
-        <div className="form-container container">
-          {this.state.err && <p className="errors">{this.state.err}</p>}
+    return (
+      <div className="form-container container">
+        {err && (
+          <p className="errors">
+            {err}
+            {window.scrollTo(0, 0)}
+          </p>
+        )}
+        {showEmailBox ? (
           <div className="forms-important-box">
             <div>
               <p>
-                <strong>Important: </strong>This form will send you an email
-                with a link to update your existing profile to alow us to see
-                your request to access admin dashboard.
+                <strong>Important: </strong>this form will send you a
+                verification email before getting access to our dashboard
               </p>
               <p>
                 <strong>
-                  Please entre the email you used for volunteer application form
-                  and click submit.
+                  Please enter your email you used and click submit
                 </strong>
               </p>
               <form
@@ -315,49 +327,44 @@ class Forms extends Component {
               </span>
             </div>
           </div>
-        </div>
-      )
-    }
-    return (
-      <div className="form-container container">
-        <Header
-          err={err || this.state.err}
-          formInComplete={formInComplete}
-          userId={userId}
-        />
-        {userId && (
-          <div className="forms-important-box">
-            <span>
-              <strong>Important:</strong> If you already completed this form in
-              some point please click{' '}
-              <span
-                style={{ cursor: 'pointer', color: '#0053ff' }}
-                onMouseDown={() => this.setState({ showEmailBox: true })}
+        ) : (
+          <div>
+            <Header formInComplete={formInComplete} userId={userId} />
+            {userId && (
+              <div className="forms-important-box">
+                <span>
+                  <strong>Important:</strong> If you already completed this form
+                  in some point please click{' '}
+                  <span
+                    style={{ cursor: 'pointer', color: '#0053ff' }}
+                    onMouseDown={() => this.setState({ showEmailBox: true })}
+                  >
+                    here
+                  </span>
+                  .
+                </span>
+              </div>
+            )}
+            <form className="mb-4" onSubmit={this.handleSubmit} method="post">
+              <Inputs
+                onChange={this.onChange}
+                telOnChange={this.telOnChange}
+                onChangeCheckList={this.onChangeCheckList}
+                {...this.props}
+                {...this.state}
+              />
+              <Acknowledgement onChange={this.onChange} {...this.state} />
+              <button
+                disabled={
+                  disabled || !agreeToTOU || !agreeToReceiveCommunication
+                }
+                className="btn volunteer-submit-btn"
+                type="submit"
               >
-                here
-              </span>
-              .
-            </span>
+                Submit
+              </button>
+            </form>
           </div>
-        )}
-        {!showEmailBox && (
-          <form className="mb-4" onSubmit={this.handleSubmit} method="post">
-            <Inputs
-              onChange={this.onChange}
-              telOnChange={this.telOnChange}
-              onChangeCheckList={this.onChangeCheckList}
-              {...this.props}
-              {...this.state}
-            />
-            <Acknowledgement onChange={this.onChange} {...this.state} />
-            <button
-              disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
-              className="btn volunteer-submit-btn"
-              type="submit"
-            >
-              Submit
-            </button>
-          </form>
         )}
       </div>
     )

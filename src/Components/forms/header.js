@@ -1,15 +1,9 @@
 import React from 'react'
 
-export default ({ err, formInComplete, userId }) => {
+export default ({ formInComplete, userId }) => {
   return (
     <div>
       <div className="mb-2">
-        {err && (
-          <p className="errors">
-            {err}
-            {window.scrollTo(0, 0)}
-          </p>
-        )}
         {formInComplete ? (
           <p className="errors">
             Form is incomplete, please check all your details.

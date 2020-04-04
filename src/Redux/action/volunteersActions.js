@@ -14,7 +14,7 @@ export const createVolunteer = async volunteer => {
       err.response.data.error === 'EMAIL_EXIST'
     ) {
       return {
-        err: 'Volunteer account with this email address already exist.'
+        err: 'An account with this email address already exists'
       }
     }
     return {
