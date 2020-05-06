@@ -23,6 +23,8 @@ export const initialState = {
   dashboardUrl: '',
   agreeToTOU: false,
   agreeToReceiveCommunication: false,
+  showFindAccountBox: false,
+  loading: false,
   errors: {
     firstName: false,
     lastName: false,

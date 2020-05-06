@@ -7,7 +7,7 @@ import NotFound from '../Components/NotFound'
 export default () => (
   <Switch>
     <Public exact path="/" component={Forms} />
-    <Public exact path="/code/:userId" component={Forms} />
+    <Public exact path="/code/:userId/:code?" component={Forms} />
     <Route path="*" component={NotFound} />
   </Switch>
 )

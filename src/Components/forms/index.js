@@ -5,13 +5,76 @@ import { initialState, arrayOnChange, filterEmptyValue } from './helper'
 import Header from './header'
 import Inputs from './inputs'
 import Acknowledgement from './Acknowledgement'
+import axios from 'axios'
+import { domain, appPath } from '../../config'
 import './index.css'
+
+const path = `${domain()}${appPath}`
 class Forms extends Component {
   state = initialState
 
+  handleMagicLinkRequest = async e => {
+    e.preventDefault()
+    const { email, userId } = this.state
+    if (email) {
+      this.setState({ loading: true, err: '' })
+      try {
+        const magicLinkRequest = await axios.post(
+          `${path}/email/verification`,
+          {
+            email,
+            userId
+          }
+        )
+        if (magicLinkRequest.status === 200) {
+          this.setState({
+            loading: false,
+            msg:
+              'We have sent you a verification email, Please check your emails.'
+          })
+        }
+      } catch (err) {
+        if (
+          err.response &&
+          err.response.data &&
+          err.response.data.err === 'EMAIL_EMPTY'
+        ) {
+          return this.setState({
+            loading: false,
+            err: 'Email cannot be empty.'
+          })
+        }
+        if (err.response && err.response.data === 'NO_ACCOUNT') {
+          return this.setState({
+            loading: false,
+            err: 'No account was found.'
+          })
+        }
+        return this.setState({
+          err:
+            'Sorry, we are currently experiencing technical issues, please try again later.',
+          loading: false
+        })
+      }
+    }
+  }
+
   UNSAFE_componentWillMount() {
     const dashboardUrl = this.props.location.search
-    const { userId } = this.props.match.params
+    const { userId, code } = this.props.match.params
+    if (code === 'failed') {
+      return this.setState({
+        userId,
+        showEmailBox: true,
+        err:
+          'Failed to verify your email address, due to expire token or server failure. Please use the box below and try again.'
+      })
+    }
+    if (code === 'success') {
+      return this.setState({
+        msg: `Thank you for your patient, we will review your application and contact you via email, within 10 days.`
+      })
+    }
     if (userId) {
       this.setState({ userId, dashboardUrl: dashboardUrl.slice(1) })
     }
@@ -33,7 +96,8 @@ class Forms extends Component {
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,
         errors,
-        formInComplete: false
+        formInComplete: false,
+        err: null
       })
     }
   }
@@ -159,16 +223,44 @@ class Forms extends Component {
       this.setState({ selectedModal: e.target.id })
     }
   }
+  UNSAFE_componentWillReceiveProps(newProps) {
+    const { volunteer, err } = newProps
+    this.setState({ err, volunteer })
+    const { userId } = this.props.match.params
+    if (userId && err === 'An account with this email address already exists') {
+      this.setState({ showEmailBox: true })
+    }
+  }
   render() {
-    const { err, volunteer } = this.props
     const {
       disabled,
       agreeToTOU,
       formInComplete,
       userId,
       dashboardUrl,
-      agreeToReceiveCommunication
+      agreeToReceiveCommunication,
+      showEmailBox,
+      msg,
+      loading,
+      err,
+      volunteer
     } = this.state
+    if (loading) {
+      return (
+        <div className="d-flex justify-content-center mt-5">
+          <div className="loader" />
+        </div>
+      )
+    }
+    if (msg) {
+      return (
+        <div className="success-message-box">
+          <p className="success" style={{ fontSize: '24px' }}>
+            {msg}
+          </p>
+        </div>
+      )
+    }
     if (volunteer && volunteer._id) {
       return (
         <div className="form-container container p-4">
@@ -184,35 +276,103 @@ class Forms extends Component {
               contact you via email, within 10 days.
             </p>
           ) : (
-            <p>
-              Thank you for submitting your application to Code Your Future to
-              become a volunteer. We will review your application and contact
-              you via email within 10 days.
-            </p>
+            <div>
+              <p>
+                Thank you for submitting your application to Code Your Future to
+                become a volunteer. We will review your application and contact
+                you via email within 10 days.
+              </p>
+              <p>
+                While you wait, we encourage you to read our documentation
+                <a href="https://docs.codeyourfuture.io/volunteers">here</a>
+              </p>
+            </div>
           )}
         </div>
       )
     }
     return (
       <div className="form-container container">
-        <Header err={err} formInComplete={formInComplete} userId={userId} />
-        <form className="mb-4" onSubmit={this.handleSubmit} method="post">
-          <Inputs
-            onChange={this.onChange}
-            telOnChange={this.telOnChange}
-            onChangeCheckList={this.onChangeCheckList}
-            {...this.props}
-            {...this.state}
-          />
-          <Acknowledgement onChange={this.onChange} {...this.state} />
-          <button
-            disabled={disabled || !agreeToTOU || !agreeToReceiveCommunication}
-            className="btn volunteer-submit-btn"
-            type="submit"
-          >
-            Submit
-          </button>
-        </form>
+        {err && (
+          <p className="errors">
+            {err}
+            {window.scrollTo(0, 0)}
+          </p>
+        )}
+        {showEmailBox ? (
+          <div className="forms-important-box">
+            <div>
+              <p>
+                <strong>Important: </strong>this form will send you a
+                verification email before getting access to our dashboard
+              </p>
+              <p>
+                <strong>
+                  Please enter your email you used and click submit
+                </strong>
+              </p>
+              <form
+                className="forms-important-box-form"
+                onSubmit={this.handleMagicLinkRequest}
+              >
+                <input
+                  onChange={this.onChange}
+                  value={this.state.email}
+                  name="email"
+                  placeholder="example@example.example"
+                  type="email"
+                />
+                <button disabled={!this.state.email} type="submit">
+                  Submit
+                </button>
+              </form>
+              <span
+                style={{ cursor: 'pointer', color: '#0053ff' }}
+                onMouseDown={() => this.setState({ showEmailBox: false })}
+              >
+                Back
+              </span>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Header formInComplete={formInComplete} userId={userId} />
+            {userId && (
+              <div className="forms-important-box">
+                <span>
+                  <strong>Important:</strong> If you already completed this form
+                  in some point please click{' '}
+                  <span
+                    style={{ cursor: 'pointer', color: '#0053ff' }}
+                    onMouseDown={() => this.setState({ showEmailBox: true })}
+                  >
+                    here
+                  </span>
+                  .
+                </span>
+              </div>
+            )}
+            <form className="mb-4" onSubmit={this.handleSubmit} method="post">
+              <Inputs
+                onChange={this.onChange}
+                telOnChange={this.telOnChange}
+                onChangeCheckList={this.onChangeCheckList}
+                {...this.props}
+                {...this.state}
+              />
+              <Acknowledgement onChange={this.onChange} {...this.state} />
+              <button
+                disabled={
+                  disabled || !agreeToTOU || !agreeToReceiveCommunication
+                }
+                className="btn volunteer-submit-btn"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     )
   }
