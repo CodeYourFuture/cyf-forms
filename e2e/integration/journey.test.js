@@ -11,9 +11,7 @@ const initialData = {
   interestedInVolunteer: 'just sounds interesting',
   interestedInCYF: 'trying to do my bit',
   industry: 'Education',
-  hearAboutCYF: 'Social media',
-  agreeToReceiveCommunication: false,
-  agreeToTOU: false
+  hearAboutCYF: 'Social media'
 }
 
 beforeEach(() => {
