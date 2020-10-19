@@ -11,7 +11,9 @@ const initialData = {
   interestedInVolunteer: 'just sounds interesting',
   interestedInCYF: 'trying to do my bit',
   industry: 'Education',
-  hearAboutCYF: 'Social media'
+  hearAboutCYF: 'Social media',
+  agreeToReceiveCommunication: false,
+  agreeToTOU: false
 }
 
 beforeEach(() => {
@@ -34,7 +36,9 @@ const generateExpected = data => ({
   guidePeople: data.guidePeople || [],
   techSkill: data.techSkill || [],
   otherSkill: data.otherSkill || [],
-  userId: ''
+  userId: '',
+  agreeToReceiveCommunication: true,
+  agreeToTOU: true
 })
 
 it('can submit a minimal form', () => {
