@@ -34,7 +34,9 @@ const generateExpected = data => ({
   guidePeople: data.guidePeople || [],
   techSkill: data.techSkill || [],
   otherSkill: data.otherSkill || [],
-  userId: ''
+  userId: '',
+  agreeToReceiveCommunication: true,
+  agreeToTOU: true
 })
 
 it('can submit a minimal form', () => {
