@@ -26,7 +26,9 @@ commands:
 jobs:
   build:
     docker:
-      - image: circleci/node:11.12
+      - image: cypress/base:12
+        environment:
+          TERM: xterm
     working_directory: ~/repo
     steps:
       - checkout
@@ -43,6 +45,9 @@ jobs:
       - run:
           name: Test
           command: yarn test:ci
+      - run:
+          name: E2E
+          command: yarn e2e
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
