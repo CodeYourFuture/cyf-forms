@@ -41,6 +41,9 @@ jobs:
           paths:
             - ~/.cache
       - run:
+          name: Test
+          command: yarn test:ci
+      - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
@@ -49,6 +52,8 @@ jobs:
       - run:
           name: build production
           command: REACT_APP_NODE_ENV=PRODUCTION yarn build:production
+      - store_test_results:
+          path: ./reports
       - persist_to_workspace:
           root: .
           paths:

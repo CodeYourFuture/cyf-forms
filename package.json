@@ -40,6 +40,7 @@
     "delete-map-files": "find ./build -name '*.map' -delete",
     "delete-references-to-map-files": "find ./build -regex '.*\\.\\(js\\|css\\)' -exec sed -i -E '\\/[\\*\\/]#\\ssourceMappingURL=main(\\.[0-9a-f]+)?\\.(css|js)\\.map(\\*\\/)?/g' {} +",
     "test": "react-scripts test --env=jsdom",
+    "test:ci": "yarn test --coverage --reporters=default --reporters=jest-junit",
     "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open\"",
     "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
@@ -56,6 +57,9 @@
       "pre-commit": "lint-staged"
     }
   },
+  "jest-junit": {
+    "outputDirectory": "./reports/jest/"
+  },
   "lint-staged": {
     "*.js": [
       "pretty-quick --staged",
@@ -65,6 +69,9 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.6",
+    "@testing-library/react": "^11.2.2",
+    "@testing-library/user-event": "^12.6.0",
     "autoprefixer": "^9.6.1",
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
@@ -77,6 +84,7 @@
     "eslint-plugin-prettier": "^3.1.0",
     "eslint-plugin-react": "^7.14.3",
     "husky": "^3.0.4",
+    "jest-junit": "^12.0.0",
     "lint-staged": "^9.2.5",
     "prettier": "^1.18.2",
     "wait-on": "^3.3.0"

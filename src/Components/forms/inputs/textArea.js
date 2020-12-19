@@ -1,7 +1,8 @@
+import PropTypes from 'prop-types'
 import React from 'react'
 import { FormGroup, Label, Input } from 'reactstrap'
 
-export default ({
+const TextArea = ({
   value,
   onChange,
   isEmpty,
@@ -26,3 +27,15 @@ export default ({
     </FormGroup>
   )
 }
+
+TextArea.propTypes = {
+  isEmpty: PropTypes.bool,
+  label: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func,
+  placeholder: PropTypes.string,
+  type: PropTypes.string,
+  value: PropTypes.any
+}
+
+export default TextArea
