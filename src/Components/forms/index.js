@@ -284,7 +284,7 @@ class Forms extends Component {
               </p>
               <p>
                 While you wait, we encourage you to read our documentation
-                <a href="https://docs.codeyourfuture.io/volunteers">here</a>
+                <a href="https://docs.codeyourfuture.io/volunteering-codeyourfuture/joining"> here</a>
               </p>
             </div>
           )}
