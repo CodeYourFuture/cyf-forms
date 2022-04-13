@@ -35,7 +35,9 @@
     { "name": "Transport and Logistics", "_id": "Transport and Logistics" },
     { "name": "Other", "_id": "Other" }
   ],
+
   "hearAboutCYFList": [
+    { "name": "Employer", "_id": "Employer" },
     { "name": "Search engine", "_id": "Search engine" },
     { "name": "Colleague or friend", "_id": "Colleague or friend" },
     { "name": "Conference", "_id": "Conference" },
@@ -45,11 +47,17 @@
     { "name": "Other", "_id": "Other" }
   ],
 
+  "employer": [
+    { "name": "Capgemini", "_id": "Capgemini" },
+    { "name": "Other", "_id": "Other" }
+  ],
+
   "radioButtonList": [
     { "value": "None", "_id": "None" },
     { "value": "Some", "_id": "Some" },
     { "value": "Professional experience", "_id": "Professional experience" }
   ],
+
   "guidePeopleSkillList": [
     {
       "id": "98y439hf934",
@@ -64,6 +72,7 @@
       "label": "Help people learn public speaking"
     }
   ],
+
   "techSkillList": [
     {
       "id": "8976tygsbhj3e",
