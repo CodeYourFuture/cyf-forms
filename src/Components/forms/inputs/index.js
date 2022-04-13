@@ -132,6 +132,14 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
+        <DropDown
+          onChange={onChange}
+          value={employer}
+          name="employer"
+          arrayList={ListsData.employer}
+          isEmpty={errors.employer}
+          label="Who is your employer?"
+        />
         <span className="contact-interested">
           <span>
             What would you like help Code Your Future with, and what is your
