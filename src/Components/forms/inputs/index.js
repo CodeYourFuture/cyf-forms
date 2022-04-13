@@ -8,6 +8,13 @@ import CheckListB from './checkListB'
 import CheckListH from './checkListH'
 
 export default class VolunteerForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      displayDropdown: false
+    }
+  }
+
   render() {
     const {
       onChange,
