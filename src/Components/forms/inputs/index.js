@@ -34,7 +34,8 @@ export default class VolunteerForm extends Component {
       onChangeCheckList,
       guidePeople,
       techSkill,
-      otherSkill
+      otherSkill,
+      employer
     } = this.props
 
     return (
@@ -117,7 +118,14 @@ export default class VolunteerForm extends Component {
           label="What industry are you in?"
         />
         <DropDown
-          onChange={onChange}
+          onChange={
+            (onChange,
+            e => {
+              return this.setState({
+                displayDropdown: e.target.value === 'Employer'
+              })
+            })
+          }
           value={hearAboutCYF}
           name="hearAboutCYF"
           arrayList={ListsData.hearAboutCYFList}
