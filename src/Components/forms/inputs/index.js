@@ -125,7 +125,7 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={employer}
             name="employer"
-            arrayList={ListsData.employer}
+            arrayList={ListsData.employerList}
             isEmpty={errors.employer}
             label="Who is your employer?"
           />
