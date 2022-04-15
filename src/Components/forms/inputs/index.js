@@ -28,7 +28,8 @@ export default class VolunteerForm extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      employer
+      employer,
+      displayDropdown
     } = this.props
 
     return (
@@ -110,29 +111,25 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.industry}
           label="What industry are you in?"
         />
+
         <DropDown
-          onChange={
-            (onChange,
-            e => {
-              return this.setState({
-                displayDropdown: e.target.value === 'Employer'
-              })
-            })
-          }
+          onChange={onChange}
           value={hearAboutCYF}
           name="hearAboutCYF"
           arrayList={ListsData.hearAboutCYFList}
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
-        <DropDown
-          onChange={onChange}
-          value={employer}
-          name="employer"
-          arrayList={ListsData.employer}
-          isEmpty={errors.employer}
-          label="Who is your employer?"
-        />
+        {displayDropdown && (
+          <DropDown
+            onChange={onChange}
+            value={employer}
+            name="employer"
+            arrayList={ListsData.employer}
+            isEmpty={errors.employer}
+            label="Who is your employer?"
+          />
+        )}
         <span className="contact-interested">
           <span>
             What would you like help Code Your Future with, and what is your
