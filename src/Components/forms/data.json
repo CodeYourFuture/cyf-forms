@@ -47,7 +47,7 @@
     { "name": "Other", "_id": "Other" }
   ],
 
-  "employer": [
+  "employerList": [
     { "name": "Capgemini", "_id": "Capgemini" },
     { "name": "Other", "_id": "Other" }
   ],
