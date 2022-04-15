@@ -100,6 +100,11 @@ class Forms extends Component {
         err: null
       })
     }
+    if (name === 'hearAboutCYF') {
+      this.setState({
+        displayDropdown: value === 'Employer'
+      })
+    }
   }
 
   validateForm = values => {
