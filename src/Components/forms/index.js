@@ -159,6 +159,7 @@ class Forms extends Component {
       interestedInCYF,
       industry,
       hearAboutCYF,
+      employer,
       guidePeople,
       techSkill,
       otherSkill,
