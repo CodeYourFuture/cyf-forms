@@ -196,6 +196,7 @@ class Forms extends Component {
         interestedInCYF,
         industry,
         hearAboutCYF,
+        employer: hearAboutCYF === 'Employer' ? employer : '',
         guidePeople: filterEmptyValue(guidePeople),
         techSkill: filterEmptyValue(techSkill),
         otherSkill: filterEmptyValue(otherSkill),
