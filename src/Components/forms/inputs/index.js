@@ -118,7 +118,7 @@ export default class VolunteerForm extends Component {
           name="hearAboutCYF"
           arrayList={ListsData.hearAboutCYFList}
           isEmpty={errors.hearAboutCYF}
-          label="Where did you hear about Code Your Future?"
+          label="Where did you hear about Code Your Future? *"
         />
         {displayDropdown && (
           <DropDown
@@ -127,7 +127,7 @@ export default class VolunteerForm extends Component {
             name="employer"
             arrayList={ListsData.employerList}
             isEmpty={errors.employer}
-            label="Who is your employer?"
+            label="Who is your employer? *"
           />
         )}
         <span className="contact-interested">
