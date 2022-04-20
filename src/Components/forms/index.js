@@ -174,7 +174,6 @@ class Forms extends Component {
       lastName,
       email,
       cityId,
-      hearAboutCYF,
       employer: displayDropdown ? employer : true,
       interestedInVolunteer,
       tel,
