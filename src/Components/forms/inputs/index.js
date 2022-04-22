@@ -28,8 +28,7 @@ export default class VolunteerForm extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      employer,
-      displayDropdown
+      employer
     } = this.props
 
     return (
@@ -120,7 +119,7 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
-        {displayDropdown && (
+        {hearAboutCYF === 'Employer' && (
           <DropDown
             onChange={onChange}
             value={employer}
