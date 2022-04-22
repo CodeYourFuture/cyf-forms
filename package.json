@@ -34,6 +34,7 @@
   "scripts": {
     "start": "REACT_APP_NODE_ENV=LOCAL react-scripts start",
     "build": "react-scripts build && yarn run delete-maps",
+    "build:qa": "REACT_APP_NODE_ENV=QA react-scripts build && yarn run delete-maps && mv build qa",
     "build:staging": "REACT_APP_NODE_ENV=STAGING react-scripts build && yarn run delete-maps && mv build staging",
     "build:production": "REACT_APP_NODE_ENV=PRODUCTION react-scripts build && yarn run delete-maps && mv build production",
     "delete-maps": "yarn run delete-map-files && yarn run delete-references-to-map-files",
