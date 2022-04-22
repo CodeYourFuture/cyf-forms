@@ -100,11 +100,6 @@ class Forms extends Component {
         err: null
       })
     }
-    if (name === 'hearAboutCYF') {
-      this.setState({
-        displayDropdown: value === 'Employer'
-      })
-    }
   }
 
   validateForm = values => {
@@ -160,7 +155,6 @@ class Forms extends Component {
       industry,
       hearAboutCYF,
       employer,
-      displayDropdown,
       guidePeople,
       techSkill,
       otherSkill,
@@ -174,7 +168,7 @@ class Forms extends Component {
       lastName,
       email,
       cityId,
-      employer: displayDropdown ? employer : true,
+      employer: hearAboutCYF === 'Employer' ? employer : true,
       interestedInVolunteer,
       tel,
       agreeToTOU,
