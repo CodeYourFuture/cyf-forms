@@ -24,6 +24,7 @@ export default class VolunteerForm extends Component {
       interestedInCYF,
       industry,
       hearAboutCYF,
+      hearAboutCYFFromEmployer,
       onChangeCheckList,
       guidePeople,
       techSkill,
@@ -119,7 +120,7 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
-        {hearAboutCYF === 'Employer' && (
+        {hearAboutCYFFromEmployer && (
           <DropDown
             onChange={onChange}
             value={employer}
