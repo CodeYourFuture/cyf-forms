@@ -10,6 +10,7 @@ export const initialState = {
   interestedInCYF: '',
   industry: '',
   hearAboutCYF: '',
+  hearAboutCYFFromEmployer: false,
   employer: '',
   displayDropdown: false,
   guidePeople: ListsData.guidePeopleSkillList,
