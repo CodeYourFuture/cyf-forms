@@ -100,8 +100,9 @@ class Forms extends Component {
         err: null
       })
     }
-    name === 'hearAboutCYF' &&
+    if (name === 'hearAboutCYF') {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
+    }
   }
 
   validateForm = values => {
