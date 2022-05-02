@@ -12,7 +12,6 @@ export const initialState = {
   hearAboutCYF: '',
   hearAboutCYFFromEmployer: false,
   employer: '',
-  displayDropdown: false,
   guidePeople: ListsData.guidePeopleSkillList,
   techSkill: ListsData.techSkillList,
   otherSkill: ListsData.otherSkillList,
