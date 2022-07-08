@@ -44,6 +44,9 @@ jobs:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
+          name: build qa
+          command: REACT_APP_NODE_ENV=QA yarn build:qa
+      - run:
           name: build staging
           command: REACT_APP_NODE_ENV=STAGING yarn build:staging
       - run:
@@ -52,15 +55,37 @@ jobs:
       - persist_to_workspace:
           root: .
           paths:
+            - qa
             - staging
             - production
+
+  deploy_qa:
+    docker:
+      - image: circleci/python:3.6-jessie
+    working_directory: ~/deploy
+    environment:
+      PUBLIC_URL: https://forms.qa.codeyourfuture.io
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: Set env variables
+          command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
+      - run:
+          name: Install awscli
+          command: sudo pip install awscli
+      - s3deploy:
+          dir: qa
+          to: 'forms.qa.codeyourfuture.io'
+          cf_distribution_id: E2VFUDC8YCDBKS
+
 
   deploy_staging:
     docker:
       - image: circleci/python:3.6-jessie
     working_directory: ~/deploy
     environment:
-      PUBLIC_URL: https://staging.forms.codeyourfuture.io
+      PUBLIC_URL: https://forms.staging.codeyourfuture.io
     steps:
       - attach_workspace:
           at: .
@@ -72,8 +97,8 @@ jobs:
           command: sudo pip install awscli
       - s3deploy:
           dir: staging
-          to: 'staging.forms.codeyourfuture.io'
-          cf_distribution_id: E3MJAA9E60TZUB
+          to: 'forms.staging.codeyourfuture.io'
+          cf_distribution_id: E1SJFMKKCNFUGI
 
   deploy_production:
     docker:
@@ -101,6 +126,14 @@ workflows:
     jobs:
       - build:
           context: build
+      - deploy_qa:
+          context: deployments_qa
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - qa
       - deploy_staging:
           context: deployments_staging
           requires:
