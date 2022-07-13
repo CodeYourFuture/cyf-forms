@@ -8,7 +8,7 @@
     "eslint-plugin-flowtype": "^4.2.0",
     "eslint-plugin-react-hooks": "^2.0.1",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.23.0",
+    "moment": "^2.29.4",
     "npm": "^6.5.0",
     "pm2": "^3.2.7",
     "pretty-quick": "^1.10.0",
