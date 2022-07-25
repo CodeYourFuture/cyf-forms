@@ -5,6 +5,8 @@ export const domain = () => {
   switch (env) {
     case 'LOCAL':
       return 'http://localhost:3001'
+    case 'QA':
+      return 'https://cyf-api.qa.codeyourfuture.io'
     case 'STAGING':
       return 'https://cyf-api.staging.codeyourfuture.io'
     case 'PRODUCTION':

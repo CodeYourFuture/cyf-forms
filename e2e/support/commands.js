@@ -23,7 +23,8 @@ Cypress.Commands.add('fillInitialForm', data => {
   }
 
   // submission
-  cy.get('[name="acknowledgement"]').click()
+  cy.get('[name="agreeToTOU"]').check()
+  cy.get('[name="agreeToReceiveCommunication"]').check()
   cy.get('button')
     .contains('Submit')
     .click()

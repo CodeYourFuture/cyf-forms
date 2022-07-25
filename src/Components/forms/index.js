@@ -100,6 +100,9 @@ class Forms extends Component {
         err: null
       })
     }
+    if (name === 'hearAboutCYF') {
+      this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
+    }
   }
 
   validateForm = values => {
@@ -154,6 +157,8 @@ class Forms extends Component {
       interestedInCYF,
       industry,
       hearAboutCYF,
+      hearAboutCYFFromEmployer,
+      employer,
       guidePeople,
       techSkill,
       otherSkill,
@@ -167,6 +172,7 @@ class Forms extends Component {
       lastName,
       email,
       cityId,
+      employer: hearAboutCYFFromEmployer ? employer : true,
       interestedInVolunteer,
       tel,
       agreeToTOU,
@@ -191,6 +197,7 @@ class Forms extends Component {
         interestedInCYF,
         industry,
         hearAboutCYF,
+        employer: hearAboutCYFFromEmployer ? employer : '',
         guidePeople: filterEmptyValue(guidePeople),
         techSkill: filterEmptyValue(techSkill),
         otherSkill: filterEmptyValue(otherSkill),
