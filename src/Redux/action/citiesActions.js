@@ -24,6 +24,10 @@ export const setCities = cities => {
 export const loadCities = () => {
   return async dispatch => {
     const data = await getCities()
-    dispatch(setCities(data))
+    const filteredCities = data.cities.filter(({ visibleIn }) => {
+      return visibleIn?.includes('VOLUNTEER_FORM')
+    })
+
+    dispatch(setCities({ cities: filteredCities }))
   }
 }
