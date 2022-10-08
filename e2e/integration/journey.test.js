@@ -42,7 +42,9 @@ it('can submit a minimal form', () => {
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
-    const [{ body: payload }] = response.body
+    const [{ body: payload, method, path }] = response.body
+    expect(method).to.equal('POST')
+    expect(path).to.equal('/volunteer')
     expect(payload).to.deep.eq({
       ...initialData,
       agreeToReceiveCommunication: true,
