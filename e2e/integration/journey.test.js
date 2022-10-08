@@ -58,6 +58,10 @@ it('can submit a minimal form', () => {
       userId: ''
     })
   })
+  cy.findByText(
+    `Welcome ${initialData.firstName} ${initialData.lastName}`
+  ).should('exist')
+  cy.findByText(/thank you for submitting your application/i).should('exist')
 })
 
 it('requires employee selection', () => {

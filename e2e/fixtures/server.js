@@ -22,7 +22,7 @@ app.post('/volunteer', (req, res) => {
     body: req.body,
     headers: req.headers
   })
-  res.json({ volunteer: req.body })
+  res.json({ volunteer: { _id: 'abc123', ...req.body } })
 })
 
 app.get('/_calls', (req, res) => {
