@@ -38,7 +38,7 @@
     "serve": "serve --cors --debug -p 3000 --single build",
     "test": "react-scripts test --env=jsdom",
     "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open\"",
-    "e2e:prod": "concurrently -k -n \"app,mock,e2e\" \"yarn serve\" \"yarn e2e:mock\" \"yarn e2e:run\"",
+    "e2e:prod": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn serve\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
