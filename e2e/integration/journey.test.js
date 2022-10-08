@@ -57,3 +57,35 @@ it('can submit a minimal form', () => {
     })
   })
 })
+
+it('requires employee selection', () => {
+  cy.findByRole('textbox', { name: /first name/i }).type('Laura')
+  cy.findByRole('textbox', { name: /last name/i }).type('Olsen')
+  cy.findByRole('combobox', { name: /city/i }).select('London')
+  cy.findByRole('textbox', { name: /email/i }).type('laura.olsen@example.com')
+  cy.findByRole('textbox', { name: /phone number/i }).type('96838503')
+  cy.findByRole('textbox', { name: /interested in volunteering/i }).type('just')
+  cy.findByRole('textbox', { name: /interested in code your future/i }).type(
+    'testing'
+  )
+  cy.findByRole('checkbox', { name: /terms of use/i }).check()
+  cy.findByRole('checkbox', { name: /contact me/i }).check()
+
+  cy.findByRole('combobox', { name: /hear about code your future/i }).select(
+    'Employer'
+  )
+  cy.findByRole('button', { name: /submit/i }).click()
+  cy.findByText(/form is incomplete/i).should('exist')
+
+  cy.findByRole('combobox', { name: /who is your employer/i }).select(
+    'Capgemini'
+  )
+  cy.findByRole('button', { name: /submit/i }).click()
+
+  cy.request(`${mockServerURL}/_calls`).then(({ body }) => {
+    expect(body).to.have.length(1)
+    const [{ body: payload }] = body
+    expect(payload).to.have.property('hearAboutCYF', 'Employer')
+    expect(payload).to.have.property('employer', 'Capgemini')
+  })
+})
