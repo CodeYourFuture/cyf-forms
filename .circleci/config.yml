@@ -24,7 +24,7 @@ commands:
               --paths /\*
 
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/node:11.12
     working_directory: ~/repo
@@ -40,6 +40,19 @@ jobs:
           key: yarn-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
+      - run: yarn e2e
+  build:
+    docker:
+      - image: circleci/node:11.12
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-dependencies-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
@@ -124,8 +137,12 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
+      - test:
+          context: build
       - build:
           context: build
+          requires:
+            - test
       - deploy_qa:
           context: deployments_qa
           requires:
