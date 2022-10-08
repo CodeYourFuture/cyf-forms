@@ -30,9 +30,7 @@ app.get('/_calls', (req, res) => {
 })
 
 app.post('/_reset', (req, res) => {
-  while (calls.length > 0) {
-    calls.pop()
-  }
+  calls.splice(0, calls.length)
   res.sendStatus(204)
 })
 
