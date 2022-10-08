@@ -8,6 +8,7 @@
 # testing
 /coverage
 /e2e/screenshots
+/e2e/videos
 
 # production
 /build

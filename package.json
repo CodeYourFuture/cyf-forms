@@ -66,6 +66,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/cypress": "^8.0.3",
     "autoprefixer": "^9.6.1",
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
