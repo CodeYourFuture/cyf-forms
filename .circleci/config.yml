@@ -58,13 +58,22 @@ jobs:
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build qa
-          command: REACT_APP_NODE_ENV=QA yarn build:qa
+          command: yarn build
+          env:
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'QA'
       - run:
           name: build staging
-          command: REACT_APP_NODE_ENV=STAGING yarn build:staging
+          command: yarn build
+          env:
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'STAGING'
       - run:
           name: build production
-          command: REACT_APP_NODE_ENV=PRODUCTION yarn build:production
+          command: yarn build
+          env:
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'PRODUCTION'
       - persist_to_workspace:
           root: .
           paths:
