@@ -33,6 +33,7 @@ jobs:
       - restore_cache:
           keys:
             - yarn-dependencies-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-
       - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile
