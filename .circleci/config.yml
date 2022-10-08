@@ -40,7 +40,7 @@ jobs:
           key: yarn-dependencies-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
-      - run: yarn e2e
+      - run: yarn e2e:prod
   build:
     docker:
       - image: circleci/node:11.12
