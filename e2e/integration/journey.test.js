@@ -1,49 +1,59 @@
-const mockServerURL = `http://localhost:3001`
-
-const timestamp = 1559822173490
-
-const initialData = {
-  firstName: 'Jane',
-  lastName: 'Doe',
-  cityName: 'London',
-  email: 'jane.doe@morgue.org',
-  tel: '01189998819991197253',
-  interestedInVolunteer: 'just sounds interesting',
-  interestedInCYF: 'trying to do my bit',
-  industry: 'Education',
-  hearAboutCYF: 'Social media'
-}
+const mockServerURL = 'http://localhost:3001'
 
 beforeEach(() => {
   cy.request('POST', `${mockServerURL}/_reset`)
-  cy.clock(timestamp)
 
   cy.visit('/')
 })
 
-const generateExpected = data => ({
-  firstName: data.firstName,
-  lastName: data.lastName,
-  email: data.email,
-  tel: `+${data.tel}`,
-  cityId: '123abc',
-  interestedInVolunteer: data.interestedInVolunteer,
-  interestedInCYF: data.interestedInCYF,
-  industry: data.industry || '',
-  hearAboutCYF: data.hearAboutCYF || '',
-  employer: data.employer || '',
-  guidePeople: data.guidePeople || [],
-  techSkill: data.techSkill || [],
-  otherSkill: data.otherSkill || [],
-  userId: '',
-  agreeToReceiveCommunication: true,
-  agreeToTOU: true
-})
-
 it('can submit a minimal form', () => {
-  cy.fillInitialForm(initialData)
+  const initialData = {
+    firstName: 'Jane',
+    lastName: 'Doe',
+    email: 'jane.doe@morgue.org',
+    tel: '01189998819991197253',
+    interestedInVolunteer: 'just sounds interesting',
+    interestedInCYF: 'trying to do my bit',
+    industry: 'Education',
+    hearAboutCYF: 'Social media'
+  }
+
+  cy.findByRole('textbox', { name: /first name/i }).type(initialData.firstName)
+  cy.findByRole('textbox', { name: /last name/i }).type(initialData.lastName)
+  cy.findByRole('combobox', { name: /city/i }).select('London')
+  cy.findByRole('textbox', { name: /email/i }).type(initialData.email)
+  cy.findByRole('textbox', { name: /phone number/i }).type(initialData.tel)
+  cy.findByRole('textbox', { name: /interested in volunteering/i }).type(
+    initialData.interestedInVolunteer
+  )
+  cy.findByRole('textbox', { name: /interested in code your future/i }).type(
+    initialData.interestedInCYF
+  )
+
+  // optional fields
+  cy.findByRole('combobox', { name: /industry/i }).select(initialData.industry)
+  cy.findByRole('combobox', { name: /hear about code your future/i }).select(
+    initialData.hearAboutCYF
+  )
+
+  // submission
+  cy.findByRole('checkbox', { name: /terms of use/i }).check()
+  cy.findByRole('checkbox', { name: /contact me/i }).check()
+  cy.findByRole('button', { name: /submit/i }).click()
 
   cy.request(`${mockServerURL}/_calls`).then(response => {
-    expect(response.body[0].body).to.deep.eq(generateExpected(initialData))
+    const [{ body: payload }] = response.body
+    expect(payload).to.deep.eq({
+      ...initialData,
+      agreeToReceiveCommunication: true,
+      agreeToTOU: true,
+      guidePeople: [],
+      cityId: '123abc',
+      employer: '',
+      otherSkill: [],
+      techSkill: [],
+      tel: `+${initialData.tel}`,
+      userId: ''
+    })
   })
 })
