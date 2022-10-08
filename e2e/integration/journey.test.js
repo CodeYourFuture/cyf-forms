@@ -31,6 +31,7 @@ const generateExpected = data => ({
   interestedInCYF: data.interestedInCYF,
   industry: data.industry || '',
   hearAboutCYF: data.hearAboutCYF || '',
+  employer: data.employer || '',
   guidePeople: data.guidePeople || [],
   techSkill: data.techSkill || [],
   otherSkill: data.otherSkill || [],
