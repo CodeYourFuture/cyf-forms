@@ -32,13 +32,13 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - yarn-dependencies-{{ checksum "yarn.lock" }}
-            - yarn-dependencies-
+            - yarn-dependencies-cypress-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-cypress-
       - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile
       - save_cache:
-          key: yarn-dependencies-{{ checksum "yarn.lock" }}
+          key: yarn-dependencies-cypress-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
       - run: yarn e2e:prod
@@ -50,10 +50,15 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - yarn-dependencies-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-node-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-node-
       - run:
           name: Install dependencies
           command: yarn install --frozen-lockfile
+      - save_cache:
+          key: yarn-dependencies-node-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
       - run:
           name: Set env variables
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
