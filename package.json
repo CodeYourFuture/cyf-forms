@@ -42,8 +42,9 @@
     "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
-    "lint:fix": "./node_modules/.bin/eslint --fix src",
-    "prettier": "./node_modules/.bin/prettier --config .prettierrc --write 'src/**/*.js'",
+    "lint": "eslint src --max-warnings 0 && prettier --check 'src/**/*.js'",
+    "lint:fix": "eslint --fix src",
+    "prettier": "prettier --config .prettierrc --write 'src/**/*.js'",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

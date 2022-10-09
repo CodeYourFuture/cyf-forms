@@ -41,6 +41,7 @@ jobs:
           key: yarn-dependencies-cypress-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
+      - run: yarn lint
       - run: yarn e2e:prod
   build:
     docker:
@@ -109,7 +110,6 @@ jobs:
           dir: qa
           to: 'forms.qa.codeyourfuture.io'
           cf_distribution_id: E2VFUDC8YCDBKS
-
 
   deploy_staging:
     docker:
