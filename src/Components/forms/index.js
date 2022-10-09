@@ -29,8 +29,7 @@ class Forms extends Component {
         if (magicLinkRequest.status === 200) {
           this.setState({
             loading: false,
-            msg:
-              'We have sent you a verification email, Please check your emails.'
+            msg: 'We have sent you a verification email, Please check your emails.'
           })
         }
       } catch (err) {
@@ -51,8 +50,7 @@ class Forms extends Component {
           })
         }
         return this.setState({
-          err:
-            'Sorry, we are currently experiencing technical issues, please try again later.',
+          err: 'Sorry, we are currently experiencing technical issues, please try again later.',
           loading: false
         })
       }
@@ -66,8 +64,7 @@ class Forms extends Component {
       return this.setState({
         userId,
         showEmailBox: true,
-        err:
-          'Failed to verify your email address, due to expire token or server failure. Please use the box below and try again.'
+        err: 'Failed to verify your email address, due to expire token or server failure. Please use the box below and try again.'
       })
     }
     if (code === 'success') {
