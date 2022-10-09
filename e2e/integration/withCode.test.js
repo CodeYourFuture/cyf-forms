@@ -1,7 +1,7 @@
 const mockServerURL = 'http://localhost:3001'
 
 beforeEach(() => {
-  cy.request('POST', `${mockServerURL}/_reset`)
+  cy.intercept('GET', `${mockServerURL}/cities`, { fixture: 'cities.json' })
 })
 
 it('shows success message', () => {
@@ -12,6 +12,9 @@ it('shows success message', () => {
 it('includes the user ID when resubmitting', () => {
   const userId = 'something'
   const code = 'does-this-matter'
+  cy.intercept('POST', `${mockServerURL}/volunteer`, req => {
+    req.reply({ volunteer: { _id: 'some-new-id', ...req.body } })
+  }).as('createVolunteer')
   cy.visit(`/code/${userId}/${code}`)
 
   cy.findByRole('textbox', { name: /first name/i }).type('Erhard')
@@ -29,16 +32,15 @@ it('includes the user ID when resubmitting', () => {
   cy.findByRole('checkbox', { name: /contact me/i }).check()
   cy.findByRole('button', { name: /submit/i }).click()
 
-  cy.request(`${mockServerURL}/_calls`).then(({ body }) => {
-    expect(body).to.have.length(1)
-    const [{ body: payload, method, path }] = body
-    expect(method).to.equal('POST')
-    expect(path).to.equal('/volunteer')
+  cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.have.property('userId', userId)
   })
 })
 
 it('lets you request a reminder email', () => {
+  cy.intercept('POST', `${mockServerURL}/volunteer/email/verification`, {
+    statusCode: 200
+  }).as('verifyEmail')
   const userId = 'whoever'
   const code = 'whatever'
   const email = 'foo@bar.org'
@@ -52,11 +54,8 @@ it('lets you request a reminder email', () => {
   // TODO not accessible by label
   cy.findByRole('textbox').type(email)
   cy.findByRole('button', { name: /submit/i }).click()
-  cy.request(`${mockServerURL}/_calls`).then(({ body }) => {
-    expect(body).to.have.length(1)
-    const [{ body: payload, method, path }] = body
-    expect(method).to.equal('POST')
-    expect(path).to.equal('/volunteer/email/verification')
+
+  cy.wait('@verifyEmail').then(({ request: { body: payload } }) => {
     expect(payload).to.deep.equal({ email, userId })
   })
 })

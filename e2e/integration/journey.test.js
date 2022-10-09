@@ -1,12 +1,14 @@
 const mockServerURL = 'http://localhost:3001'
 
 beforeEach(() => {
-  cy.request('POST', `${mockServerURL}/_reset`)
-
+  cy.intercept('GET', `${mockServerURL}/cities`, { fixture: 'cities.json' })
   cy.visit('/')
 })
 
 it('can submit a minimal form', () => {
+  cy.intercept('POST', `${mockServerURL}/volunteer`, req => {
+    req.reply({ volunteer: { _id: 'some-new-id', ...req.body } })
+  }).as('createVolunteer')
   const initialData = {
     firstName: 'Jane',
     lastName: 'Doe',
@@ -41,10 +43,7 @@ it('can submit a minimal form', () => {
   cy.findByRole('checkbox', { name: /contact me/i }).check()
   cy.findByRole('button', { name: /submit/i }).click()
 
-  cy.request(`${mockServerURL}/_calls`).then(response => {
-    const [{ body: payload, method, path }] = response.body
-    expect(method).to.equal('POST')
-    expect(path).to.equal('/volunteer')
+  cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.deep.eq({
       ...initialData,
       agreeToReceiveCommunication: true,
@@ -65,6 +64,10 @@ it('can submit a minimal form', () => {
 })
 
 it('requires employee selection', () => {
+  cy.intercept('POST', `${mockServerURL}/volunteer`, req => {
+    req.reply({ volunteer: { _id: 'some-new-id', ...req.body } })
+  }).as('createVolunteer')
+
   cy.findByRole('textbox', { name: /first name/i }).type('Laura')
   cy.findByRole('textbox', { name: /last name/i }).type('Olsen')
   cy.findByRole('combobox', { name: /city/i }).select('London')
@@ -88,9 +91,7 @@ it('requires employee selection', () => {
   )
   cy.findByRole('button', { name: /submit/i }).click()
 
-  cy.request(`${mockServerURL}/_calls`).then(({ body }) => {
-    expect(body).to.have.length(1)
-    const [{ body: payload }] = body
+  cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.have.property('hearAboutCYF', 'Employer')
     expect(payload).to.have.property('employer', 'Capgemini')
   })
