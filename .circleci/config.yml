@@ -26,7 +26,7 @@ commands:
 jobs:
   test:
     docker:
-      - image: cypress/base:11.13.0
+      - image: cypress/base:16.17.1
     working_directory: ~/repo
     steps:
       - checkout
@@ -45,7 +45,7 @@ jobs:
       - run: yarn e2e:prod
   build:
     docker:
-      - image: circleci/node:11.12
+      - image: cimg/node:16.17.1
     working_directory: ~/repo
     steps:
       - checkout
