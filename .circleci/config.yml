@@ -66,21 +66,21 @@ jobs:
       - run:
           name: build qa
           command: yarn build
-          env:
+          environment:
             BUILD_PATH: 'qa'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'QA'
       - run:
           name: build staging
           command: yarn build
-          env:
+          environment:
             BUILD_PATH: 'staging'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'STAGING'
       - run:
           name: build production
           command: yarn build
-          env:
+          environment:
             BUILD_PATH: 'production'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'PRODUCTION'
