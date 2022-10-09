@@ -19,7 +19,7 @@
   "scripts": {
     "build": "react-scripts build",
     "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
-    "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open\"",
+    "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open --e2e\"",
     "e2e:mock": "node ./e2e/fixtures/server.js",
     "e2e:prod": "concurrently -k -s first -n \"app,mock,e2e\" \"yarn serve\" \"yarn e2e:mock\" \"yarn e2e:run\"",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
@@ -61,10 +61,10 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/cypress": "^7.0.7",
+    "@testing-library/cypress": "^8.0.3",
     "concurrently": "^7.4.0",
     "cors": "^2.8.5",
-    "cypress": "^3.4.1",
+    "cypress": "^10.9.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.2.1",
