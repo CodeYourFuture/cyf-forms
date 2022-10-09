@@ -67,23 +67,23 @@ jobs:
           name: build qa
           command: yarn build
           env:
+            BUILD_PATH: 'qa'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'QA'
-      - run: mv build qa
       - run:
           name: build staging
           command: yarn build
           env:
+            BUILD_PATH: 'staging'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'STAGING'
-      - run: mv build staging
       - run:
           name: build production
           command: yarn build
           env:
+            BUILD_PATH: 'production'
             GENERATE_SOURCEMAP: 'false'
             REACT_APP_NODE_ENV: 'PRODUCTION'
-      - run: mv build production
       - persist_to_workspace:
           root: .
           paths:

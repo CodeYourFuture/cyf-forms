@@ -11,7 +11,7 @@
     "react-phone-number-input": "^2.3.21",
     "react-redux": "^6.0.0",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "^3.0.1",
+    "react-scripts": "4.0.3",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
@@ -33,7 +33,17 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "import/no-anonymous-default-export": "off",
+      "prettier/prettier": "error"
+    }
   },
   "husky": {
     "hooks": {
@@ -53,16 +63,8 @@
     "concurrently": "^5.0.0",
     "cors": "^2.8.5",
     "cypress": "^3.4.1",
-    "eslint": "^6.2.2",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-config-react-app": "^7.0.1",
-    "eslint-plugin-flowtype": "^8.0.3",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
     "husky": "^3.0.4",
     "lint-staged": "^9.2.5",
     "morgan": "^1.10.0",
