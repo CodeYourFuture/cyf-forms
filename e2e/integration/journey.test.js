@@ -37,6 +37,10 @@ it('can submit a minimal form', () => {
   cy.findByRole('combobox', { name: /hear about code your future/i }).select(
     initialData.hearAboutCYF
   )
+  setExperience('public speaking', 'None')
+  setExperience('node', 'Some')
+  setExperience('react', 'Professional experience')
+  setExperience('blogging', 'Some')
 
   // submission
   cy.findByRole('checkbox', { name: /terms of use/i }).check()
@@ -44,17 +48,38 @@ it('can submit a minimal form', () => {
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
-    expect(payload).to.deep.eq({
+    expect(payload).to.deep.include({
       ...initialData,
       agreeToReceiveCommunication: true,
       agreeToTOU: true,
-      guidePeople: [],
       cityId: '123abc',
       employer: '',
-      otherSkill: [],
-      techSkill: [],
       tel: `+${initialData.tel}`,
       userId: ''
+    })
+    expect(payload.guidePeople).to.deep.include({
+      id: '09u03uifnc',
+      label: 'Help people learn public speaking',
+      level: 'None',
+      name: 'Help people learn public speaking'
+    })
+    expect(payload.otherSkill).to.deep.include({
+      id: '8hyuhe22uhh',
+      label: 'Blogging / Writing',
+      level: 'Some',
+      name: 'Blogging / Writing'
+    })
+    expect(payload.techSkill).to.deep.include({
+      id: '8976tygsbhj3e',
+      label: 'NodeJS',
+      level: 'Some',
+      name: 'NodeJS'
+    })
+    expect(payload.techSkill).to.deep.include({
+      id: '23edcs3h3j3',
+      label: 'ReactJS',
+      level: 'Professional experience',
+      name: 'ReactJS'
     })
   })
   cy.findByText(
@@ -96,3 +121,12 @@ it('requires employee selection', () => {
     expect(payload).to.have.property('employer', 'Capgemini')
   })
 })
+
+const setExperience = (topic, level) => {
+  cy.findByRole('checkbox', { name: new RegExp(topic, 'i') })
+    .check()
+    .parents('.form-table')
+    .within(() => {
+      cy.findByRole('radio', { name: new RegExp(level, 'i') }).check()
+    })
+}
