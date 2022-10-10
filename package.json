@@ -10,7 +10,7 @@
     "react-ga": "^3.3.1",
     "react-phone-number-input": "^3.2.11",
     "react-redux": "^8.0.4",
-    "react-router-dom": "^5.0.1",
+    "react-router-dom": "^6.4.2",
     "react-scripts": "5.0.1",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",

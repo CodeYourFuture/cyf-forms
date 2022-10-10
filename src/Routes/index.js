@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Switch, useLocation, useParams } from 'react-router-dom'
+import { Route, Routes, useLocation, useParams } from 'react-router-dom'
 
 import Forms from '../Components/forms'
 import NotFound from '../Components/NotFound'
@@ -11,15 +11,11 @@ function WithRouteProps({ children: Component }) {
 }
 
 export default () => (
-  <Switch>
-    <Route exact path="/">
-      <WithRouteProps children={Forms} />
+  <Routes>
+    <Route path="/" element={<WithRouteProps children={Forms} />} />
+    <Route path="/code/:userId" element={<WithRouteProps children={Forms} />}>
+      <Route path=":code" element={<WithRouteProps children={Forms} />} />
     </Route>
-    <Route exact path="/code/:userId/:code?">
-      <WithRouteProps children={Forms} />
-    </Route>
-    <Route path="*">
-      <NotFound />
-    </Route>
-  </Switch>
+    <Route path="*" element={<NotFound />} />
+  </Routes>
 )
