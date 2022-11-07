@@ -3,87 +3,75 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "axios": "^0.18.0",
-    "eslint-config-react-app": "^5.0.1",
-    "eslint-plugin-flowtype": "^4.2.0",
-    "eslint-plugin-react-hooks": "^2.0.1",
-    "jwt-decode": "^2.2.0",
+    "axios": "^1.1.2",
     "moment": "^2.23.0",
-    "npm": "^6.5.0",
-    "pm2": "^3.2.7",
-    "pretty-quick": "^1.10.0",
-    "react": "^16.9.0",
-    "react-datepicker": "^2.8.0",
-    "react-day-picker": "^7.3.0",
-    "react-dom": "^16.7.0",
-    "react-draft-wysiwyg": "^1.12.13",
-    "react-emotion": "^9.2.6",
-    "react-ga": "^2.5.7",
-    "react-phone-number-input": "^3.2.6",
-    "react-quill": "^1.3.3",
-    "react-redux": "^6.0.0",
-    "react-responsive": "^5.0.0",
-    "react-router-dom": "^5.0.1",
-    "react-rte": "^0.16.1",
-    "react-scripts": "^3.0.1",
-    "react-show-more-list": "^0.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-ga": "^3.3.1",
+    "react-phone-number-input": "^3.2.11",
+    "react-redux": "^8.0.4",
+    "react-router-dom": "^6.4.2",
+    "react-scripts": "5.0.1",
     "reactstrap": "^8.0.1",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0"
   },
   "scripts": {
-    "start": "REACT_APP_NODE_ENV=LOCAL react-scripts start",
-    "build": "react-scripts build && yarn run delete-maps",
-    "build:qa": "REACT_APP_NODE_ENV=QA react-scripts build && yarn run delete-maps && mv build qa",
-    "build:staging": "REACT_APP_NODE_ENV=STAGING react-scripts build && yarn run delete-maps && mv build staging",
-    "build:production": "REACT_APP_NODE_ENV=PRODUCTION react-scripts build && yarn run delete-maps && mv build production",
-    "delete-maps": "yarn run delete-map-files && yarn run delete-references-to-map-files",
-    "delete-map-files": "find ./build -name '*.map' -delete",
-    "delete-references-to-map-files": "find ./build -regex '.*\\.\\(js\\|css\\)' -exec sed -i -E '\\/[\\*\\/]#\\ssourceMappingURL=main(\\.[0-9a-f]+)?\\.(css|js)\\.map(\\*\\/)?/g' {} +",
-    "test": "react-scripts test --env=jsdom",
-    "e2e:dev": "concurrently -k -n \"app,mock,e2e\" \"yarn start\" \"yarn e2e:mock\" \"cypress open\"",
-    "e2e": "concurrently -k -s first -n \"app,mock,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:mock\" \"yarn e2e:run\"",
-    "e2e:mock": "node ./e2e/fixtures/server.js",
+    "build": "react-scripts build",
+    "e2e": "concurrently -k -s first -n \"app,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:run\"",
+    "e2e:dev": "concurrently -k -n \"app,e2e\" \"yarn start\" \"cypress open --e2e\"",
+    "e2e:prod": "concurrently -k -s first -n \"app,e2e\" \"yarn serve\" \"yarn e2e:run\"",
     "e2e:run": "wait-on -l http-get://localhost:3000 && cypress run",
-    "lint:fix": "./node_modules/.bin/eslint --fix src",
-    "prettier": "./node_modules/.bin/prettier --config .prettierrc --write 'src/**/*.js'",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "yarn lint:eslint && yarn lint:prettier --check",
+    "lint:eslint": "eslint e2e src --max-warnings 0",
+    "lint:prettier": "prettier --config .prettierrc 'e2e/**/*.js' 'src/**/*.js'",
+    "lint:fix": "yarn lint:eslint --fix",
+    "prepare": "husky install",
+    "prettier": "yarn lint:prettier --write",
+    "preserve": "REACT_APP_NODE_ENV=LOCAL yarn build",
+    "serve": "serve --cors --debug -p 3000 --single build",
+    "start": "REACT_APP_NODE_ENV=LOCAL react-scripts start",
+    "test": "react-scripts test --env=jsdom"
   },
   "eslintConfig": {
-    "extends": "react-app"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
+    "extends": [
+      "react-app",
+      "prettier"
+    ],
+    "plugins": [
+      "prettier"
+    ],
+    "rules": {
+      "import/no-anonymous-default-export": "off",
+      "prettier/prettier": [
+        "error",
+        {
+          "arrowParens": "avoid"
+        }
+      ]
     }
   },
   "lint-staged": {
     "*.js": [
       "pretty-quick --staged",
       "eslint src --fix",
-      "prettier",
-      "git add"
+      "prettier"
     ]
   },
   "devDependencies": {
-    "autoprefixer": "^9.6.1",
-    "concurrently": "^5.0.0",
-    "cors": "^2.8.5",
-    "cypress": "^3.4.1",
-    "eslint": "^6.2.2",
-    "eslint-config-airbnb": "^18.0.1",
-    "eslint-config-prettier": "^6.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-jsx-a11y": "=6.5.1",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3",
-    "husky": "^3.0.4",
-    "lint-staged": "^9.2.5",
-    "prettier": "^1.18.2",
-    "wait-on": "^3.3.0"
-  },
-  "resolutions": {
-    "eslint-plugin-jsx-a11y/axe-core": "4.4.1"
+    "@testing-library/cypress": "^8.0.3",
+    "concurrently": "^7.4.0",
+    "cypress": "^10.9.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-cypress": "^2.12.1",
+    "eslint-plugin-prettier": "^4.2.1",
+    "husky": "^8.0.0",
+    "lint-staged": "^13.0.3",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3",
+    "serve": "^14.0.1",
+    "wait-on": "^6.0.1"
   },
   "browserslist": [
     ">0.2%",
