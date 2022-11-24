@@ -5,7 +5,9 @@ import { domain } from '../../config'
 
 export const getCities = async () => {
   try {
-    const Cities = await axios.get(`${domain()}/cities`)
+    const Cities = await axios.get(
+      `${domain()}/cities?visibleIn=VOLUNTEER_FORM`
+    )
     return Cities.data
   } catch (err) {
     return {
