@@ -1,9 +1,7 @@
 const mockServerURL = 'http://localhost:3001'
 
 beforeEach(() => {
-  cy.intercept('GET', `${mockServerURL}/cities?visibleIn=VOLUNTEER_FORM`, {
-    fixture: 'cities.json'
-  })
+  cy.intercept('GET', `${mockServerURL}/cities`, { fixture: 'cities.json' })
   cy.visit('/')
 })
 
