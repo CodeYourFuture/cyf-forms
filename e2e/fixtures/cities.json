@@ -2,8 +2,7 @@
   "cities": [
     {
       "_id": "123abc",
-      "name": "London",
-      "visibleIn": ["VOLUNTEER_FORM"]
+      "name": "London"
     }
   ]
 }
