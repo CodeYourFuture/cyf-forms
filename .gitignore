@@ -8,6 +8,7 @@
 # testing
 /coverage
 /e2e/screenshots
+/e2e/videos
 
 # production
 /build
@@ -43,4 +44,3 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .env
-package-lock.json

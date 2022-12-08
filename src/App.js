@@ -9,8 +9,11 @@ import Navbar from './Components/Navbar'
 import reducers from './Redux/Reducer'
 import Routes from './Routes'
 
-const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
-const store = createStore(reducers, composeEnhancers(applyMiddleware(ReduxThunk)))
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+const store = createStore(
+  reducers,
+  composeEnhancers(applyMiddleware(ReduxThunk))
+)
 
 const App = () => (
   <Provider store={store}>

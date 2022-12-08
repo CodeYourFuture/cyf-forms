@@ -8,8 +8,9 @@ export default ({ onChange, list, name }) => {
       {list.map(listItem => (
         <div
           key={listItem.label}
-          className={`form-table ${listItem.level === "It's empty" &&
-            'form-table-tr-is-empty'}`}
+          className={`form-table ${
+            listItem.level === "It's empty" && 'form-table-tr-is-empty'
+          }`}
         >
           <div className="form-table-single">
             <CheckBox

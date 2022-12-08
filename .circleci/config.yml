@@ -24,20 +24,40 @@ commands:
               --paths /\*
 
 jobs:
-  build:
+  test:
     docker:
-      - image: circleci/node:11.12
+      - image: cypress/base:16.17.1
     working_directory: ~/repo
     steps:
       - checkout
       - restore_cache:
           keys:
-            - yarn-dependencies-{{ checksum "package.json" }}
+            - yarn-dependencies-cypress-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-cypress-
       - run:
           name: Install dependencies
-          command: yarn
+          command: yarn install --frozen-lockfile
       - save_cache:
-          key: yarn-dependencies-{{ checksum "package.json" }}
+          key: yarn-dependencies-cypress-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache
+      - run: yarn lint
+      - run: yarn e2e:prod
+  build:
+    docker:
+      - image: cimg/node:16.17.1
+    working_directory: ~/repo
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - yarn-dependencies-node-{{ checksum "yarn.lock" }}
+            - yarn-dependencies-node-
+      - run:
+          name: Install dependencies
+          command: yarn install --frozen-lockfile
+      - save_cache:
+          key: yarn-dependencies-node-{{ checksum "yarn.lock" }}
           paths:
             - ~/.cache
       - run:
@@ -45,13 +65,25 @@ jobs:
           command: echo 'export VERSION=$(echo $CIRCLE_SHA1 | cut -c -7)' >> $BASH_ENV
       - run:
           name: build qa
-          command: REACT_APP_NODE_ENV=QA yarn build:qa
+          command: yarn build
+          environment:
+            BUILD_PATH: 'qa'
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'QA'
       - run:
           name: build staging
-          command: REACT_APP_NODE_ENV=STAGING yarn build:staging
+          command: yarn build
+          environment:
+            BUILD_PATH: 'staging'
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'STAGING'
       - run:
           name: build production
-          command: REACT_APP_NODE_ENV=PRODUCTION yarn build:production
+          command: yarn build
+          environment:
+            BUILD_PATH: 'production'
+            GENERATE_SOURCEMAP: 'false'
+            REACT_APP_NODE_ENV: 'PRODUCTION'
       - persist_to_workspace:
           root: .
           paths:
@@ -78,7 +110,6 @@ jobs:
           dir: qa
           to: 'forms.qa.codeyourfuture.io'
           cf_distribution_id: E2VFUDC8YCDBKS
-
 
   deploy_staging:
     docker:
@@ -124,8 +155,12 @@ workflows:
   version: 2
   test_and_deploy:
     jobs:
+      - test:
+          context: build
       - build:
           context: build
+          requires:
+            - test
       - deploy_qa:
           context: deployments_qa
           requires:
