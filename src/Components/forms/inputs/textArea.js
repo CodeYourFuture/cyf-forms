@@ -17,8 +17,9 @@ export default ({
         type={type}
         name={name}
         id={name}
-        className={`form-control form-control-text-area ${isEmpty &&
-          'is-empty'}`}
+        className={`form-control form-control-text-area ${
+          isEmpty && 'is-empty'
+        }`}
         placeholder={placeholder}
         value={value}
         onChange={onChange}
