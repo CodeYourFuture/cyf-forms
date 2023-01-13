@@ -101,6 +101,11 @@ class Forms extends Component {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
     }
   }
+  employerOnChange = employer => {
+    const { errors } = this.state
+    errors[`${'Employer'}`] = false
+    this.setState({ employer, errors, submitted: false, formInComplete: false })
+  }
 
   validateForm = values => {
     const { errors } = this.state
@@ -361,6 +366,7 @@ class Forms extends Component {
                 onChange={this.onChange}
                 telOnChange={this.telOnChange}
                 onChangeCheckList={this.onChangeCheckList}
+                employerOnChange={this.employerOnChange}
                 {...this.props}
                 {...this.state}
               />
