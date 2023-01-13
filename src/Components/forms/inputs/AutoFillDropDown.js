@@ -27,12 +27,11 @@ export default ({ employerOnChange, isEmpty, label, name, arrayList }) => {
         .filter(item => {
           const searchTerm = value.toLowerCase()
           const employer = item.name.toLowerCase()
-
-          return (
-            searchTerm &&
-            employer.startsWith(searchTerm) &&
-            employer !== searchTerm
-          )
+          const matchSearch =
+            value.length === 1
+              ? employer.includes(searchTerm)
+              : employer.startsWith(searchTerm)
+          return searchTerm && matchSearch && employer !== searchTerm
         })
         .slice(0, 10)
         .map(item => (
