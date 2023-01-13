@@ -6,6 +6,7 @@ import TextInput from './textInput'
 import TextArea from './textArea'
 import CheckListB from './checkListB'
 import CheckListH from './checkListH'
+import AutoFillDropDown from './AutoFillDropDown'
 
 export default class VolunteerForm extends Component {
   render() {
@@ -29,7 +30,7 @@ export default class VolunteerForm extends Component {
       guidePeople,
       techSkill,
       otherSkill,
-      employer
+      employerOnChange
     } = this.props
 
     return (
@@ -121,9 +122,8 @@ export default class VolunteerForm extends Component {
           label="Where did you hear about Code Your Future?"
         />
         {hearAboutCYFFromEmployer && (
-          <DropDown
-            onChange={onChange}
-            value={employer}
+          <AutoFillDropDown
+            employerOnChange={employerOnChange}
             name="employer"
             arrayList={ListsData.employerList}
             isEmpty={errors.employer}
