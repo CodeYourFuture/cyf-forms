@@ -103,8 +103,13 @@ class Forms extends Component {
   }
   employerOnChange = employer => {
     const { errors } = this.state
-    errors[`${'Employer'}`] = false
-    this.setState({ employer, errors, submitted: false, formInComplete: false })
+    errors.Employer = false
+    this.setState({
+      employer,
+      errors,
+      submitted: false,
+      formInComplete: false
+    })
   }
 
   validateForm = values => {
