@@ -113,9 +113,12 @@ it('requires employee selection', () => {
   cy.findByRole('button', { name: /submit/i }).click()
   cy.findByText(/form is incomplete/i).should('exist')
 
-  cy.findByRole('combobox', { name: /who is your employer/i }).select(
-    'Capgemini'
-  )
+  cy.findByRole('textbox', { name: /who is your employer/i }).type('Ca')
+  cy.get("option[class='employer-option']").each(($ele, i, $list) => {
+    if ($ele.text() === 'Capgemini') {
+      cy.wrap($ele).click()
+    }
+  })
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
