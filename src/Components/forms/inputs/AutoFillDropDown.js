@@ -1,11 +1,28 @@
 import React, { useState } from 'react'
 import { Label } from 'reactstrap'
+import '../index.css'
 
-export default ({ employerOnChange, isEmpty, label, name, arrayList }) => {
+const AutoFillDropDown = ({
+  employerOnChange,
+  isEmpty,
+  label,
+  name,
+  arrayList
+}) => {
   const [value, setValue] = useState('')
-
-  const onType = e => {
-    setValue(e.target.value)
+  const filteredEmployers = arrayList.filter(item => {
+    const searchTerm = value.toLowerCase()
+    const employer = item.name.toLowerCase()
+    const matchSearch =
+      value.length === 1
+        ? employer.includes(searchTerm)
+        : employer.startsWith(searchTerm)
+    return searchTerm && matchSearch && employer !== searchTerm
+  })
+  const employerSorter = (a, b) => {
+    const aIndex = a.name.toLowerCase().indexOf(value.toLowerCase())
+    const bIndex = b.name.toLowerCase().indexOf(value.toLowerCase())
+    return aIndex > bIndex ? 1 : aIndex < bIndex ? -1 : 0
   }
 
   const onSearch = searchTerm => {
@@ -20,31 +37,27 @@ export default ({ employerOnChange, isEmpty, label, name, arrayList }) => {
         type="text"
         id={name}
         value={value}
-        onChange={onType}
+        onChange={e => setValue(e.target.value)}
         placeholder="Type your employer name here"
+        autoComplete="no"
       />
-      {arrayList
-        .filter(item => {
-          const searchTerm = value.toLowerCase()
-          const employer = item.name.toLowerCase()
-          const matchSearch =
-            value.length === 1
-              ? employer.includes(searchTerm)
-              : employer.startsWith(searchTerm)
-          return searchTerm && matchSearch && employer !== searchTerm
-        })
-        .slice(0, 10)
-        .map(item => (
+      <div className="options">
+        {filteredEmployers.sort(employerSorter).map(item => (
           <option
+            className="employer-option"
             onClick={() => {
               onSearch(item.name)
             }}
+            onKeyDown={e => e.key === 'Enter' && onSearch(item.name)}
             key={item._id}
-            className="employer-option"
+            tabIndex={0}
           >
             {item.name}
           </option>
         ))}
+      </div>
     </div>
   )
 }
+
+export default AutoFillDropDown
