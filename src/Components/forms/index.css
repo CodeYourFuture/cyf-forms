@@ -266,7 +266,29 @@
     padding-left: 0px !important;
   }
 }
+
+.options {
+  max-height: 350px;
+  overflow: auto;
+  list-style: none;
+  border: 1px solid #999;
+  border-top: none;
+  border-radius: 2px;
+  margin: 0;
+  padding: 0;
+}
+
 .employer-option {
-  padding: 2px;
-  margin: 2px;
+  text-align: left;
+  padding: 0.4em;
+  border-bottom: 1px solid #999;
+  cursor: pointer;
+}
+
+.employer-option:hover {
+  background-color:lightskyblue ;
+}
+
+.employer-option:focus {
+  background-color: lightskyblue;
 }
