@@ -6,7 +6,7 @@ import TextInput from './textInput'
 import TextArea from './textArea'
 import CheckListB from './checkListB'
 import CheckListH from './checkListH'
-import AutoFillDropDown from './AutoFillDropDown'
+import EmployerDropDown from './EmployerDropDown'
 
 export default class VolunteerForm extends Component {
   render() {
@@ -122,12 +122,10 @@ export default class VolunteerForm extends Component {
           label="Where did you hear about Code Your Future?"
         />
         {hearAboutCYFFromEmployer && (
-          <AutoFillDropDown
+          <EmployerDropDown
             employerOnChange={employerOnChange}
-            name="employer"
             arrayList={ListsData.employerList}
             isEmpty={errors.employer}
-            label="Who is your employer? *"
           />
         )}
         <span className="contact-interested">
