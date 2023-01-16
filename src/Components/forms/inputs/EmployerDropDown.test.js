@@ -1,45 +1,36 @@
-import '@testing-library/jest-dom' // this should go in ./src/setupTests.js
+import '@testing-library/jest-dom'
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import exampleData from '../data.json'
-import AutoFillDropDown from './AutoFillDropDown'
+import EmployerDropDown from './EmployerDropDown'
 
-describe('AutoFillDropDown', () => {
-  describe('AutoFillDropDown', () => {
-    it('shows a matching option for specific word', async () => {
-      const user = userEvent.setup()
-      render(
-        <AutoFillDropDown
-          arrayList={exampleData.employerList}
-          employerOnChange={() => {}}
-          isEmpty={false}
-          label="Employer"
-          name="employer"
-        />
-      )
-
-      await user.type(
-        screen.getByRole('textbox', { name: /employer/i }),
-        'capgemini'
-      )
-
-      expect(
-        screen.getByRole('option', { name: /capgemini/i })
-      ).toBeInTheDocument()
-    })
-    expect(
-      screen.queryByRole('option', { name: /Carnall Farrar/i })
-    ).not.toBeInTheDocument()
-  })
-  it('finds characters within words', async () => {
+describe('EmployerDropDown', () => {
+  it('shows a matching option for specific word', async () => {
     const user = userEvent.setup()
     render(
-      <AutoFillDropDown
+      <EmployerDropDown
         arrayList={exampleData.employerList}
         employerOnChange={() => {}}
         isEmpty={false}
-        name="employer"
-        label="Employer"
+      />
+    )
+
+    await user.type(screen.getByRole('textbox', { name: /employer/i }), 'cap')
+
+    expect(
+      screen.getByRole('option', { name: /capgemini/i })
+    ).toBeInTheDocument()
+  })
+  expect(
+    screen.queryByRole('option', { name: /Carnall Farrar/i })
+  ).not.toBeInTheDocument()
+  it('finds characters within words', async () => {
+    const user = userEvent.setup()
+    render(
+      <EmployerDropDown
+        arrayList={exampleData.employerList}
+        employerOnChange={() => {}}
+        isEmpty={false}
       />
     )
 
