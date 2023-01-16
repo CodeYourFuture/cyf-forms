@@ -13,11 +13,8 @@ const AutoFillDropDown = ({
   const filteredEmployers = arrayList.filter(item => {
     const searchTerm = value.toLowerCase()
     const employer = item.name.toLowerCase()
-    const matchSearch =
-      value.length === 1
-        ? employer.includes(searchTerm)
-        : employer.startsWith(searchTerm)
-    return searchTerm && matchSearch && employer !== searchTerm
+    const matchSearch = employer.includes(searchTerm)
+    return searchTerm && matchSearch
   })
   const employerSorter = (a, b) => {
     const aIndex = a.name.toLowerCase().indexOf(value.toLowerCase())
