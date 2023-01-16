@@ -2,19 +2,13 @@ import React, { useState } from 'react'
 import { Label } from 'reactstrap'
 import '../index.css'
 
-const AutoFillDropDown = ({
-  employerOnChange,
-  isEmpty,
-  label,
-  name,
-  arrayList
-}) => {
+const EmployerDropDown = ({ employerOnChange, isEmpty, arrayList }) => {
   const [value, setValue] = useState('')
   const filteredEmployers = arrayList.filter(item => {
     const searchTerm = value.toLowerCase()
     const employer = item.name.toLowerCase()
     const matchSearch = employer.includes(searchTerm)
-    return searchTerm && matchSearch
+    return searchTerm && matchSearch && employer !== searchTerm
   })
   const employerSorter = (a, b) => {
     const aIndex = a.name.toLowerCase().indexOf(value.toLowerCase())
@@ -28,11 +22,11 @@ const AutoFillDropDown = ({
   }
   return (
     <div className="form-group">
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor="employer">"Who is your employer?"</Label>
       <input
         className={`form-control ${isEmpty && 'is-empty'}`}
         type="text"
-        id={name}
+        id="employer"
         value={value}
         onChange={e => setValue(e.target.value)}
         placeholder="Type your employer name here"
@@ -57,4 +51,4 @@ const AutoFillDropDown = ({
   )
 }
 
-export default AutoFillDropDown
+export default EmployerDropDown
