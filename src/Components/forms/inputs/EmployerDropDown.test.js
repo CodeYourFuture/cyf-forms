@@ -33,7 +33,11 @@ describe('EmployerDropDown', () => {
     const user = userEvent.setup()
     render(
       <EmployerDropDown
-        arrayList={employerList}
+        arrayList={[
+          { name: 'Beamery', _id: 'Beamery' },
+          { name: 'American Express ', _id: 'American Express ' },
+          { name: 'Capgemini', _id: 'Capgemini' }
+        ]}
         employerOnChange={() => {}}
         isEmpty={false}
       />
@@ -44,10 +48,10 @@ describe('EmployerDropDown', () => {
     expect(
       screen.getByRole('option', { name: /capgemini/i })
     ).toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: /Carnall Farrar/i })
+    ).not.toBeInTheDocument()
   })
-  expect(
-    screen.queryByRole('option', { name: /Carnall Farrar/i })
-  ).not.toBeInTheDocument()
   it('finds characters within words', async () => {
     const user = userEvent.setup()
     render(
@@ -88,27 +92,27 @@ describe('EmployerDropDown', () => {
     expect(
       screen.queryByRole('option', { name: 'BBC' })
     ).not.toBeInTheDocument()
-  })
-  expect(
-    screen.queryByRole('option', { name: 'Blue Frontier' })
-  ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Blue Frontier' })
+    ).not.toBeInTheDocument()
 
-  expect(
-    screen.queryByRole('option', { name: 'Brandwatch' })
-  ).not.toBeInTheDocument()
-  expect(
-    screen.queryByRole('option', { name: 'EngineerBetter' })
-  ).not.toBeInTheDocument()
-  expect(
-    screen.queryByRole('option', { name: 'Equal Experts' })
-  ).not.toBeInTheDocument()
-  expect(
-    screen.queryByRole('option', { name: 'Infobip' })
-  ).not.toBeInTheDocument()
-  expect(
-    screen.queryByRole('option', { name: 'Synaptik Digital' })
-  ).not.toBeInTheDocument()
-  expect(
-    screen.queryByRole('option', { name: 'Tata Consultancy services' })
-  ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Brandwatch' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'EngineerBetter' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Equal Experts' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Infobip' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Synaptik Digital' })
+    ).not.toBeInTheDocument()
+    expect(
+      screen.queryByRole('option', { name: 'Tata Consultancy services' })
+    ).not.toBeInTheDocument()
+  })
 })
