@@ -1,52 +1,30 @@
 import React, { useState } from 'react'
 import { Label } from 'reactstrap'
-import '../index.css'
+import Select from 'react-select'
 
 const EmployerDropDown = ({ employerOnChange, isEmpty, arrayList }) => {
   const [value, setValue] = useState('')
-  const filteredEmployers = arrayList.filter(item => {
-    const searchTerm = value.toLowerCase()
-    const employer = item.name.toLowerCase()
-    const matchSearch = employer.includes(searchTerm)
-    return searchTerm && matchSearch && employer !== searchTerm
-  })
   const employerSorter = (a, b) => {
-    const aIndex = a.name.toLowerCase().indexOf(value.toLowerCase())
-    const bIndex = b.name.toLowerCase().indexOf(value.toLowerCase())
+    const aIndex = a.value.toLowerCase().indexOf(value.toLowerCase())
+    const bIndex = b.value.toLowerCase().indexOf(value.toLowerCase())
     return aIndex > bIndex ? 1 : aIndex < bIndex ? -1 : 0
   }
-
-  const onSearch = searchTerm => {
-    setValue(searchTerm)
-    employerOnChange(searchTerm)
-  }
+  const employersList = arrayList
+    .map(item => ({
+      value: item.name,
+      label: item.name
+    }))
+    .sort(employerSorter)
   return (
     <div className="form-group">
-      <Label htmlFor="employer">"Who is your employer?"</Label>
-      <input
-        className={`form-control ${isEmpty && 'is-empty'}`}
-        type="text"
+      <Label htmlFor="employer">Who is your employer?</Label>
+      <Select
         id="employer"
-        value={value}
-        onChange={e => setValue(e.target.value)}
+        onInputChange={inputVal => setValue(inputVal)}
+        options={employersList}
+        onChange={e => employerOnChange(e.value)}
         placeholder="Type your employer name here"
-        autoComplete="no"
       />
-      <div className="options">
-        {filteredEmployers.sort(employerSorter).map(item => (
-          <option
-            className="employer-option"
-            onClick={() => {
-              onSearch(item.name)
-            }}
-            onKeyDown={e => e.key === 'Enter' && onSearch(item.name)}
-            key={item._id}
-            tabIndex={0}
-          >
-            {item.name}
-          </option>
-        ))}
-      </div>
     </div>
   )
 }
