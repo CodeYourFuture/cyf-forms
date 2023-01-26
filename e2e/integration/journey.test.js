@@ -113,8 +113,7 @@ it('requires employee selection', () => {
   cy.findByRole('button', { name: /submit/i }).click()
   cy.findByText(/form is incomplete/i).should('exist')
 
-  cy.findByRole('textbox', { name: /who is your employer/i }).type('Ca')
-  cy.findByRole('option', { name: /Capgemini/i }).click()
+  cy.get('input[id="react-select-2-input"]').type('Ca').type('{enter}')
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
