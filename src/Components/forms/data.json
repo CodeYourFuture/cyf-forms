@@ -96,6 +96,7 @@
     { "name": "Meta", "_id": "Meta" },
     { "name": "Microsoft", "_id": "Microsoft" },
     { "name": "Multitudes", "_id": "Multitudes" },
+    { "name": "Multiverse", "_id": "Multiverse" },
     { "name": "MVF", "_id": "MVF" },
     { "name": "Nat West", "_id": "Nat West" },
     { "name": "NooS", "_id": "NooS" },
@@ -119,7 +120,8 @@
     { "name": "The Developer Society", "_id": "The Developer Society" },
     { "name": "University of Arts", "_id": "University of Arts" },
     { "name": "Venditan", "_id": "Venditan" },
-    { "name": "Yoti", "_id": "Yoti" }
+    { "name": "Yoti", "_id": "Yoti" },
+    { "name": "Other", "_id": "Other" }
   ],
 
   "radioButtonList": [
