@@ -16,10 +16,10 @@ const EmployerDropDown = ({ employerOnChange, isEmpty, arrayList }) => {
     }))
     .sort(employerSorter)
   return (
-    <div className="form-group">
+    <div className="form-group" data-testId="form-group">
       <Label htmlFor="employer">Who is your employer?</Label>
       <Select
-        id="employer"
+        inputId="employer"
         onInputChange={inputVal => setValue(inputVal)}
         options={employersList}
         onChange={e => employerOnChange(e.value)}
