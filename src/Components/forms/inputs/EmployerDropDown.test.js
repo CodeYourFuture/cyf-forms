@@ -1,5 +1,4 @@
 import React from 'react'
-import Select from 'react-select'
 import { render, screen } from '@testing-library/react'
 import selectEvent from 'react-select-event'
 import '@testing-library/jest-dom'
@@ -8,7 +7,6 @@ import EmployerDropDown from './EmployerDropDown'
 
 describe('EmployerDropDown', () => {
   it('shows the label value and place holder value', async () => {
-    const user = userEvent.setup()
     render(
       <EmployerDropDown
         arrayList={[
@@ -28,7 +26,6 @@ describe('EmployerDropDown', () => {
     )
   })
   it('shows the selected value', async () => {
-    const user = userEvent.setup()
     render(
       <EmployerDropDown
         arrayList={[
