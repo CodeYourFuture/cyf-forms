@@ -42,6 +42,7 @@ jobs:
           paths:
             - ~/.cache
       - run: yarn lint
+      - run: yarn test
       - run: yarn e2e:prod
   build:
     docker:
