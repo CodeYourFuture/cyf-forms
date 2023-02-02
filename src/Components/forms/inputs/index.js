@@ -123,8 +123,10 @@ export default class VolunteerForm extends Component {
         {hearAboutCYFFromEmployer && (
           <EmployerDropDown
             onChange={onChange}
+            name="employer"
             arrayList={ListsData.employerList}
             isEmpty={errors.employer}
+            label="Who is your employer? *"
           />
         )}
         <span className="contact-interested">

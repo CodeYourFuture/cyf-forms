@@ -57,6 +57,8 @@ const renderInForm = ({
       <EmployerDropDown
         arrayList={employers.map(name => ({ _id: name, name }))}
         isEmpty={isEmpty}
+        label="Who is your employer? *"
+        name="employer"
         onChange={onChange}
       />
     </form>
