@@ -14,12 +14,12 @@ describe('EmployerDropDown', () => {
           { name: 'American Express', _id: 'American Express ' },
           { name: 'Capgemini', _id: 'Capgemini' }
         ]}
-        employerOnChange={() => {}}
+        onChange={() => {}}
         isEmpty={false}
       />
     )
     expect(screen.getByTestId('form-group')).toHaveTextContent(
-      'Who is your employer?'
+      'Who is your employer? *'
     )
     expect(screen.getByTestId('form-group')).toHaveTextContent(
       'Type your employer name here'
@@ -34,7 +34,7 @@ describe('EmployerDropDown', () => {
           { name: 'Capgemini', _id: 'Capgemini' },
           { name: 'Carnall Farrar', _id: 'Carnall Farrar' }
         ]}
-        employerOnChange={() => {}}
+        onChange={() => {}}
         isEmpty={false}
       />
     )
@@ -56,15 +56,16 @@ describe('EmployerDropDown', () => {
           { name: 'Beamery', _id: 'Beamery' },
           { name: 'American Express ', _id: 'American Express ' },
           { name: 'Capgemini', _id: 'Capgemini' },
-          { name: 'Capnga', _id: 'Capnga' }
+          { name: 'Capital', _id: 'Capital' }
         ]}
-        employerOnChange={() => {}}
+        onChange={() => {}}
         isEmpty={false}
-      />
+      />,
+      { hidden: true }
     )
     await user.type(screen.getByRole('combobox', { id: 'employer' }), 'cap')
     expect(screen.getByTestId('form-group')).toHaveTextContent('Capgemini')
-    expect(screen.getByTestId('form-group')).toHaveTextContent('Capnga')
+    expect(screen.getByTestId('form-group')).toHaveTextContent('Capital')
     expect(screen.getByTestId('form-group')).not.toHaveTextContent('Beamery')
   })
   it('finds characters within words', async () => {
@@ -102,47 +103,40 @@ describe('EmployerDropDown', () => {
         ]}
         employerOnChange={() => {}}
         isEmpty={false}
-      />
+      />,
+      { hidden: true }
     )
-    await user.type(screen.getByRole('combobox', { id: 'employer' }), 'am')
-    expect(screen.getByTestId('form-group')).toHaveTextContent('Amazon')
-    expect(screen.getByTestId('form-group')).toHaveTextContent(
-      'Amazon Web Services (AWS)'
-    )
-    expect(screen.getByTestId('form-group')).toHaveTextContent(
-      'American Express'
-    )
-    expect(screen.getByTestId('form-group')).toHaveTextContent('Beamery')
-    expect(screen.getByTestId('form-group')).toHaveTextContent(
-      'Blueprint Gaming'
-    )
-    expect(screen.getByTestId('form-group')).toHaveTextContent('EPAM System')
-    expect(screen.getByTestId('form-group')).toHaveTextContent(
-      'Inspired Gaming Group'
-    )
-    expect(screen.getByTestId('form-group')).toHaveTextContent('Tamarix Tech')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
-      'Alpha FX Group'
-    )
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent('Anaplan')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent('BBC')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent('Bet365')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
-      'Blue Frontier'
-    )
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent('Brandwatch')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
-      'EngineerBetter'
-    )
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
-      'Equal Experts'
-    )
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent('Infobip')
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
+    const appearingEmployers = [
+      'Amazon',
+      'Amazon Web Services (AWS)',
+      'American Express',
+      'Beamery',
+      'Blueprint Gaming',
+      'EPAM System',
+      'Inspired Gaming Group',
+      'Tamarix Tech'
+    ]
+    const notAppearingApplicants = [
+      'Alpha FX Group',
+      'Anaplan',
+      'BBC',
+      'Bet365',
+      'Brandwatch',
+      'Blue Frontier',
+      'EngineerBetter',
+      'Equal Experts',
+      'Infobip',
+      'Tata Consultancy services',
       'Synaptik Digital'
+    ]
+
+    await user.type(screen.getByRole('combobox', { id: 'employer' }), 'am')
+
+    appearingEmployers.forEach(employer =>
+      expect(screen.getByTestId('form-group')).toHaveTextContent(employer)
     )
-    expect(screen.getByTestId('form-group')).not.toHaveTextContent(
-      'Tata Consultancy services'
+    notAppearingApplicants.forEach(employer =>
+      expect(screen.getByTestId('form-group')).not.toHaveTextContent(employer)
     )
   })
 })
