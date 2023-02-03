@@ -29,8 +29,7 @@ export default class VolunteerForm extends Component {
       onChangeCheckList,
       guidePeople,
       techSkill,
-      otherSkill,
-      employerOnChange
+      otherSkill
     } = this.props
 
     return (
@@ -123,7 +122,7 @@ export default class VolunteerForm extends Component {
         />
         {hearAboutCYFFromEmployer && (
           <EmployerDropDown
-            employerOnChange={employerOnChange}
+            onChange={onChange}
             arrayList={ListsData.employerList}
             isEmpty={errors.employer}
           />
