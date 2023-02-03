@@ -1,30 +1,34 @@
+import { useMemo } from 'react'
 import Select from 'react-select'
 import { Label } from 'reactstrap'
 
 export default function EmployerDropDown({
-  arrayList,
+  arrayList: partners,
   isEmpty,
-  label,
-  name,
   onChange
 }) {
-  const inputId = `${name}-employer-select`
+  const inputId = 'employer-select'
+  const options = useMemo(
+    () =>
+      partners.map(({ _id, name }) => ({
+        label: name,
+        value: _id
+      })),
+    [partners]
+  )
   return (
     <div className="form-group">
-      <Label htmlFor={inputId}>{label}</Label>
+      <Label htmlFor={inputId}>Who is your employer? *</Label>
       <Select
         className={isEmpty ? 'is-empty' : ''}
         inputId={inputId}
         isSearchable
-        name={name}
+        name="employer"
         noOptionsMessage={() => 'No matches found, please select "Other"'}
         onChange={({ value }) =>
-          onChange({ target: { name, type: 'text', value } })
+          onChange({ target: { name: 'employer', type: 'text', value } })
         }
-        options={arrayList.map(({ _id, name }) => ({
-          label: name,
-          value: _id
-        }))}
+        options={options}
       />
     </div>
   )
