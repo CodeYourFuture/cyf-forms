@@ -44,6 +44,55 @@ describe('EmployerDropDown', () => {
       screen.getByText('No matches found, please select "Other"')
     ).toBeInTheDocument()
   })
+
+  it('brings prefix matches to the top of the list', async () => {
+    const { container, user } = renderInForm({
+      employers: [
+        'Arnold Clark',
+        'Bankifi',
+        'Capgemini',
+        'Deloitte',
+        'EDF',
+        'Other'
+      ]
+    })
+    await user.type(screen.getByRole('combobox', { name: /employer/i }), 'e')
+    expect(renderedItems(container)).toEqual([
+      'EDF',
+      'Capgemini',
+      'Deloitte',
+      'Other'
+    ])
+  })
+
+  it('keeps "Other" at the end of the list', async () => {
+    const { container, user } = renderInForm({
+      employers: [
+        'Arnold Clark',
+        'Bankifi',
+        'Capgemini',
+        'Deloitte',
+        'EDF',
+        'Other'
+      ]
+    })
+    await user.type(screen.getByRole('combobox', { name: /employer/i }), 'o')
+    expect(renderedItems(container)).toEqual([
+      'Arnold Clark',
+      'Deloitte',
+      'Other'
+    ])
+  })
+
+  /**
+   * @param {HTMLElement} container
+   */
+  const renderedItems = container => {
+    const divs = Array.from(container.getElementsByTagName('div'))
+    return divs
+      .filter(el => el.getAttribute('aria-disabled') === 'false')
+      .map(el => el.textContent)
+  }
 })
 
 const renderInForm = ({
