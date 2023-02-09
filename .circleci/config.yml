@@ -43,6 +43,7 @@ jobs:
             - ~/.cache
       - run: yarn lint
       - run: yarn e2e:prod
+      - run: yarn test
   build:
     docker:
       - image: cimg/node:16.17.1
