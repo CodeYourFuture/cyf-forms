@@ -89,9 +89,12 @@ class Forms extends Component {
     const { errors } = this.state
     errors['employer'] = false
     if (employer) {
-      this.setState({employer: employer.value, errors, submitted: false, formInComplete: false
-    })
-
+      this.setState({
+        employer: employer.value,
+        errors,
+        submitted: false,
+        formInComplete: false
+      })
     }
     console.log(this.state, 'val')
   }
@@ -114,7 +117,7 @@ class Forms extends Component {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
     }
   }
-  onInputChange = (val)=> {
+  onInputChange = val => {
     console.log('yeeeee', val)
   }
 
@@ -192,7 +195,7 @@ class Forms extends Component {
       interestedInCYF,
       agreeToReceiveCommunication
     })
-    
+
     console.log(validatedInputs, 'input', employer)
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
