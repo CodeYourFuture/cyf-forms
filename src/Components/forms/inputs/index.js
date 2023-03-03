@@ -34,7 +34,6 @@ export default class VolunteerForm extends Component {
       onEmployerChange,
       onInputChange
     } = this.props
-
     return (
       <Fragment>
         <div className="form-section-one">
