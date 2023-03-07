@@ -62,6 +62,23 @@ describe('EmployerDropDown', () => {
     })
   })
 
+  it('adds the new employer to the list', async () => {
+    const { user } = renderInForm({ employers: ['ABC', 'BBC', 'CBC'] })
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      'Google'
+    )
+    await user.click(screen.getByText('Create "Google"'))
+    await selectEvent.select(
+      screen.getByLabelText(/who is your employer/i),
+      'BBC'
+    )
+    await selectEvent.select(
+      screen.getByLabelText(/who is your employer/i),
+      'Google'
+    )
+  })
+
   it('shows the expected values in AC', async () => {
     const { user } = renderInForm({
       employers: [
