@@ -43,9 +43,11 @@ const EmployerDropDown = ({ onChange, arrayList, onInputChange }) => {
         isClearable
         isDisabled={isLoading}
         isLoading={isLoading}
-        onChange={employer => {
-          setValue(employer)
-          onChange(employer, value)
+        onChange={e => {
+          onChange({
+            target: { name: 'employer', type: 'text', value: e.value }
+          })
+          setValue(e.label)
         }}
         onCreateOption={handleCreate}
         options={options}
@@ -59,6 +61,9 @@ const EmployerDropDown = ({ onChange, arrayList, onInputChange }) => {
                 'This employer will be added to our list. Make sure you typed it correctly.'
               )
             : setSuccessfulySubmittedMsg('')
+          onChange({
+            target: { name: 'employer', type: 'text', value: typed }
+          })
         }}
         value={value}
         placeholder="Type your employer name here"

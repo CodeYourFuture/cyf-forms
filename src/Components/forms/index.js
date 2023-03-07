@@ -82,21 +82,6 @@ class Forms extends Component {
     const { errors } = this.state
     errors[`${'tel'}`] = false
     this.setState({ tel, errors, submitted: false, formInComplete: false })
-    console.log(this.state)
-  }
-
-  onEmployerChange = (employer, val) => {
-    const { errors } = this.state
-    errors['employer'] = false
-    if (employer) {
-      this.setState({
-        employer: employer.value,
-        errors,
-        submitted: false,
-        formInComplete: false
-      })
-    }
-    console.log(this.state, 'val')
   }
 
   onChange = (e, val) => {
@@ -112,13 +97,10 @@ class Forms extends Component {
         err: null
       })
     }
-    console.log(e.target.value, 'eeeeee')
     if (name === 'hearAboutCYF') {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
     }
-  }
-  onInputChange = val => {
-    console.log('yeeeee', val)
+    console.log(this.state.employer, 'emp')
   }
 
   validateForm = values => {
@@ -381,8 +363,6 @@ class Forms extends Component {
             <form className="mb-4" onSubmit={this.handleSubmit} method="post">
               <Inputs
                 onChange={this.onChange}
-                onEmployerChange={this.onEmployerChange}
-                onInputChange={this.onInputChange}
                 telOnChange={this.telOnChange}
                 onChangeCheckList={this.onChangeCheckList}
                 {...this.props}

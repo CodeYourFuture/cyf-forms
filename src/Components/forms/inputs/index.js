@@ -30,9 +30,7 @@ export default class VolunteerForm extends Component {
       onChangeCheckList,
       guidePeople,
       techSkill,
-      otherSkill,
-      onEmployerChange,
-      onInputChange
+      otherSkill
     } = this.props
     return (
       <Fragment>
@@ -126,8 +124,7 @@ export default class VolunteerForm extends Component {
             <EmployerDropDown
               value={employer}
               isEmpty={errors.employer}
-              onInputChange={onInputChange}
-              onChange={onEmployerChange}
+              onChange={onChange}
               arrayList={ListsData.employerList}
             />
           )}
