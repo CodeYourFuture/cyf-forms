@@ -26,13 +26,7 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
         options={employersList}
         onChange={handleChange}
         onCreateOption={newEmployer => {
-          setEmployersList(oldList => [
-            ...oldList,
-            {
-              label: newEmployer,
-              value: newEmployer
-            }
-          ])
+          setEmployersList(oldList => insertedInto([...oldList], newEmployer))
           handleChange({ value: newEmployer })
         }}
         name="employer"
@@ -41,6 +35,19 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
       />
     </div>
   )
+}
+
+const insertedInto = (employers, employer) => {
+  const canonical = employer.toLowerCase()
+  const entry = { label: employer, value: employer }
+  for (let index = 0; index < employers.length; index++) {
+    if (canonical < employers[index].value.toLowerCase()) {
+      employers.splice(index, 0, entry)
+      return employers
+    }
+  }
+  employers.push(entry)
+  return employers
 }
 
 export default EmployerDropDown

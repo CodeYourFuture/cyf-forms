@@ -79,6 +79,30 @@ describe('EmployerDropDown', () => {
     )
   })
 
+  it('keeps the list in alphabetical order', async () => {
+    const { container, user } = renderInForm({
+      employers: ['ABC', 'BBC', 'CBC']
+    })
+    for (const employer of ['Boggle', 'Google', 'Aardvark']) {
+      await user.type(
+        screen.getByRole('combobox', { name: /employer/i }),
+        `${employer}{enter}`
+      )
+    }
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      '{delete}'
+    )
+    expect(renderedItems(container)).toEqual([
+      'Aardvark',
+      'ABC',
+      'BBC',
+      'Boggle',
+      'CBC',
+      'Google'
+    ])
+  })
+
   it('shows the expected values in AC', async () => {
     const { user } = renderInForm({
       employers: [
@@ -120,6 +144,16 @@ describe('EmployerDropDown', () => {
       expect(screen.getByText(employer)).toBeInTheDocument()
     )
   })
+
+  /**
+   * @param {HTMLElement} container
+   */
+  const renderedItems = container => {
+    const divs = Array.from(container.getElementsByTagName('div'))
+    return divs
+      .filter(el => el.getAttribute('aria-disabled') === 'false')
+      .map(el => el.textContent)
+  }
 })
 const renderInForm = ({
   employers = [],
