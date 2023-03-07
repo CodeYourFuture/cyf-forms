@@ -88,7 +88,8 @@ class Forms extends Component {
     const { name, value, type, checked } = e.target
     const { errors } = this.state
     errors[name] = false
-    if (e && e.target) {
+    if (e && e.target && value !== '') {
+      console.log('YAAAAAA', e.target)
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,

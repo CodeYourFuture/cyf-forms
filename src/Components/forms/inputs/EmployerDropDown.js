@@ -1,11 +1,9 @@
 import React, { Fragment } from 'react'
-import { Label } from 'reactstrap'
-import Select from 'react-select'
 import CreatableSelect from 'react-select/creatable'
 import { useState } from 'react'
 import './index.css'
 
-const EmployerDropDown = ({ onChange, arrayList, onInputChange }) => {
+const EmployerDropDown = ({ onChange, arrayList }) => {
   const createOption = label => ({
     label,
     value: label.replace(/\./g, '')
@@ -19,7 +17,7 @@ const EmployerDropDown = ({ onChange, arrayList, onInputChange }) => {
   const [value, setValue] = useState('')
   const [showTextOnSuccessfulSubmit, setSuccessfulySubmittedMsg] = useState('')
 
-  const handleCreate = inputValue => {
+  const typeNewEmployer = inputValue => {
     setIsLoading(true)
     setTimeout(() => {
       const newOption = createOption(inputValue)
@@ -49,7 +47,7 @@ const EmployerDropDown = ({ onChange, arrayList, onInputChange }) => {
           })
           setValue(e.label)
         }}
-        onCreateOption={handleCreate}
+        onCreateOption={typeNewEmployer}
         options={options}
         onInputChange={typed => {
           let results = options.map(employer => employer.value)
