@@ -33,7 +33,7 @@ This is a:
 - [ ] I have linked to the project board ticket (and any related PRs/issues) in the Links section
 - [ ] I have added a link to this PR to the ticket
 - [ ] I have made the PR to `qa` from a branch named `<category>/<name>`, e.g. `feature/edit-spaceships` or `bugfix/restore-oxygen`
-- [ ] I have completed the manual tests [described here](https://github.com/CodeYourFuture/tech-team/wiki/Manual-Test-Procedures)
+- [ ] I have completed the manual tests [described here](https://github.com/CodeYourFuture/tech-team/wiki/3.-How-we-work#manual-test-procedures)
 - [ ] I have requested reviewers here and in my team chat channel
 <!-- depending on the task, the following may be optional -->
 - [ ] I have spoken with my PM or TL about any parts of this task that may have become out-of-scope, or any additional improvements that I now realise may benefit my project
