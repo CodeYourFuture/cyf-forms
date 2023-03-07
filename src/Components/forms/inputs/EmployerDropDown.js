@@ -29,6 +29,7 @@ const EmployerDropDown = ({ onChange, arrayList, value }) => {
         if (a.value > b.value) {
           return 1
         }
+        return 1
       })
       setOptions(newOptions)
       setValue(newOption)
