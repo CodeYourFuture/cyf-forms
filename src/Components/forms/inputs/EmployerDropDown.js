@@ -1,6 +1,6 @@
 import React from 'react'
 import { Label } from 'reactstrap'
-import Select from 'react-select'
+import Select from 'react-select/creatable'
 
 const EmployerDropDown = ({ onChange, isEmpty, arrayList }) => {
   const employersList = arrayList.map(({ _id, name }) => ({
@@ -12,7 +12,6 @@ const EmployerDropDown = ({ onChange, isEmpty, arrayList }) => {
       <Label htmlFor="employer">Who is your employer? *</Label>
       <Select
         className={isEmpty ? 'is-empty' : ''}
-        noOptionsMessage={() => 'Employer not found? Please select "Other".'}
         inputId="employer"
         isSearchable
         options={employersList}

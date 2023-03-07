@@ -1,8 +1,7 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import selectEvent from 'react-select-event'
-import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
+import selectEvent from 'react-select-event'
+
 import EmployerDropDown from './EmployerDropDown'
 
 describe('EmployerDropDown', () => {
@@ -47,12 +46,20 @@ describe('EmployerDropDown', () => {
     expect(container.getElementsByClassName('is-empty')).toHaveLength(1)
   })
 
-  it('asks user to select "Other" if no matches', async () => {
-    const { user } = renderInForm({ employers: ['G-Research'] })
-    await user.type(screen.getByRole('combobox', { name: /employer/i }), 'cap')
-    expect(
-      screen.getByText('Employer not found? Please select "Other".')
-    ).toBeInTheDocument()
+  it('allows the user to enter their own employer', async () => {
+    const onChange = jest.fn()
+    const { user } = renderInForm({
+      employers: ['ABC', 'BBC', 'CBC'],
+      onChange
+    })
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      'Google'
+    )
+    await user.click(screen.getByText('Create "Google"'))
+    expect(onChange).toHaveBeenCalledWith({
+      target: { name: 'employer', type: 'text', value: 'Google' }
+    })
   })
 
   it('shows the expected values in AC', async () => {
