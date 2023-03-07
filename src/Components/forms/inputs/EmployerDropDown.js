@@ -3,7 +3,7 @@ import CreatableSelect from 'react-select/creatable'
 import { useState } from 'react'
 import './index.css'
 
-const EmployerDropDown = ({ onChange, arrayList }) => {
+const EmployerDropDown = ({ onChange, arrayList, value }) => {
   const createOption = label => ({
     label,
     value: label.replace(/\./g, '')
@@ -14,7 +14,7 @@ const EmployerDropDown = ({ onChange, arrayList }) => {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [options, setOptions] = useState(defaultOptions)
-  const [value, setValue] = useState('')
+  const [val, setValue] = useState('')
   const [showTextOnSuccessfulSubmit, setSuccessfulySubmittedMsg] = useState('')
 
   const typeNewEmployer = inputValue => {
@@ -45,7 +45,7 @@ const EmployerDropDown = ({ onChange, arrayList }) => {
           onChange({
             target: { name: 'employer', type: 'text', value: e.value }
           })
-          setValue(e.label)
+          setValue({ label: e.label, value: e.label })
         }}
         onCreateOption={typeNewEmployer}
         options={options}
@@ -63,7 +63,7 @@ const EmployerDropDown = ({ onChange, arrayList }) => {
             target: { name: 'employer', type: 'text', value: typed }
           })
         }}
-        value={value}
+        value={val}
         placeholder="Type your employer name here"
       />
       {showTextOnSuccessfulSubmit.length > 0 && (
