@@ -32,7 +32,7 @@ This is a:
 - [ ] I have written a description that says what the PR does and how to validate it
 - [ ] I have linked to the project board ticket (and any related PRs/issues) in the Links section
 - [ ] I have added a link to this PR to the ticket
-- [ ] I have made the PR to `staging` from a branch named `<category>/<name>`, e.g. `feature/edit-spaceships` or `bugfix/restore-oxygen`
+- [ ] I have made the PR to `qa` from a branch named `<category>/<name>`, e.g. `feature/edit-spaceships` or `bugfix/restore-oxygen`
 - [ ] I have completed the manual tests [described here](https://github.com/CodeYourFuture/tech-team/wiki/Manual-Test-Procedures)
 - [ ] I have requested reviewers here and in my team chat channel
 <!-- depending on the task, the following may be optional -->
