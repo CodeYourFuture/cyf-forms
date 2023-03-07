@@ -4,6 +4,7 @@ import { CREAT_VOLUNTEER } from './types'
 const path = `${domain()}${appPath}`
 
 export const createVolunteer = async volunteer => {
+  console.log(volunteer, 'volunteer')
   try {
     const response = await axios.post(`${path}`, volunteer)
     return response.data
@@ -32,6 +33,7 @@ export const setVolunteerToStore = volunteer => {
 export const createVolunteerHandler = volunteer => {
   return async dispatch => {
     const data = await createVolunteer(volunteer)
+    console.log(data)
     dispatch(setVolunteerToStore(data))
   }
 }

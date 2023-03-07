@@ -82,9 +82,24 @@ class Forms extends Component {
     const { errors } = this.state
     errors[`${'tel'}`] = false
     this.setState({ tel, errors, submitted: false, formInComplete: false })
+    console.log(this.state)
   }
 
-  onChange = e => {
+  onEmployerChange = (employer, val) => {
+    const { errors } = this.state
+    errors['employer'] = false
+    if (employer) {
+      this.setState({
+        employer: employer.value,
+        errors,
+        submitted: false,
+        formInComplete: false
+      })
+    }
+    console.log(this.state, 'val')
+  }
+
+  onChange = (e, val) => {
     const { name, value, type, checked } = e.target
     const { errors } = this.state
     errors[name] = false
@@ -97,9 +112,13 @@ class Forms extends Component {
         err: null
       })
     }
+    console.log(e.target.value, 'eeeeee')
     if (name === 'hearAboutCYF') {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
     }
+  }
+  onInputChange = val => {
+    console.log('yeeeee', val)
   }
 
   validateForm = values => {
@@ -176,6 +195,8 @@ class Forms extends Component {
       interestedInCYF,
       agreeToReceiveCommunication
     })
+
+    console.log(validatedInputs, 'input', employer)
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
     const { valuationError } = this.state
@@ -222,6 +243,7 @@ class Forms extends Component {
         return ''
     }
   }
+
   showModal = e => {
     if (e && e.target.id) {
       this.setState({ selectedModal: e.target.id })
@@ -359,6 +381,8 @@ class Forms extends Component {
             <form className="mb-4" onSubmit={this.handleSubmit} method="post">
               <Inputs
                 onChange={this.onChange}
+                onEmployerChange={this.onEmployerChange}
+                onInputChange={this.onInputChange}
                 telOnChange={this.telOnChange}
                 onChangeCheckList={this.onChangeCheckList}
                 {...this.props}

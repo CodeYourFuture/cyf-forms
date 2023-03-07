@@ -18,6 +18,7 @@ export default class VolunteerForm extends Component {
       cities,
       cityId,
       email,
+      employer,
       telOnChange,
       errors,
       volunteer,
@@ -29,9 +30,10 @@ export default class VolunteerForm extends Component {
       onChangeCheckList,
       guidePeople,
       techSkill,
-      otherSkill
+      otherSkill,
+      onEmployerChange,
+      onInputChange
     } = this.props
-
     return (
       <Fragment>
         <div className="form-section-one">
@@ -111,7 +113,6 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.industry}
           label="What industry are you in?"
         />
-
         <DropDown
           onChange={onChange}
           value={hearAboutCYF}
@@ -120,13 +121,17 @@ export default class VolunteerForm extends Component {
           isEmpty={errors.hearAboutCYF}
           label="Where did you hear about Code Your Future?"
         />
-        {hearAboutCYFFromEmployer && (
-          <EmployerDropDown
-            onChange={onChange}
-            arrayList={ListsData.employerList}
-            isEmpty={errors.employer}
-          />
-        )}
+        <div className="employer-select">
+          {hearAboutCYFFromEmployer && (
+            <EmployerDropDown
+              value={employer}
+              isEmpty={errors.employer}
+              onInputChange={onInputChange}
+              onChange={onEmployerChange}
+              arrayList={ListsData.employerList}
+            />
+          )}
+        </div>
         <span className="contact-interested">
           <span>
             What would you like help Code Your Future with, and what is your

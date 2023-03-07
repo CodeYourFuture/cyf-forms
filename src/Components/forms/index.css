@@ -266,3 +266,7 @@
     padding-left: 0px !important;
   }
 }
+
+input[role="combobox"] {
+  width: 100px !important;
+}

@@ -12,12 +12,12 @@ function SelectOption(arrayList) {
   }
 }
 
-export default ({ onChange, isEmpty, label, name, arrayList, value }) => {
+export default ({ onChange, label, name, arrayList, value }) => {
   return (
     <div className="form-group">
       <Label htmlFor={name}>{label}</Label>
       <select
-        className={`form-control ${isEmpty && 'is-empty'}`}
+        className={`form-control`}
         id={name}
         name={name}
         value={value}

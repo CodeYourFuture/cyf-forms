@@ -1,0 +1,9 @@
+.employer-select {
+    width: 45%;
+}
+
+.employer-select > p {
+    padding-top: 60px !important;
+    color: darkgreen !important;
+    font-weight: bold;
+}
