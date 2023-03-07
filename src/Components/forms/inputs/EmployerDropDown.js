@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
 import CreatableSelect from 'react-select/creatable'
 import { useState } from 'react'
+import { Label } from 'reactstrap'
 import './index.css'
 
 const EmployerDropDown = ({ onChange, arrayList, value }) => {
@@ -37,6 +38,7 @@ const EmployerDropDown = ({ onChange, arrayList, value }) => {
 
   return (
     <Fragment>
+      <Label htmlFor="employer">Who is your employer? *</Label>
       <CreatableSelect
         isClearable
         isDisabled={isLoading}

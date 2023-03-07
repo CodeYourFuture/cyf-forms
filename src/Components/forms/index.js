@@ -84,12 +84,11 @@ class Forms extends Component {
     this.setState({ tel, errors, submitted: false, formInComplete: false })
   }
 
-  onChange = (e, val) => {
+  onChange = e => {
     const { name, value, type, checked } = e.target
     const { errors } = this.state
     errors[name] = false
     if (e && e.target && value !== '') {
-      console.log('YAAAAAA', e.target)
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,
@@ -101,7 +100,6 @@ class Forms extends Component {
     if (name === 'hearAboutCYF') {
       this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
     }
-    console.log(this.state.employer, 'emp')
   }
 
   validateForm = values => {
@@ -178,8 +176,6 @@ class Forms extends Component {
       interestedInCYF,
       agreeToReceiveCommunication
     })
-
-    console.log(validatedInputs, 'input', employer)
     await this.validateArray({ guidePeople, techSkill, otherSkill })
     const emptyValues = validatedInputs.includes(true)
     const { valuationError } = this.state
