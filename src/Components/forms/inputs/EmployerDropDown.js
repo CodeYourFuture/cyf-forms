@@ -2,31 +2,41 @@ import { useEffect, useState } from 'react'
 import { Label } from 'reactstrap'
 import Select from 'react-select/creatable'
 
-const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
-  const [customEntry, setCustomEntry] = useState(false)
-  const [employersList, setEmployersList] = useState([])
+const EmployerDropDown = ({
+  arrayList: employers,
+  isEmpty,
+  onChange,
+  value
+}) => {
+  const [isCustomEntry, setIsCustomEntry] = useState(false)
+  const [options, setOptions] = useState([])
+  const [selectedOption, setSelectedOption] = useState()
 
   useEffect(() => {
-    setEmployersList(
-      arrayList.map(({ _id, name }) => ({
+    setOptions(
+      employers.map(({ _id, name }) => ({
         value: _id,
         label: name
       }))
     )
-  }, [arrayList])
+  }, [employers])
 
   useEffect(() => {
-    setCustomEntry(
-      value !== '' && !arrayList.some(({ name }) => name === value)
+    setIsCustomEntry(
+      value !== '' && !employers.some(({ name }) => name === value)
     )
-  }, [arrayList, value])
+  }, [employers, value])
+
+  useEffect(() => {
+    setSelectedOption(options.find(employer => employer.value === value))
+  }, [options, value])
 
   const handleChange = e =>
     onChange({
       target: {
         name: 'employer',
         type: 'text',
-        value: e === null ? '' : e.value
+        value: e?.value ?? ''
       }
     })
 
@@ -36,19 +46,19 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
       <Select
         className={isEmpty ? 'is-empty' : ''}
         inputId="employer"
-        isSearchable
         isClearable
-        options={employersList}
+        isSearchable
+        name="employer"
         onChange={handleChange}
         onCreateOption={newEmployer => {
-          setEmployersList(oldList => insertedInto([...oldList], newEmployer))
+          setOptions(oldOptions => insertedInto([...oldOptions], newEmployer))
           handleChange({ value: newEmployer })
         }}
-        name="employer"
+        options={options}
         placeholder="Type your employer name here"
-        value={employersList.find(employer => employer.value === value)}
+        value={selectedOption}
       />
-      {customEntry && (
+      {isCustomEntry && (
         <p className="reminder">
           This employer will be added to our list. Make sure you typed it
           correctly.
@@ -58,17 +68,17 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
   )
 }
 
-const insertedInto = (employers, employer) => {
-  const canonical = employer.toLowerCase()
-  const entry = { label: employer, value: employer }
-  for (let index = 0; index < employers.length; index++) {
-    if (canonical < employers[index].value.toLowerCase()) {
-      employers.splice(index, 0, entry)
-      return employers
+const insertedInto = (options, newEmployer) => {
+  const canonical = newEmployer.toLowerCase()
+  const entry = { label: newEmployer, value: newEmployer }
+  for (let index = 0; index < options.length; index++) {
+    if (canonical < options[index].value.toLowerCase()) {
+      options.splice(index, 0, entry)
+      return options
     }
   }
-  employers.push(entry)
-  return employers
+  options.push(entry)
+  return options
 }
 
 export default EmployerDropDown
