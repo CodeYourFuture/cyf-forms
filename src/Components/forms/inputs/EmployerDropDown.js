@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { Label } from 'reactstrap'
 import Select from 'react-select/creatable'
 
@@ -8,9 +8,17 @@ const EmployerDropDown = ({
   onChange,
   value
 }) => {
-  const [isCustomEntry, setIsCustomEntry] = useState(false)
   const [options, setOptions] = useState([])
-  const [selectedOption, setSelectedOption] = useState()
+
+  const isCustomEntry = useMemo(
+    () => value !== '' && !employers.some(({ name }) => name === value),
+    [employers, value]
+  )
+
+  const selectedOption = useMemo(
+    () => options.find(employer => employer.value === value),
+    [options, value]
+  )
 
   useEffect(() => {
     setOptions(
@@ -20,16 +28,6 @@ const EmployerDropDown = ({
       }))
     )
   }, [employers])
-
-  useEffect(() => {
-    setIsCustomEntry(
-      value !== '' && !employers.some(({ name }) => name === value)
-    )
-  }, [employers, value])
-
-  useEffect(() => {
-    setSelectedOption(options.find(employer => employer.value === value))
-  }, [options, value])
 
   const handleChange = e =>
     onChange({
