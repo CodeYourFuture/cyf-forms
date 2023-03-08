@@ -23,7 +23,11 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
 
   const handleChange = e =>
     onChange({
-      target: { name: 'employer', type: 'text', value: e.value }
+      target: {
+        name: 'employer',
+        type: 'text',
+        value: e === null ? '' : e.value
+      }
     })
 
   return (
@@ -33,6 +37,7 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
         className={isEmpty ? 'is-empty' : ''}
         inputId="employer"
         isSearchable
+        isClearable
         options={employersList}
         onChange={handleChange}
         onCreateOption={newEmployer => {

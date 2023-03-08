@@ -165,6 +165,15 @@ describe('EmployerDropDown', () => {
     )
   })
 
+  it('can be cleared', async () => {
+    const onChange = jest.fn()
+    renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
+    await selectEvent.clearAll(screen.getByLabelText(/who is your employer/i))
+    expect(onChange).toHaveBeenCalledWith({
+      target: { name: 'employer', type: 'text', value: '' }
+    })
+  })
+
   /**
    * @param {HTMLElement} container
    */
