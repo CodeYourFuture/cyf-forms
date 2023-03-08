@@ -131,6 +131,7 @@ it('can create a new employer', () => {
     'Weyland Yutani{enter}'
   )
   cy.findByText('Weyland Yutani').should('exist')
+  cy.findByText(/Make sure you typed it correctly\./).should('exist')
 })
 
 const setExperience = (topic, level) => {

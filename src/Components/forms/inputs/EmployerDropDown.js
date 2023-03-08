@@ -3,7 +3,9 @@ import { Label } from 'reactstrap'
 import Select from 'react-select/creatable'
 
 const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
+  const [customEntry, setCustomEntry] = useState(false)
   const [employersList, setEmployersList] = useState([])
+
   useEffect(() => {
     setEmployersList(
       arrayList.map(({ _id, name }) => ({
@@ -12,10 +14,18 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
       }))
     )
   }, [arrayList])
+
+  useEffect(() => {
+    setCustomEntry(
+      value !== '' && !arrayList.some(({ name }) => name === value)
+    )
+  }, [arrayList, value])
+
   const handleChange = e =>
     onChange({
       target: { name: 'employer', type: 'text', value: e.value }
     })
+
   return (
     <div className="form-group">
       <Label htmlFor="employer">Who is your employer? *</Label>
@@ -33,6 +43,12 @@ const EmployerDropDown = ({ arrayList, isEmpty, onChange, value }) => {
         placeholder="Type your employer name here"
         value={employersList.find(employer => employer.value === value)}
       />
+      {customEntry && (
+        <p className="reminder">
+          This employer will be added to our list. Make sure you typed it
+          correctly.
+        </p>
+      )}
     </div>
   )
 }

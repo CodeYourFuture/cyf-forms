@@ -103,6 +103,26 @@ describe('EmployerDropDown', () => {
     ])
   })
 
+  describe('reminder', () => {
+    const reminder =
+      'This employer will be added to our list. Make sure you typed it correctly.'
+
+    it('does not show message when no value is entered', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: '' })
+      expect(screen.queryByText(reminder)).not.toBeInTheDocument()
+    })
+
+    it('does not show message when employer is in list', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: 'BBC' })
+      expect(screen.queryByText(reminder)).not.toBeInTheDocument()
+    })
+
+    it('shows message when employer is custom entry', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: 'Google' })
+      expect(screen.queryByText(reminder)).toBeInTheDocument()
+    })
+  })
+
   it('shows the expected values in AC', async () => {
     const { user } = renderInForm({
       employers: [
@@ -158,7 +178,8 @@ describe('EmployerDropDown', () => {
 const renderInForm = ({
   employers = [],
   isEmpty = false,
-  onChange = () => {}
+  onChange = () => {},
+  value = ''
 }) => {
   const user = userEvent.setup()
   const wrapper = render(
@@ -168,6 +189,7 @@ const renderInForm = ({
         isEmpty={isEmpty}
         name="employer"
         onChange={onChange}
+        value={value}
       />
     </form>
   )
