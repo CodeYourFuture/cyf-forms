@@ -29,14 +29,8 @@ const EmployerDropDown = ({
     )
   }, [employers])
 
-  const handleChange = e =>
-    onChange({
-      target: {
-        name: 'employer',
-        type: 'text',
-        value: e?.value ?? ''
-      }
-    })
+  const handleChange = value =>
+    onChange({ target: { name: 'employer', type: 'text', value } })
 
   return (
     <div className="form-group">
@@ -47,10 +41,10 @@ const EmployerDropDown = ({
         isClearable
         isSearchable
         name="employer"
-        onChange={handleChange}
+        onChange={event => handleChange(event?.value ?? '')}
         onCreateOption={newEmployer => {
-          setOptions(oldOptions => insertedInto([...oldOptions], newEmployer))
-          handleChange({ value: newEmployer })
+          setOptions(oldOptions => insertedInto(oldOptions, newEmployer))
+          handleChange(newEmployer)
         }}
         options={options}
         placeholder="Type your employer name here"
@@ -66,7 +60,8 @@ const EmployerDropDown = ({
   )
 }
 
-const insertedInto = (options, newEmployer) => {
+const insertedInto = (oldOptions, newEmployer) => {
+  const options = [...oldOptions]
   const canonical = newEmployer.toLowerCase()
   const entry = { label: newEmployer, value: newEmployer }
   for (let index = 0; index < options.length; index++) {
