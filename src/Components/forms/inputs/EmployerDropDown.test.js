@@ -5,6 +5,10 @@ import selectEvent from 'react-select-event'
 import EmployerDropDown from './EmployerDropDown'
 
 describe('EmployerDropDown', () => {
+  beforeEach(() => {
+    sessionStorage.clear()
+  })
+
   it('shows the label value and place holder value', async () => {
     renderInForm({ employers: ['Arnold Clark'] })
     expect(screen.getByTestId('form')).toHaveTextContent(

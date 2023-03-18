@@ -1,6 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 import { Label } from 'reactstrap'
 import Select from 'react-select/creatable'
+
+import useSession from '../../../hooks/useSession'
 
 const EmployerDropDown = ({
   arrayList: employers,
@@ -8,7 +10,12 @@ const EmployerDropDown = ({
   onChange,
   value
 }) => {
-  const [options, setOptions] = useState([])
+  const [options, setOptions] = useSession('cyfEmployerList', () =>
+    employers.map(({ _id, name }) => ({
+      value: _id,
+      label: name
+    }))
+  )
 
   const isCustomEntry = useMemo(
     () => value !== '' && !employers.some(({ name }) => name === value),
@@ -19,15 +26,6 @@ const EmployerDropDown = ({
     () => options.find(employer => employer.value === value),
     [options, value]
   )
-
-  useEffect(() => {
-    setOptions(
-      employers.map(({ _id, name }) => ({
-        value: _id,
-        label: name
-      }))
-    )
-  }, [employers])
 
   const handleChange = value =>
     onChange({ target: { name: 'employer', type: 'text', value } })
