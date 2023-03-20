@@ -1,11 +1,14 @@
-import React from 'react'
 import { render, screen } from '@testing-library/react'
-import selectEvent from 'react-select-event'
-import '@testing-library/jest-dom'
 import userEvent from '@testing-library/user-event'
+import selectEvent from 'react-select-event'
+
 import EmployerDropDown from './EmployerDropDown'
 
 describe('EmployerDropDown', () => {
+  beforeEach(() => {
+    sessionStorage.clear()
+  })
+
   it('shows the label value and place holder value', async () => {
     renderInForm({ employers: ['Arnold Clark'] })
     expect(screen.getByTestId('form')).toHaveTextContent(
@@ -47,12 +50,81 @@ describe('EmployerDropDown', () => {
     expect(container.getElementsByClassName('is-empty')).toHaveLength(1)
   })
 
-  it('asks user to select "Other" if no matches', async () => {
-    const { user } = renderInForm({ employers: ['G-Research'] })
-    await user.type(screen.getByRole('combobox', { name: /employer/i }), 'cap')
-    expect(
-      screen.getByText('Employer not found? Please select "Other".')
-    ).toBeInTheDocument()
+  it('allows the user to enter their own employer', async () => {
+    const onChange = jest.fn()
+    const { user } = renderInForm({
+      employers: ['ABC', 'BBC', 'CBC'],
+      onChange
+    })
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      'Google'
+    )
+    await user.click(screen.getByText('Create "Google"'))
+    expect(onChange).toHaveBeenCalledWith({
+      target: { name: 'employer', type: 'text', value: 'Google' }
+    })
+  })
+
+  it('adds the new employer to the list', async () => {
+    const { user } = renderInForm({ employers: ['ABC', 'BBC', 'CBC'] })
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      'Google'
+    )
+    await user.click(screen.getByText('Create "Google"'))
+    await selectEvent.select(
+      screen.getByLabelText(/who is your employer/i),
+      'BBC'
+    )
+    await selectEvent.select(
+      screen.getByLabelText(/who is your employer/i),
+      'Google'
+    )
+  })
+
+  it('keeps the list in alphabetical order', async () => {
+    const { container, user } = renderInForm({
+      employers: ['ABC', 'BBC', 'CBC']
+    })
+    for (const employer of ['Boggle', 'Google', 'Aardvark']) {
+      await user.type(
+        screen.getByRole('combobox', { name: /employer/i }),
+        `${employer}{enter}`
+      )
+    }
+    await user.type(
+      screen.getByRole('combobox', { name: /employer/i }),
+      '{delete}'
+    )
+    expect(renderedItems(container)).toEqual([
+      'Aardvark',
+      'ABC',
+      'BBC',
+      'Boggle',
+      'CBC',
+      'Google'
+    ])
+  })
+
+  describe('reminder', () => {
+    const reminder =
+      'This employer will be added to our list. Make sure you typed it correctly.'
+
+    it('does not show message when no value is entered', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: '' })
+      expect(screen.queryByText(reminder)).not.toBeInTheDocument()
+    })
+
+    it('does not show message when employer is in list', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: 'BBC' })
+      expect(screen.queryByText(reminder)).not.toBeInTheDocument()
+    })
+
+    it('shows message when employer is custom entry', () => {
+      renderInForm({ employers: ['ABC', 'BBC', 'CBC'], value: 'Google' })
+      expect(screen.queryByText(reminder)).toBeInTheDocument()
+    })
   })
 
   it('shows the expected values in AC', async () => {
@@ -96,11 +168,31 @@ describe('EmployerDropDown', () => {
       expect(screen.getByText(employer)).toBeInTheDocument()
     )
   })
+
+  it('can be cleared', async () => {
+    const onChange = jest.fn()
+    renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
+    await selectEvent.clearAll(screen.getByLabelText(/who is your employer/i))
+    expect(onChange).toHaveBeenCalledWith({
+      target: { name: 'employer', type: 'text', value: '' }
+    })
+  })
+
+  /**
+   * @param {HTMLElement} container
+   */
+  const renderedItems = container => {
+    const divs = Array.from(container.getElementsByTagName('div'))
+    return divs
+      .filter(el => el.getAttribute('aria-disabled') === 'false')
+      .map(el => el.textContent)
+  }
 })
 const renderInForm = ({
   employers = [],
   isEmpty = false,
-  onChange = () => {}
+  onChange = () => {},
+  value = ''
 }) => {
   const user = userEvent.setup()
   const wrapper = render(
@@ -110,6 +202,7 @@ const renderInForm = ({
         isEmpty={isEmpty}
         name="employer"
         onChange={onChange}
+        value={value}
       />
     </form>
   )
