@@ -123,6 +123,26 @@ it('requires employee selection', () => {
   })
 })
 
+it('can create a new employer', () => {
+  cy.findByRole('combobox', { name: /hear about code your future/i }).select(
+    'Employer'
+  )
+  cy.findByRole('combobox', { name: /who is your employer/i }).type(
+    'Weyland Yutani{enter}'
+  )
+  cy.findByText('Weyland Yutani').should('exist')
+  cy.findByText(/Make sure you typed it correctly\./).should('exist')
+  cy.visit('/')
+  cy.findByRole('combobox', { name: /hear about code your future/i }).select(
+    'Employer'
+  )
+  cy.findByRole('combobox', { name: /who is your employer/i }).type(
+    'yutani{enter}'
+  )
+  cy.findByText('Weyland Yutani').should('exist')
+  cy.findByText(/Make sure you typed it correctly\./).should('exist')
+})
+
 const setExperience = (topic, level) => {
   cy.findByRole('checkbox', { name: new RegExp(topic, 'i') })
     .check()

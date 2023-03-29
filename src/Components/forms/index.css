@@ -200,6 +200,10 @@
   padding: 10px;
   font-size: 20px;
 }
+.reminder {
+  color: darkgreen;
+  font-weight: bold;
+}
 @media screen and (max-width: 1000px) {
   .media {
     display: block;
