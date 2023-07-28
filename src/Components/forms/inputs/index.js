@@ -17,6 +17,8 @@ export default class VolunteerForm extends Component {
       tel,
       cities,
       cityId,
+      teamId,
+      teamOptions,
       email,
       telOnChange,
       errors,
@@ -103,6 +105,28 @@ export default class VolunteerForm extends Component {
           name="interestedInCYF"
           placeholder="Just one or two sentences as required..."
           type="textarea"
+        />
+        <DropDown
+          data-testid="testId"
+          onChange={onChange}
+          value={teamId}
+          name="teamId"
+          arrayList={teamOptions}
+          isEmpty={errors.teamId}
+          label={
+            <span>
+              Please select the team you want to volunteer for. You can read
+              about the teams on this
+              <a
+                href="https://codeyourfuture.io/volunteers/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {' '}
+                page
+              </a>
+            </span>
+          }
         />
         <DropDown
           onChange={onChange}
