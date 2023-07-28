@@ -25,6 +25,10 @@ it('includes the user ID when resubmitting', () => {
   cy.findByRole('textbox', { name: /email/i }).type(
     'erhard.hennemann@example.com'
   )
+  cy.findByRole('combobox', {
+    name: /select the team you want to volunteer for/i
+  }).select('5e863b833150f6001b34627d')
+
   cy.findByRole('textbox', { name: /phone number/i }).type('0158-8969905')
   cy.findByRole('textbox', { name: /interested in volunteering/i }).type('just')
   cy.findByRole('textbox', { name: /interested in code your future/i }).type(

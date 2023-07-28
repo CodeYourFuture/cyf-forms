@@ -19,12 +19,16 @@ it('can submit a minimal form', () => {
     interestedInVolunteer: 'just sounds interesting',
     interestedInCYF: 'trying to do my bit',
     industry: 'Education',
-    hearAboutCYF: 'Social media'
+    hearAboutCYF: 'Social media',
+    teamId: '5e863b833150f6001b34627d'
   }
 
   cy.findByRole('textbox', { name: /first name/i }).type(initialData.firstName)
   cy.findByRole('textbox', { name: /last name/i }).type(initialData.lastName)
   cy.findByRole('combobox', { name: /city/i }).select('London')
+  cy.findByRole('combobox', {
+    name: /select the team you want to volunteer for/i
+  }).select(initialData.teamId)
   cy.findByRole('textbox', { name: /email/i }).type(initialData.email)
   cy.findByRole('textbox', { name: /phone number/i }).type(initialData.tel)
   cy.findByRole('textbox', { name: /interested in volunteering/i }).type(
@@ -98,6 +102,9 @@ it('requires employee selection', () => {
   cy.findByRole('textbox', { name: /first name/i }).type('Laura')
   cy.findByRole('textbox', { name: /last name/i }).type('Olsen')
   cy.findByRole('combobox', { name: /city/i }).select('London')
+  cy.findByRole('combobox', {
+    name: /select the team you want to volunteer for/i
+  }).select('5e863b833150f6001b34627d')
   cy.findByRole('textbox', { name: /email/i }).type('laura.olsen@example.com')
   cy.findByRole('textbox', { name: /phone number/i }).type('96838503')
   cy.findByRole('textbox', { name: /interested in volunteering/i }).type('just')
