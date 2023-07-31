@@ -4,6 +4,9 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/cities?visibleIn=VOLUNTEER_FORM`, {
     fixture: 'cities.json'
   })
+  cy.intercept('GET', `${mockServerURL}/teams`, {
+    fixture: 'teams.json'
+  })
   cy.visit('/')
 })
 
@@ -19,8 +22,7 @@ it('can submit a minimal form', () => {
     interestedInVolunteer: 'just sounds interesting',
     interestedInCYF: 'trying to do my bit',
     industry: 'Education',
-    hearAboutCYF: 'Social media',
-    teamId: '5e863b833150f6001b34627d'
+    hearAboutCYF: 'Social media'
   }
 
   cy.findByRole('textbox', { name: /first name/i }).type(initialData.firstName)
@@ -28,7 +30,7 @@ it('can submit a minimal form', () => {
   cy.findByRole('combobox', { name: /city/i }).select('London')
   cy.findByRole('combobox', {
     name: /select the team you want to volunteer for/i
-  }).select(initialData.teamId)
+  }).select('Education')
   cy.findByRole('textbox', { name: /email/i }).type(initialData.email)
   cy.findByRole('textbox', { name: /phone number/i }).type(initialData.tel)
   cy.findByRole('textbox', { name: /interested in volunteering/i }).type(
