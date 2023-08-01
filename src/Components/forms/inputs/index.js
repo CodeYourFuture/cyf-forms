@@ -107,7 +107,6 @@ export default class VolunteerForm extends Component {
           type="textarea"
         />
         <DropDown
-          data-testid="testId"
           onChange={onChange}
           value={teamId}
           name="teamId"
