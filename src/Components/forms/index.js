@@ -28,8 +28,10 @@ class Forms extends Component {
       teamData.sort((a, b) => a.name.localeCompare(b.name))
 
       this.setState({ teamOptions: teamData })
-    } catch (error) {
-      console.error('Error fetching team data:', error)
+    } catch (err) {
+      return this.setState({
+        err: 'Sorry, we are currently experiencing technical issues, please try again later.'
+      })
     }
   }
 
