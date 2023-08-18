@@ -18,7 +18,6 @@ class Forms extends Component {
 
   componentDidMount() {
     this.fetchTeamData()
-    this.props.loadCities()
   }
 
   fetchTeamData = async () => {
