@@ -11,7 +11,28 @@ import './index.css'
 
 const path = `${domain()}${appPath}`
 class Forms extends Component {
-  state = initialState
+  state = {
+    teamOptions: [],
+    ...initialState
+  }
+
+  componentDidMount() {
+    this.fetchTeamData()
+  }
+
+  fetchTeamData = async () => {
+    try {
+      const response = await axios.get(`${domain()}/teams`)
+      const teamData = response.data.teams
+      teamData.sort((a, b) => a.name.localeCompare(b.name))
+
+      this.setState({ teamOptions: teamData })
+    } catch (err) {
+      return this.setState({
+        err: 'Sorry, we are currently experiencing technical issues, please try again later.'
+      })
+    }
+  }
 
   handleMagicLinkRequest = async e => {
     e.preventDefault()
@@ -88,7 +109,12 @@ class Forms extends Component {
     const { name, value, type, checked } = e.target
     const { errors } = this.state
     errors[name] = false
-    if (e && e.target) {
+
+    // Handle teamId separately
+    if (name === 'teamId') {
+      this.setState({ teamId: value })
+    } else {
+      // Handle other form fields
       this.setState({
         [name]: type === 'checkbox' ? checked : value,
         submitted: false,
@@ -96,9 +122,11 @@ class Forms extends Component {
         formInComplete: false,
         err: null
       })
-    }
-    if (name === 'hearAboutCYF') {
-      this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
+
+      // Check for special case where name is 'hearAboutCYF'
+      if (name === 'hearAboutCYF') {
+        this.setState({ hearAboutCYFFromEmployer: value === 'Employer' })
+      }
     }
   }
 
@@ -150,6 +178,7 @@ class Forms extends Component {
       email,
       tel,
       cityId,
+      teamId,
       interestedInVolunteer,
       interestedInCYF,
       industry,
@@ -169,6 +198,7 @@ class Forms extends Component {
       lastName,
       email,
       cityId,
+      teamId,
       employer: hearAboutCYFFromEmployer ? employer : true,
       interestedInVolunteer,
       tel,
@@ -190,6 +220,7 @@ class Forms extends Component {
         email,
         tel,
         cityId,
+        teamId,
         interestedInVolunteer,
         interestedInCYF,
         industry,
@@ -361,6 +392,7 @@ class Forms extends Component {
                 onChange={this.onChange}
                 telOnChange={this.telOnChange}
                 onChangeCheckList={this.onChangeCheckList}
+                teamOptions={this.state.teamOptions}
                 {...this.props}
                 {...this.state}
               />
