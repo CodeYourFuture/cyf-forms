@@ -1,0 +1,13 @@
+{
+  "teams": [
+    {
+      "_id": "5e863b833150f6001b34627d",
+      "global": "false",
+      "name": "Education",
+      "cityId": "5cefa67c071d210018e3dccf",
+      "description": "EDU",
+      "__v": 0,
+      "leaderEmail": "chris.owen@codeyourfuture.io"
+    }
+  ]
+}
