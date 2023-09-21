@@ -25,7 +25,7 @@ class Forms extends Component {
       const response = await axios.get(`${domain()}/teams`)
       const teamData = response.data.teams
       teamData.sort((a, b) => a.name.localeCompare(b.name))
-
+      teamData.push({ name: 'I am not sure' })
       this.setState({ teamOptions: teamData })
     } catch (err) {
       return this.setState({
