@@ -178,6 +178,22 @@ class Forms extends Component {
     })
   }
 
+  postNewEmployer = async employer => {
+    try {
+      const newEmployerResponse = await axios({
+        method: 'POST',
+        url: `${domain()}/employers`,
+        data: employer
+      })
+      const newEmployer = newEmployerResponse.data
+      return newEmployer
+    } catch (err) {
+      return this.setState({
+        err: `Sorry, your employer's name has not been saved.`
+      })
+    }
+  }
+
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({
@@ -409,6 +425,7 @@ class Forms extends Component {
                 employersOptions={this.state.employersOptions}
                 {...this.props}
                 {...this.state}
+                postNewEmployer={this.postNewEmployer}
               />
               <Acknowledgement onChange={this.onChange} {...this.state} />
               <button

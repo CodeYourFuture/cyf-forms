@@ -8,7 +8,8 @@ const EmployerDropDown = ({
   arrayList: employers,
   isEmpty,
   onChange,
-  value
+  value,
+  postNewEmployer
 }) => {
   const [options, setOptions] = useSession('cyfEmployerList', () =>
     employers.map(({ _id, name }) => ({
@@ -43,8 +44,9 @@ const EmployerDropDown = ({
         onCreateOption={newEmployer => {
           setOptions(oldOptions => insertedInto(oldOptions, newEmployer))
           handleChange(newEmployer)
+          postNewEmployer({ name: `${newEmployer}` })
         }}
-        options={options}
+        options={options.sort((a, b) => a.label.localeCompare(b.label))}
         placeholder="Type your employer name here"
         value={selectedOption}
       />
