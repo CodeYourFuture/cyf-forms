@@ -203,6 +203,7 @@ const renderInForm = ({
         name="employer"
         onChange={onChange}
         value={value}
+        postNewEmployer={jest.fn()}
       />
     </form>
   )
