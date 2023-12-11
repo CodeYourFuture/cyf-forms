@@ -33,8 +33,7 @@ export default class VolunteerForm extends Component {
       techSkill,
       otherSkill,
       employersOptions,
-      employer,
-      postNewEmployer
+      employer
     } = this.props
 
     return (
@@ -152,7 +151,6 @@ export default class VolunteerForm extends Component {
             isEmpty={errors.employer}
             onChange={onChange}
             value={employer}
-            postNewEmployer={postNewEmployer}
           />
         )}
         <span className="contact-interested">
