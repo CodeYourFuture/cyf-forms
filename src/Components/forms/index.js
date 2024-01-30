@@ -13,11 +13,13 @@ const path = `${domain()}${appPath}`
 class Forms extends Component {
   state = {
     teamOptions: [],
+    employersOptions: [],
     ...initialState
   }
 
   componentDidMount() {
     this.fetchTeamData()
+    this.fetchEmployers()
   }
 
   fetchTeamData = async () => {
@@ -31,6 +33,17 @@ class Forms extends Component {
       return this.setState({
         err: 'Sorry, we are currently experiencing technical issues, please try again later.'
       })
+    }
+  }
+
+  fetchEmployers = async () => {
+    try {
+      const employersResponse = await axios.get(`${domain()}/employers`)
+      const employersData = employersResponse.data.employers
+      employersData.sort((a, b) => a.name.localeCompare(b.name))
+      this.setState({ employersOptions: employersData })
+    } catch (err) {
+      console.log(err)
     }
   }
 
@@ -393,8 +406,10 @@ class Forms extends Component {
                 telOnChange={this.telOnChange}
                 onChangeCheckList={this.onChangeCheckList}
                 teamOptions={this.state.teamOptions}
+                employersOptions={this.state.employersOptions}
                 {...this.props}
                 {...this.state}
+                postNewEmployer={this.postNewEmployer}
               />
               <Acknowledgement onChange={this.onChange} {...this.state} />
               <button
