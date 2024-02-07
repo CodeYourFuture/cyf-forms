@@ -131,7 +131,7 @@ it('requires employee selection', () => {
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.have.property('hearAboutCYF', 'Employer')
-    expect(payload).to.have.property('employer', '6569')
+    expect(payload).to.have.property('employer', 'Capgemini')
   })
 })
 
