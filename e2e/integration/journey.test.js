@@ -7,9 +7,6 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/teams`, {
     fixture: 'teams.json'
   })
-  cy.intercept('GET', `${mockServerURL}/employers`, {
-    fixture: 'employers.json'
-  })
   cy.visit('/')
 })
 
