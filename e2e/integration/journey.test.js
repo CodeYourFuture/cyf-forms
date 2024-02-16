@@ -7,6 +7,9 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/teams`, {
     fixture: 'teams.json'
   })
+  cy.intercept('GET', `${mockServerURL}/employers`, {
+    fixture: 'employers.json'
+  })
   cy.visit('/')
 })
 
@@ -122,7 +125,7 @@ it('requires employee selection', () => {
   cy.findByRole('button', { name: /submit/i }).click()
   cy.findByText(/form is incomplete/i).should('exist')
   cy.findByRole('combobox', { name: /who is your employer/i }).type(
-    'Cap{enter}'
+    'Capgemini{enter}'
   )
   cy.findByRole('button', { name: /submit/i }).click()
 
