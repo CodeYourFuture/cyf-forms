@@ -44,7 +44,7 @@ const EmployerDropDown = ({
           setOptions(oldOptions => insertedInto(oldOptions, newEmployer))
           handleChange(newEmployer)
         }}
-        options={options.sort((a, b) => a.label.localeCompare(b.label))}
+        options={options}
         placeholder="Type your employer name here"
         value={selectedOption}
       />
