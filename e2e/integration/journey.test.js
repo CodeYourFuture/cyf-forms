@@ -122,7 +122,7 @@ it('requires employee selection', () => {
   cy.findByRole('button', { name: /submit/i }).click()
   cy.findByText(/form is incomplete/i).should('exist')
   cy.findByRole('combobox', { name: /who is your employer/i }).type(
-    'Capgemini{enter}'
+    'Cap{enter}'
   )
   cy.findByRole('button', { name: /submit/i }).click()
 
