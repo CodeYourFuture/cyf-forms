@@ -7,9 +7,6 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/teams`, {
     fixture: 'teams.json'
   })
-  cy.intercept('GET', `${mockServerURL}/employers`, {
-    fixture: 'employers.json'
-  })
   cy.visit('/')
 })
 
@@ -125,13 +122,13 @@ it('requires employee selection', () => {
   cy.findByRole('button', { name: /submit/i }).click()
   cy.findByText(/form is incomplete/i).should('exist')
   cy.findByRole('combobox', { name: /who is your employer/i }).type(
-    'Capgemini{enter}'
+    'Cap{enter}'
   )
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.have.property('hearAboutCYF', 'Employer')
-    expect(payload).to.have.property('employer', '6569')
+    expect(payload).to.have.property('employer', 'Capgemini')
   })
 })
 
