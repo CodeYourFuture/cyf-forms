@@ -39,12 +39,13 @@ class Forms extends Component {
   fetchEmployers = async () => {
     try {
       const employersResponse = await axios.get(`${domain()}/employers`)
-      const employersData = employersResponse.data.employersList
-      console.log(employersData)
+      const employersData = employersResponse.data
       employersData.sort((a, b) => a.name.localeCompare(b.name))
       this.setState({ employersOptions: employersData })
     } catch (err) {
-      console.log(err)
+      return this.setState({
+        err: 'Sorry, we are currently experiencing technical issues, please try again later.'
+      })
     }
   }
 
