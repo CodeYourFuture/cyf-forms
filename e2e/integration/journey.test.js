@@ -7,6 +7,9 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/teams`, {
     fixture: 'teams.json'
   })
+  cy.intercept('GET', `${mockServerURL}/employers`, {
+    fixture: 'employers.json'
+  })
   cy.visit('/')
 })
 
@@ -128,7 +131,7 @@ it('requires employee selection', () => {
 
   cy.wait('@createVolunteer').then(({ request: { body: payload } }) => {
     expect(payload).to.have.property('hearAboutCYF', 'Employer')
-    expect(payload).to.have.property('employer', 'Capgemini')
+    expect(payload).to.have.property('employer', '6569')
   })
 })
 
