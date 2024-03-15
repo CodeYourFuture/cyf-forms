@@ -38,8 +38,8 @@ class Forms extends Component {
 
   fetchEmployers = async () => {
     try {
-      const employersResponse = await axios.get(`${domain()}/employers`)
-      const employersData = employersResponse.data
+      const response = await axios.get(`${domain()}/employers`)
+      const employersData = response.data.employers
       employersData.sort((a, b) => a.name.localeCompare(b.name))
       this.setState({ employersOptions: employersData })
     } catch (err) {
