@@ -17,6 +17,8 @@ export default class VolunteerForm extends Component {
       tel,
       cities,
       cityId,
+      teamId,
+      teamOptions,
       email,
       telOnChange,
       errors,
@@ -30,6 +32,7 @@ export default class VolunteerForm extends Component {
       guidePeople,
       techSkill,
       otherSkill,
+      employersOptions,
       employer
     } = this.props
 
@@ -106,6 +109,27 @@ export default class VolunteerForm extends Component {
         />
         <DropDown
           onChange={onChange}
+          value={teamId}
+          name="teamId"
+          arrayList={teamOptions}
+          isEmpty={errors.teamId}
+          label={
+            <span>
+              Please select the team you want to volunteer for. You can read
+              about the teams on this
+              <a
+                href="https://codeyourfuture.io/volunteers/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {' '}
+                page
+              </a>
+            </span>
+          }
+        />
+        <DropDown
+          onChange={onChange}
           value={industry}
           name="industry"
           arrayList={ListsData.industryList}
@@ -123,7 +147,7 @@ export default class VolunteerForm extends Component {
         />
         {hearAboutCYFFromEmployer && (
           <EmployerDropDown
-            arrayList={ListsData.employerList}
+            arrayList={employersOptions}
             isEmpty={errors.employer}
             onChange={onChange}
             value={employer}

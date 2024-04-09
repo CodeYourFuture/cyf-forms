@@ -4,6 +4,9 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/cities?visibleIn=VOLUNTEER_FORM`, {
     fixture: 'cities.json'
   })
+  cy.intercept('GET', `${mockServerURL}/teams`, {
+    fixture: 'teams.json'
+  })
 })
 
 it('shows success message', () => {
@@ -25,6 +28,9 @@ it('includes the user ID when resubmitting', () => {
   cy.findByRole('textbox', { name: /email/i }).type(
     'erhard.hennemann@example.com'
   )
+  cy.findByRole('combobox', {
+    name: /select the team you want to volunteer for/i
+  }).select('Education')
   cy.findByRole('textbox', { name: /phone number/i }).type('0158-8969905')
   cy.findByRole('textbox', { name: /interested in volunteering/i }).type('just')
   cy.findByRole('textbox', { name: /interested in code your future/i }).type(
