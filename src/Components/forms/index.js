@@ -105,7 +105,7 @@ class Forms extends Component {
     }
     if (code === 'success') {
       return this.setState({
-        msg: `Thank you for your patient, we will review your application and contact you via email, within 10 days.`
+        msg: `Thank you for your patience, we will review your application and contact you via email, within 10 days.`
       })
     }
     if (userId) {
