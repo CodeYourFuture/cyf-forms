@@ -8,6 +8,7 @@ import Acknowledgement from './Acknowledgement'
 import axios from 'axios'
 import { domain, appPath } from '../../config'
 import './index.css'
+import { getProfile } from '../../layout/AuthService'
 
 const path = `${domain()}${appPath}`
 class Forms extends Component {
@@ -20,6 +21,19 @@ class Forms extends Component {
   componentDidMount() {
     this.fetchTeamData()
     this.fetchEmployers()
+    const profile = getProfile()
+    if (profile) {
+      const fullName = profile.fullName.split(' ')
+      const firstName = fullName[0] || ''
+      const lastName = fullName[1] || ''
+      const email = profile.email || ''
+
+      this.setState({
+        firstName,
+        lastName,
+        email
+      })
+    }
   }
 
   fetchTeamData = async () => {
