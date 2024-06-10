@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { loadCities, createVolunteerHandler } from '../../Redux/action'
-import { initialState, arrayOnChange, filterEmptyValue } from './helper'
+import { createVolunteerHandler, loadCities } from '../../Redux/action'
+import { arrayOnChange, filterEmptyValue, initialState } from './helper'
 import Header from './header'
 import Inputs from './inputs'
 import Acknowledgement from './Acknowledgement'
 import axios from 'axios'
-import { domain, appPath } from '../../config'
+import { appPath, domain } from '../../config'
 import './index.css'
 import { getProfile } from '../../layout/AuthService'
 
@@ -43,6 +43,17 @@ class Forms extends Component {
       const employersData = response.data.employers
       employersData.sort((a, b) => a.name.localeCompare(b.name))
       this.setState({ employersOptions: employersData })
+    } catch (err) {
+      return this.setState({
+        err: 'Sorry, we are currently experiencing technical issues, please try again later.'
+      })
+    }
+  }
+
+  fetchVolunteerDetails = async userId => {
+    try {
+      const response = await axios.get(`${domain()}/volunteer/${userId}`)
+      this.setState({ ...this.state, ...response.data.volunteer })
     } catch (err) {
       return this.setState({
         err: 'Sorry, we are currently experiencing technical issues, please try again later.'
