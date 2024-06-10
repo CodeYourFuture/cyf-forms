@@ -8,6 +8,7 @@ import Acknowledgement from './Acknowledgement'
 import axios from 'axios'
 import { domain, appPath } from '../../config'
 import './index.css'
+import { getProfile } from '../../layout/AuthService'
 
 const path = `${domain()}${appPath}`
 class Forms extends Component {

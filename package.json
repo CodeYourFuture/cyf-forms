@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "axios": "^1.1.2",
+    "jwt-decode": "^2.2.0",
     "moment": "^2.23.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -34,9 +35,6 @@
     "serve": "serve --cors --debug -p 3000 --single build",
     "start": "REACT_APP_NODE_ENV=LOCAL react-scripts start",
     "test": "react-scripts test --env=jsdom"
-  },
-  "engines": {
-    "node": "^16.7.1"
   },
   "eslintConfig": {
     "extends": [
