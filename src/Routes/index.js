@@ -20,7 +20,7 @@ function WithRouteProps({ children: Component }) {
 
   useEffect(() => {
     if (!AuthService.loggedIn()) {
-      navigate('/sign-in')
+      navigate('/sign-up')
     }
   }, [location, navigate])
 

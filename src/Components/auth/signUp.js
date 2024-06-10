@@ -60,7 +60,7 @@ class GitHubLogIn extends Component {
         </div>
         <div className="register-b">
           Already registered?
-          <Link className="buttons-register" to="/">
+          <Link className="buttons-register" to="/sign-in">
             &nbsp;Log in
           </Link>
         </div>

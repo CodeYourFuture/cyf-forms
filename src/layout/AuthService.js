@@ -90,5 +90,9 @@ export const loggedIn = () => {
 }
 
 export const getProfile = () => {
-  return decode(getToken())
+  const token = getToken()
+  if (!!token) {
+    return decode(getToken())
+  }
+  return null
 }
