@@ -50,17 +50,6 @@ class Forms extends Component {
     }
   }
 
-  fetchVolunteerDetails = async userId => {
-    try {
-      const response = await axios.get(`${domain()}/volunteer/${userId}`)
-      this.setState({ ...this.state, ...response.data.volunteer })
-    } catch (err) {
-      return this.setState({
-        err: 'Sorry, we are currently experiencing technical issues, please try again later.'
-      })
-    }
-  }
-
   handleMagicLinkRequest = async e => {
     e.preventDefault()
     const { email, userId } = this.state
