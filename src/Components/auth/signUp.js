@@ -15,6 +15,11 @@ class GitHubLogIn extends Component {
       <div className="sign-in">
         <div className="sign-logo-div">
           <img src={LoginLogo} alt="Logo" className="sign-logo" />
+          <div style={{ marginLeft: '2rem', marginBottom: '2rem' }}>
+            <div style={{ font: '1rem' }}>
+              <h2>Volunteer Portal</h2>
+            </div>
+          </div>
         </div>
         <div className="container-Sign">
           <div className="register-buttons">
@@ -39,7 +44,7 @@ class GitHubLogIn extends Component {
             </a>
             <a
               className="btn sign-up-github-btn btn-next2"
-              href={`${domain()}/auth/github-applicant`}
+              href={`${domain()}/auth/github-volunteer`}
             >
               <svg
                 width="22px"
@@ -59,9 +64,9 @@ class GitHubLogIn extends Component {
           </div>
         </div>
         <div className="register-b">
-          Already registered?
-          <Link className="buttons-register" to="/sign-in">
-            &nbsp;Log in
+          Don't have Google or Github?
+          <Link className="buttons-register" to="/">
+            &nbsp;Sign up with email
           </Link>
         </div>
       </div>
