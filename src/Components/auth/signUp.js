@@ -22,7 +22,7 @@ class GitHubLogIn extends Component {
           </div>
         </div>
         <div className="container-Sign">
-          <div className="register-buttons">
+          <div className="register-buttons" style={{ marginTop: '5rem' }}>
             <a
               className="btn sign-up-google-btn btn-next"
               href={`${domain()}/auth/google-applicant`}
@@ -62,12 +62,6 @@ class GitHubLogIn extends Component {
               Register with Github
             </a>
           </div>
-        </div>
-        <div className="register-b">
-          Don't have Google or Github?
-          <Link className="buttons-register" to="/">
-            &nbsp;Sign up with email
-          </Link>
         </div>
       </div>
     )
