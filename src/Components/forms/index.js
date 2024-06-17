@@ -22,7 +22,6 @@ class Forms extends Component {
     this.fetchTeamData()
     this.fetchEmployers()
   }
-
   fetchTeamData = async () => {
     try {
       const response = await axios.get(`${domain()}/teams`)

@@ -1,12 +1,10 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
 import LoginLogo from './Loginlogo.svg'
-
 import { loggedIn } from '../../layout/AuthService'
 import EmailLogin from './EmailLogin'
 import Loading from '../Loading'
 import { domain, appPath } from '../../config'
-import Register from './LoginAction'
 import './index.css'
 
 const path = `${domain()}${appPath}`
@@ -41,8 +39,8 @@ export default class SignIn extends Component {
             msg: (
               <>
                 Please check your email.<br></br> We have sent you a link that
-                will take you directly to your Intro to Digital Course.<br></br>{' '}
-                This email can take a few minutes to arrive, please be patient.
+                will take you to the volunteer registration form.<br></br> This
+                email can take a few minutes to arrive, please be patient.
               </>
             ),
             loading: false
@@ -97,6 +95,11 @@ export default class SignIn extends Component {
           <Fragment>
             <div className="sign-logo-div">
               <img src={LoginLogo} alt="Logo" className="sign-logo" />
+              <div style={{ marginLeft: '2rem', marginBottom: '2rem' }}>
+                <div style={{ font: '1rem' }}>
+                  <h2>Volunteer Portal</h2>
+                </div>
+              </div>
             </div>
             <div className="container-Sign">
               <div className="login-div">
@@ -147,9 +150,6 @@ export default class SignIn extends Component {
                   </svg>
                   Log in with Github
                 </a>
-                <p className="line2"></p>
-                <p className="lead">Not registered yet? </p>
-                <Register />
               </div>
             </div>
           </Fragment>

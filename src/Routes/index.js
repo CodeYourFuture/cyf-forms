@@ -8,9 +8,9 @@ import {
 } from 'react-router-dom'
 import Forms from '../Components/forms'
 import NotFound from '../Components/NotFound'
-import SignUp from '../Components/auth/signUp'
 import * as AuthService from '../layout/AuthService'
 import Login from '../Components/auth/Login'
+import SignIn from '../Components/auth/SignIn'
 
 function WithRouteProps({ children: Component }) {
   const location = useLocation()
@@ -19,7 +19,7 @@ function WithRouteProps({ children: Component }) {
 
   useEffect(() => {
     if (!AuthService.loggedIn()) {
-      navigate('/sign-up')
+      navigate('/sign-in')
     }
   }, [location, navigate])
 
@@ -28,7 +28,7 @@ function WithRouteProps({ children: Component }) {
 
 export default () => (
   <Routes>
-    <Route exact path="/sign-up" element={<SignUp />} />
+    <Route exact path="/sign-in" element={<SignIn />} />
     <Route exact path="/log-in/:token" element={<Login />} />
     <Route path="/" element={<WithRouteProps children={Forms} />} />
     <Route path="/code/:userId" element={<WithRouteProps children={Forms} />}>

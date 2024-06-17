@@ -2,7 +2,7 @@ import React, { Fragment } from 'react'
 
 export default props => (
   <Fragment>
-    <p className="login-p1">Welcome back</p>
+    <p className="login-p1">Welcome</p>
     <form className="mt-0" onSubmit={props.handleSubmit}>
       <div className="form-group">
         <label htmlFor="email" className="lead">
