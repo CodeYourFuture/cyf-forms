@@ -24,8 +24,14 @@ class Forms extends Component {
     const profile = getProfile()
     if (profile) {
       const fullName = profile.fullName.split(' ')
-      const firstName = fullName[0] || ''
-      const lastName = fullName[1] || ''
+      let firstName, lastName
+      if (this.isNotUndefined(fullName[0])) {
+        firstName = fullName[0] || ''
+      }
+      if (this.isNotUndefined(fullName[1])) {
+        lastName = fullName[1] || ''
+      }
+
       const email = profile.email || ''
 
       this.setState({
@@ -34,6 +40,10 @@ class Forms extends Component {
         email
       })
     }
+  }
+
+  isNotUndefined = value => {
+    return !!value && value.trim() !== 'undefined'
   }
 
   fetchTeamData = async () => {
