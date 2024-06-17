@@ -8,6 +8,11 @@ import Footer from './Components/Footer'
 import Navbar from './Components/Navbar'
 import reducers from './Redux/Reducer'
 import Routes from './Routes'
+import * as AuthService from './layout/AuthService'
+
+if (AuthService.getToken()) {
+  AuthService.setDefaultAxiosHeaders(AuthService.getToken())
+}
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(

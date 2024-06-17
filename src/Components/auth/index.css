@@ -1,0 +1,328 @@
+.text-center {
+  padding-bottom: 25%;
+}
+
+.sign-in-box {
+  display: flex;
+}
+
+.sign-in {
+  background-color: #f3f3f3;
+  padding-bottom: 80px;
+  margin-top: 10px;
+}
+
+.sign-logo-div {
+  text-align: center;
+}
+
+.sign-logo {
+  padding-bottom: 40px;
+  padding-top: 40px;
+}
+
+.container-Sign {
+  background: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  width: 600px;
+  padding-top: 10px;
+  padding-bottom: 5%;
+  margin: 0 auto 20px auto;
+}
+
+.login-div {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+.login-p1 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 36px;
+  line-height: 43px;
+  letter-spacing: 0.01em;
+  color: #333333;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.welcome-b2 {
+  display: flex;
+  flex-direction: row;
+}
+
+.welcome-B {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.01em;
+  width: 450px;
+  margin: 20px auto;
+  border: 1.5px dashed #333333;
+  padding-bottom: 20px;
+}
+
+.welcome-B img {
+  margin: 30px 20px 10px 20px;
+  width: 35px;
+  height: 35px;
+}
+
+.welcome-B p {
+  padding-top: 25px;
+}
+
+.lead,
+.lead2 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 29px;
+  letter-spacing: 0.01em;
+  text-align: left;
+}
+
+.lead2 {
+  color: #000000;
+  margin-bottom: 20px;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.lead {
+  color: #333333;
+  margin-bottom: 10px;
+}
+
+.form-control2 {
+  width: 450px;
+  height: 60px;
+  background: #ececec;
+  border: 1px solid #b0b0b0;
+  box-sizing: border-box;
+  font-size: 24px;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: normal;
+  padding-left: 10px;
+}
+
+.sign-up-btnn {
+  background: #27ae60;
+  color: #ffffff;
+  width: 450px;
+  height: 60px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 54px;
+  letter-spacing: 0.01em;
+  margin-top: 15px;
+}
+
+.line1,
+.line2 {
+  width: 450px;
+  height: 0px;
+  margin: 40px auto;
+}
+
+.line1 {
+  border: 1.5px dashed #e1e1e1;
+  /* or */
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 0px;
+  letter-spacing: 0.01em;
+  color: #000000;
+  text-align: center;
+}
+
+.line2 {
+  border: 2px solid #e1e1e1;
+}
+
+.register-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.sign-up-google-btn,
+.sign-up-github-btn {
+  width: 316px;
+  height: 60px;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 43px;
+  border-radius: 2px;
+  letter-spacing: 0.01em;
+  color: #ffffff;
+}
+
+.sign-up-google-btn {
+  background: #ec2326;
+}
+
+.sign-up-github-btn {
+  background: #25292e;
+  margin: 20px auto;
+}
+
+.sign-up-btnn:hover {
+  color: #e6e1e1;
+}
+
+.sign-up-google-btn:hover {
+  color: #f7b6b0;
+}
+
+.sign-up-github-btn:hover {
+  color: #b1b1b1;
+}
+
+.buttons-register,
+.buttons-register2 {
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+}
+
+.buttons-register {
+  font-size: 20px;
+  color: #e70909;
+}
+
+.buttons-register2 {
+  width: 450px;
+  height: 60px;
+  font-size: 24px;
+  line-height: 43px;
+  letter-spacing: 0.01em;
+  margin-top: 10px;
+  background: #3455db;
+  color: #ffffff;
+}
+
+.buttons-register:hover {
+  color: #214cf7;
+}
+
+.buttons-register2:hover {
+  background: #1b365d;
+  color: #b1b1b1;
+}
+
+.register-b {
+  text-align: center;
+  font-family: Lato;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+@media screen and (max-width: 800px) {
+  .sign-in-box {
+    display: block;
+  }
+
+  .sign-in {
+    margin-top: 50px;
+    font-size: 1rem;
+  }
+
+  .sign-up-google-btn,
+  .sign-up-github-btn {
+    width: 80%;
+    font-size: 18px;
+  }
+
+  .sign-up-github-btn {
+    margin-top: 20px;
+  }
+
+  .buttons-register {
+    min-height: 10%;
+  }
+
+  .buttons-register2 {
+    width: 80%;
+    font-size: 20px;
+  }
+
+  .text-center {
+    padding-bottom: 15%;
+  }
+
+  .login-div {
+    width: 100%;
+  }
+
+  .login-p1,
+  .lead,
+  .lead2 {
+    text-align: center;
+  }
+
+  .login-p1 {
+    font-size: 26px;
+  }
+
+  .lead,
+  .lead2 {
+    font-size: 20px;
+  }
+
+  .line1 {
+    width: 100%;
+  }
+
+  .line2 {
+    width: 70%;
+  }
+
+  .container-Sign {
+    width: 90vw;
+    text-align: center;
+  }
+
+  .welcome-B {
+    width: 96%;
+    margin: 0 auto;
+  }
+
+  .welcome-B p {
+    padding-top: 0;
+  }
+
+  .welcome-b2 {
+    padding: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .form-control2 {
+    width: 90%;
+    font-size: 18px;
+  }
+
+  .sign-up-btnn {
+    width: 90%;
+  }
+}
