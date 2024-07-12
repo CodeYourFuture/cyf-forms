@@ -4,11 +4,11 @@ export default props => (
   <Fragment>
     <p className="login-p1">Welcome</p>
     <form className="mt-0" onSubmit={props.handleSubmit}>
-      <div className="form-group">
+      <div className="form-group-login">
         <label htmlFor="email" className="lead">
           Log in with email
         </label>
-        {props.errors && <p className="errors">{props.error}</p>}
+        {props.error && <p className="errors">{props.error}</p>}
         <div>
           <input
             type="email"
