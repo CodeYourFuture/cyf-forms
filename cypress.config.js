@@ -18,7 +18,7 @@ module.exports = defineConfig({
     }
   },
   env: {
-    jwtPrivateKey: `${process.cwd()}/e2e/privateKey`
+    jwtPrivateKey: `${process.cwd()}/e2e/privateKey.txt`
   },
   fixturesFolder: 'e2e/fixtures',
   screenshotsFolder: 'e2e/screenshots',
