@@ -23,6 +23,7 @@ export default props => (
             disabled={props.email === ' '}
             className="sign-up-btnn"
             type="submit"
+            name="submit"
           >
             Submit
           </button>

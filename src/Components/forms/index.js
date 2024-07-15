@@ -23,7 +23,7 @@ class Forms extends Component {
     this.fetchEmployers()
     const profile = getProfile()
     if (profile) {
-      const fullName = profile.fullName.split(' ')
+      const fullName = profile.fullName?.split(' ') || []
       let firstName, lastName
       if (this.isNotUndefined(fullName[0])) {
         firstName = fullName[0] || ''
