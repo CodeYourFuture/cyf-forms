@@ -12,8 +12,12 @@ Cypress.Commands.add('login', token => {
     req.reply({ token })
   }).as('login')
 
-  cy.findByRole('textbox', { name: /email/i }).type('jane@codeyourfuture.io')
-  cy.findByRole('button', { name: /submit/i }).click()
+  cy.findByRole('textbox', { name: /email/i })
+    .should('be.visible')
+    .type('jane@codeyourfuture.io')
+  cy.findByRole('button', { name: /submit/i })
+    .should('be.visible')
+    .click()
   cy.wait('@login')
 
   cy.findByText(/Please check your email/i).should('exist')

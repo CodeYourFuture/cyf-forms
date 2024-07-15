@@ -35,9 +35,6 @@ it('includes the user ID when resubmitting', () => {
   cy.findByRole('textbox', { name: /first name/i }).type('Erhard')
   cy.findByRole('textbox', { name: /last name/i }).type('Hennemann')
   cy.findByRole('combobox', { name: /city/i }).select('London')
-  //cy.findByRole('textbox', { name: /email/i }).type(
-  // 'erhard.hennemann@example.com'
-  //)
   cy.findByRole('combobox', {
     name: /select the team you want to volunteer for/i
   }).select('Education')
@@ -71,7 +68,6 @@ it('lets you request a reminder email', () => {
   // TODO why is this a clickable span?!
   cy.findByText('here').click()
   // TODO not accessible by label
-  //cy.findByRole('textbox').type(email)
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@verifyEmail').then(({ request: { body: payload } }) => {
