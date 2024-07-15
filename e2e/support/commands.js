@@ -7,11 +7,10 @@ import '@testing-library/cypress/add-commands'
 const mockServerURL = 'http://localhost:3001'
 
 Cypress.Commands.add('login', token => {
-  cy.visit('/')
   cy.intercept('POST', `${mockServerURL}/volunteer/login`, req => {
     req.reply({ token })
   }).as('login')
-
+  cy.visit('/')
   cy.findByRole('textbox', { name: /email/i })
     .should('be.visible')
     .type('jane@codeyourfuture.io')
