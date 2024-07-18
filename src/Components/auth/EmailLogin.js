@@ -20,7 +20,7 @@ export default props => (
             onChange={props.onChange}
           />
           <button
-            disabled={props.email === ' '}
+            disabled={props.email.trim() === ' '}
             className="sign-up-btnn"
             type="submit"
             name="submit"
