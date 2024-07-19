@@ -2,10 +2,6 @@
   padding-bottom: 25%;
 }
 
-.sign-in-box {
-  display: flex;
-}
-
 .sign-in {
   background-color: #f3f3f3;
   padding-bottom: 80px;
@@ -21,7 +17,7 @@
   padding-top: 40px;
 }
 
-.container-Sign {
+.container-sign {
   background: #ffffff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 2px;
@@ -51,34 +47,6 @@ label.lead {
   color: #333333;
   text-align: left;
   margin-top: 20px;
-}
-
-.welcome-b2 {
-  display: flex;
-  flex-direction: row;
-}
-
-.welcome-B {
-  font-family: Lato;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 28px;
-  letter-spacing: 0.01em;
-  width: 450px;
-  margin: 20px auto;
-  border: 1.5px dashed #333333;
-  padding-bottom: 20px;
-}
-
-.welcome-B img {
-  margin: 30px 20px 10px 20px;
-  width: 35px;
-  height: 35px;
-}
-
-.welcome-B p {
-  padding-top: 25px;
 }
 
 .lead,
@@ -160,12 +128,6 @@ label.lead {
   border: 2px solid #e1e1e1;
 }
 
-.register-buttons {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 .sign-up-google-btn,
 .sign-up-github-btn {
   width: 316px;
@@ -201,58 +163,28 @@ label.lead {
   color: #b1b1b1;
 }
 
-.buttons-register,
-.buttons-register2 {
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-}
-
-.buttons-register {
-  font-size: 20px;
-  color: #e70909;
-}
-
-.buttons-register2 {
-  width: 450px;
-  height: 60px;
-  font-size: 24px;
-  line-height: 43px;
-  letter-spacing: 0.01em;
-  margin-top: 10px;
-  background: #3455db;
-  color: #ffffff;
-}
-
-.buttons-register:hover {
-  color: #214cf7;
-}
-
-.buttons-register2:hover {
-  background: #1b365d;
-  color: #b1b1b1;
-}
-
-.register-b {
-  text-align: center;
-  font-family: Lato;
-  font-style: normal;
-  font-weight: bold;
-  font-size: 20px;
-  line-height: 24px;
-}
 .error {
   color: red;
   font-size: 24px;
   text-align: center;
   width: 100%;
 }
+.google-icon,
+.github-icon {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  margin-right: 10px;
+}
+.google-icon {
+  margin-top: -2px;
+}
+
+.github-icon {
+  margin-top: -10px;
+}
 
 @media screen and (max-width: 800px) {
-  .sign-in-box {
-    display: block;
-  }
-
   .sign-in {
     margin-top: 50px;
     font-size: 1rem;
@@ -266,15 +198,6 @@ label.lead {
 
   .sign-up-github-btn {
     margin-top: 20px;
-  }
-
-  .buttons-register {
-    min-height: 10%;
-  }
-
-  .buttons-register2 {
-    width: 80%;
-    font-size: 20px;
   }
 
   .text-center {
@@ -307,26 +230,11 @@ label.lead {
     width: 70%;
   }
 
-  .container-Sign {
+  .container-sign {
     width: 90vw;
     text-align: center;
   }
 
-  .welcome-B {
-    width: 96%;
-    margin: 0 auto;
-  }
-
-  .welcome-B p {
-    padding-top: 0;
-  }
-
-  .welcome-b2 {
-    padding: 0 0.5rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
   .form-group-login {
     max-height: 100%;
     min-width: 100%;
