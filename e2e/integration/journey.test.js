@@ -2,7 +2,6 @@ const mockServerURL = 'http://localhost:3001'
 const email = 'jane.doe@morge.org'
 const firstName = 'Jane'
 const lastName = 'Doe'
-let token
 
 beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/cities?visibleIn=VOLUNTEER_FORM`, {
@@ -18,11 +17,10 @@ beforeEach(() => {
   cy.task('generateToken', {
     claims: { email, fullName: `${firstName} ${lastName}` },
     algo: 'HS256'
-  }).then(data => (token = data))
+  }).then(token => cy.login(token))
 })
 
 it('can submit a minimal form', () => {
-  cy.login(token)
   cy.findByRole('textbox', { name: /email/i }).should('have.value', email)
   cy.findByRole('textbox', { name: /first name/i }).should(
     'have.value',
@@ -111,7 +109,6 @@ it('can submit a minimal form', () => {
 })
 
 it('requires employee selection', () => {
-  cy.login(token)
   cy.intercept('POST', `${mockServerURL}/volunteer`, req => {
     req.reply({ volunteer: { _id: 'some-new-id', ...req.body } })
   }).as('createVolunteer')
@@ -145,7 +142,6 @@ it('requires employee selection', () => {
 })
 
 it('can create a new employer', () => {
-  cy.login(token)
   cy.findByRole('combobox', { name: /hear about code your future/i }).select(
     'Employer'
   )

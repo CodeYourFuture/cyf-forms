@@ -11,6 +11,8 @@ Cypress.Commands.add('login', token => {
     req.reply({ token })
   }).as('login')
   cy.visit('/')
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(200)
   cy.findByRole('textbox', { name: /email/i })
     .should('be.visible')
     .type('jane@codeyourfuture.io')
