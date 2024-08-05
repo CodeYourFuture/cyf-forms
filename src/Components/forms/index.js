@@ -21,7 +21,31 @@ class Forms extends Component {
   componentDidMount() {
     this.fetchTeamData()
     this.fetchEmployers()
+    const profile = getProfile()
+    if (profile) {
+      const fullName = profile.fullName?.split(' ') || []
+      let firstName, lastName
+      if (this.isNotUndefined(fullName[0])) {
+        firstName = fullName[0] || ''
+      }
+      if (this.isNotUndefined(fullName[1])) {
+        lastName = fullName[1] || ''
+      }
+
+      const email = profile.email || ''
+
+      this.setState({
+        firstName,
+        lastName,
+        email
+      })
+    }
   }
+
+  isNotUndefined = value => {
+    return !!value && value.trim() !== 'undefined'
+  }
+
   fetchTeamData = async () => {
     try {
       const response = await axios.get(`${domain()}/teams`)
