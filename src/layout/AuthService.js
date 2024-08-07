@@ -22,8 +22,8 @@ export const setDefaultAxiosHeaders = token => {
 export const setToken = idToken => {
   // Saves user token to localStorage
   localStorage.setItem('cyf_forms_id_token', idToken)
-  setDefaultAxiosHeaders(idToken)
 }
+
 export const getToken = () => {
   // Retrieves the user token from localStorage
   const token = localStorage.getItem('cyf_forms_id_token')
@@ -31,18 +31,6 @@ export const getToken = () => {
     return token
   }
   return null
-}
-export async function register(student) {
-  try {
-    const result = await axios.post(`${path}/applicant`, student)
-    if (result) {
-      setToken(result.data.token)
-      return result
-    }
-    throw new Error('NO_RESULT')
-  } catch (err) {
-    throw new Error(err)
-  }
 }
 
 export const isAdminTrue = token => {
