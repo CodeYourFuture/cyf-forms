@@ -1,8 +1,5 @@
 import decode from 'jwt-decode'
 import axios from 'axios'
-import { domain, appPath } from '../config'
-
-const path = `${domain()}${appPath}`
 
 export const getHeaders = () => {
   const idToken = localStorage.getItem('cyf_forms_id_token')
