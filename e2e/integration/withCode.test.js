@@ -7,13 +7,6 @@ beforeEach(() => {
   cy.intercept('GET', `${mockServerURL}/teams`, {
     fixture: 'teams.json'
   })
-  cy.intercept('GET', `${mockServerURL}/employers`, {
-    fixture: 'teams.json'
-  })
-  cy.task('generateToken', {
-    claims: { email: 'foo@bar.org' },
-    algo: 'HS256'
-  }).then(token => cy.login(token))
 })
 
 it('shows success message', () => {
@@ -32,6 +25,9 @@ it('includes the user ID when resubmitting', () => {
   cy.findByRole('textbox', { name: /first name/i }).type('Erhard')
   cy.findByRole('textbox', { name: /last name/i }).type('Hennemann')
   cy.findByRole('combobox', { name: /city/i }).select('London')
+  cy.findByRole('textbox', { name: /email/i }).type(
+    'erhard.hennemann@example.com'
+  )
   cy.findByRole('combobox', {
     name: /select the team you want to volunteer for/i
   }).select('Education')
@@ -50,7 +46,6 @@ it('includes the user ID when resubmitting', () => {
 })
 
 it('lets you request a reminder email', () => {
-  // cy.login(token)
   cy.intercept('POST', `${mockServerURL}/volunteer/email/verification`, {
     statusCode: 200
   }).as('verifyEmail')
@@ -65,6 +60,7 @@ it('lets you request a reminder email', () => {
   // TODO why is this a clickable span?!
   cy.findByText('here').click()
   // TODO not accessible by label
+  cy.findByRole('textbox').type(email)
   cy.findByRole('button', { name: /submit/i }).click()
 
   cy.wait('@verifyEmail').then(({ request: { body: payload } }) => {
