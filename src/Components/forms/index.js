@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { createVolunteerHandler, loadCities } from '../../Redux/action'
-import { arrayOnChange, filterEmptyValue, initialState } from './helper'
+import { loadCities, createVolunteerHandler } from '../../Redux/action'
+import { initialState, arrayOnChange, filterEmptyValue } from './helper'
 import Header from './header'
 import Inputs from './inputs'
 import Acknowledgement from './Acknowledgement'
 import axios from 'axios'
-import { appPath, domain } from '../../config'
+import { domain, appPath } from '../../config'
 import './index.css'
-import { getProfile } from '../../layout/AuthService'
 
 const path = `${domain()}${appPath}`
 class Forms extends Component {
@@ -21,29 +20,6 @@ class Forms extends Component {
   componentDidMount() {
     this.fetchTeamData()
     this.fetchEmployers()
-    const profile = getProfile()
-    if (profile) {
-      const fullName = profile.fullName?.split(' ') || []
-      let firstName, lastName
-      if (this.isNotUndefined(fullName[0])) {
-        firstName = fullName[0] || ''
-      }
-      if (this.isNotUndefined(fullName[1])) {
-        lastName = fullName[1] || ''
-      }
-
-      const email = profile.email || ''
-
-      this.setState({
-        firstName,
-        lastName,
-        email
-      })
-    }
-  }
-
-  isNotUndefined = value => {
-    return !!value && value.trim() !== 'undefined'
   }
 
   fetchTeamData = async () => {
