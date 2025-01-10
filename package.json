@@ -36,7 +36,7 @@
     "test": "react-scripts test --env=jsdom"
   },
   "engines": {
-    "node": "^16.7.1"
+    "node": "^22.12"
   },
   "eslintConfig": {
     "extends": [
@@ -81,10 +81,17 @@
     "serve": "^14.0.1",
     "wait-on": "^6.0.1"
   },
+  "resolutions": {
+    "**/psl": "^1.10",
+    "**/tr46": "^4.0.0",
+    "**/whatwg-url": "^9.0.0",
+    "uri-js": "npm:uri-js-replace"
+  },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
