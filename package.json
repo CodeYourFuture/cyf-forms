@@ -36,7 +36,7 @@
     "test": "react-scripts test --env=jsdom"
   },
   "engines": {
-    "node": "^22.12"
+    "node": "^22.13"
   },
   "eslintConfig": {
     "extends": [
