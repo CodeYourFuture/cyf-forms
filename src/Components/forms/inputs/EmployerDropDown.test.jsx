@@ -30,7 +30,7 @@ describe('EmployerDropDown', () => {
   })
 
   it('updates the rest of the form', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderInForm({ employers: ['Deloitte', 'EDF', 'FlexJobs'], onChange })
     await selectEvent.select(
       screen.getByLabelText(/who is your employer/i),
@@ -51,7 +51,7 @@ describe('EmployerDropDown', () => {
   })
 
   it('allows the user to enter their own employer', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const { user } = renderInForm({
       employers: ['ABC', 'BBC', 'CBC'],
       onChange
@@ -170,7 +170,7 @@ describe('EmployerDropDown', () => {
   })
 
   it('can be cleared', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
     await selectEvent.clearAll(screen.getByLabelText(/who is your employer/i))
     expect(onChange).toHaveBeenCalledWith({
