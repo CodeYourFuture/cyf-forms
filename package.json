@@ -36,24 +36,6 @@
   "engines": {
     "node": "^22.13"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "prettier"
-    ],
-    "plugins": [
-      "prettier"
-    ],
-    "rules": {
-      "import/no-anonymous-default-export": "off",
-      "prettier/prettier": [
-        "error",
-        {
-          "arrowParens": "avoid"
-        }
-      ]
-    }
-  },
   "lint-staged": {
     "*.js": [
       "pretty-quick --staged",
@@ -69,6 +51,7 @@
     "@vitejs/plugin-react": "^4.4.1",
     "concurrently": "^7.4.0",
     "cypress": "^10.9.0",
+    "eslint": "^9.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-prettier": "^4.2.1",

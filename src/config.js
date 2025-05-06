@@ -1,5 +1,5 @@
+export const env = import.meta.env.VITE_NODE_ENV
 export const appPath = '/volunteer'
-export const env = process.env.REACT_APP_NODE_ENV
 
 export const domain = () => {
   switch (env) {
