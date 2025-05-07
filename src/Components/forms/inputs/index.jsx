@@ -43,7 +43,8 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={firstName}
             isEmpty={errors.firstName}
-            label="First Name *"
+            isRequired={true}
+            label="First Name"
             name="firstName"
             placeholder="Your first name..."
             type="text"
@@ -52,7 +53,8 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={lastName}
             isEmpty={errors.lastName}
-            label="Last Name *"
+            isRequired={true}
+            label="Last Name"
             name="lastName"
             placeholder="Your last name..."
             type="text"
@@ -61,8 +63,9 @@ export default class VolunteerForm extends Component {
             onChange={onChange}
             value={email}
             isEmpty={errors.email}
+            isRequired={true}
             emailExist={volunteer.userExist}
-            label="Email *"
+            label="Email"
             name="email"
             placeholder="example@example.example"
             type="email"
@@ -75,7 +78,8 @@ export default class VolunteerForm extends Component {
           name="cityId"
           arrayList={cities}
           isEmpty={errors.cityId}
-          label="What Code Your Future city do you want to work with? *"
+          isRequired={true}
+          label="What Code Your Future city do you want to work with?"
         />
         <p className="contact-interested">
           If you're interested in bringing Code Your Future to your city, email
@@ -93,7 +97,8 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={interestedInVolunteer}
           isEmpty={errors.interestedInVolunteer}
-          label="Why are you interested in volunteering? *"
+          isRequired={true}
+          label="Why are you interested in volunteering?"
           name="interestedInVolunteer"
           placeholder="Just one or two sentences as required..."
           type="textarea"
@@ -102,7 +107,8 @@ export default class VolunteerForm extends Component {
           onChange={onChange}
           value={interestedInCYF}
           isEmpty={errors.interestedInCYF}
-          label="Why are you interested in Code Your Future? *"
+          isRequired={true}
+          label="Why are you interested in Code Your Future?"
           name="interestedInCYF"
           placeholder="Just one or two sentences as required..."
           type="textarea"
@@ -113,6 +119,7 @@ export default class VolunteerForm extends Component {
           name="teamId"
           arrayList={teamOptions}
           isEmpty={errors.teamId}
+          isRequired={true}
           label={
             <span>
               Please select the team you want to volunteer for. You can read
@@ -134,6 +141,7 @@ export default class VolunteerForm extends Component {
           name="industry"
           arrayList={ListsData.industryList}
           isEmpty={errors.industry}
+          isRequired={true}
           label="What industry are you in?"
         />
 
@@ -143,12 +151,14 @@ export default class VolunteerForm extends Component {
           name="hearAboutCYF"
           arrayList={ListsData.hearAboutCYFList}
           isEmpty={errors.hearAboutCYF}
+          isRequired={true}
           label="Where did you hear about Code Your Future?"
         />
         {hearAboutCYFFromEmployer && (
           <EmployerDropDown
             arrayList={employersOptions}
             isEmpty={errors.employer}
+            isRequired={true}
             onChange={onChange}
             value={employer}
           />

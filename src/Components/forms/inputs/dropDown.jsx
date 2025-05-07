@@ -1,5 +1,7 @@
 import React from 'react'
 import { Label } from 'reactstrap'
+import RequiredFlag from '../RequiredFlag'
+
 function SelectOption(arrayList) {
   if (arrayList) {
     return arrayList.map(item => {
@@ -12,10 +14,10 @@ function SelectOption(arrayList) {
   }
 }
 
-export default ({ onChange, isEmpty, label, name, arrayList, value }) => {
+export default ({ onChange, isEmpty, isRequired, label, name, arrayList, value }) => {
   return (
     <div className="form-group">
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>{label}{isRequired ? ' ' : ''}{isRequired ? <RequiredFlag /> : ''}</Label>
       <select
         className={`form-control ${isEmpty && 'is-empty'}`}
         id={name}

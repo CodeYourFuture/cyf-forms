@@ -1,5 +1,6 @@
 import React, { Fragment } from 'react'
 import { FormGroup, Label, Input } from 'reactstrap'
+import RequiredFlag from './RequiredFlag'
 
 export default ({ onChange, agreeToTOU, agreeToReceiveCommunication }) => {
   return (
@@ -36,8 +37,7 @@ export default ({ onChange, agreeToTOU, agreeToReceiveCommunication }) => {
             rel="noopener noreferrer"
           >
             privacy policy
-          </a>{' '}
-          <strong className="text-danger">*</strong>
+          </a>{' '}<RequiredFlag />
         </Label>
       </FormGroup>
       <FormGroup check>
@@ -50,12 +50,11 @@ export default ({ onChange, agreeToTOU, agreeToReceiveCommunication }) => {
             onChange={onChange}
             checked={agreeToReceiveCommunication}
           />
-          Yes, contact me about volunteering activities and related events{' '}
-          <strong className="text-danger">*</strong>
+          Yes, contact me about volunteering activities and related events{' '}<RequiredFlag />
         </Label>
       </FormGroup>
       <p className="pt-2">
-        <strong className="text-danger">*</strong> fields are mandatory
+        <RequiredFlag /> fields are mandatory
       </p>
     </Fragment>
   )

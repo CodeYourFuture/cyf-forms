@@ -200,6 +200,7 @@ const renderInForm = ({
       <EmployerDropDown
         arrayList={employers.map(name => ({ _id: name, name }))}
         isEmpty={isEmpty}
+        isRequired={true}
         name="employer"
         onChange={onChange}
         value={value}

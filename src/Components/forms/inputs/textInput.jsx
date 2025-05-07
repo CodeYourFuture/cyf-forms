@@ -1,9 +1,12 @@
 import React from 'react'
 import { FormGroup, Label, Input } from 'reactstrap'
+import RequiredFlag from '../RequiredFlag'
+
 export default ({
   value,
   onChange,
   isEmpty,
+  isRequired,
   label,
   name,
   placeholder,
@@ -11,7 +14,7 @@ export default ({
 }) => {
   return (
     <FormGroup>
-      <Label htmlFor={name}>{label}</Label>
+      <Label htmlFor={name}>{label}{isRequired ? ' ' : ''}{isRequired ? <RequiredFlag /> : ''}</Label>
       <Input
         type={type}
         name={name}
