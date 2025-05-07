@@ -27,7 +27,7 @@
     "lint:eslint": "eslint e2e src --max-warnings 0",
     "lint:prettier": "prettier --config .prettierrc 'e2e/**/*.js' 'src/**/*.js'",
     "lint:fix": "yarn lint:eslint --fix",
-    "prepare": "husky install",
+    "prepare": "husky",
     "prettier": "yarn lint:prettier --write",
     "preserve": "VITE_NODE_ENV=LOCAL yarn build",
     "serve": "serve --cors --debug -p 3000 --single build",
