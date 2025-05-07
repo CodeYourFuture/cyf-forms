@@ -19,7 +19,6 @@ export const initialState = {
   submitted: false,
   err: null,
   msg: null,
-  valuationError: false,
   acknowledgement: false,
   formInComplete: false,
   userId: '',
@@ -75,6 +74,6 @@ export const arrayOnChange = (e, array) => {
   return newArray
 }
 
-export const filterEmptyValue = values => {
-  return values.filter(value => value.name !== '')
+export const filterForCheckedItems = items => {
+  return items.filter(item => item.name !== '')
 }

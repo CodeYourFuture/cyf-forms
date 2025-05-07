@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { loadCities, createVolunteerHandler } from '../../Redux/action'
-import { initialState, arrayOnChange, filterEmptyValue } from './helper'
+import { initialState, arrayOnChange, filterForCheckedItems } from './helper'
 import Header from './header'
 import Inputs from './inputs'
 import Acknowledgement from './Acknowledgement'
@@ -145,29 +145,30 @@ class Forms extends Component {
     }
   }
 
-  validateForm = values => {
+  validateForm = formInputs => {
     const { errors } = this.state
-    const formInputs = Object.keys(values)
-    const validated = formInputs.map(key => {
-      if (!values[key]) {
-        errors[key] = true
-        return true
+    let valid = true
+    for (const [k, v] of Object.entries(formInputs)) {
+      if (v) {
+        errors[k] = false
+      } else {
+        valid = false
+        errors[k] = true
       }
-      errors[key] = false
-      return false
-    })
+    }
     this.setState({ errors })
-    return validated
+    return valid
   }
 
-  validateArray = values => {
-    Object.keys(values).map(value => {
-      const newValue = values[value].map(item => {
+  validateGroupings = groupings => {
+    let valid = true
+    Object.keys(groupings).forEach(grouping => {
+      const newItems = groupings[grouping].map(item => {
         if (
           (item.name !== '' && item.level === '') ||
           item.level === "It's empty"
         ) {
-          this.setState({ valuationError: true })
+          valid = false
           return {
             id: item.id,
             name: item.name,
@@ -176,15 +177,15 @@ class Forms extends Component {
           }
         } else return item
       })
-      return this.setState({ [value]: newValue })
+      this.setState({ [grouping]: newItems })
     })
+    return valid
   }
 
   handleSubmit = async e => {
     e.preventDefault()
     this.setState({
       submitted: true,
-      valuationError: false,
       formInComplete: false
     })
     const {
@@ -208,7 +209,7 @@ class Forms extends Component {
       agreeToReceiveCommunication
     } = this.state
 
-    const validatedInputs = this.validateForm({
+    const inputsAllValid = this.validateForm({
       firstName,
       lastName,
       email,
@@ -221,14 +222,14 @@ class Forms extends Component {
       interestedInCYF,
       agreeToReceiveCommunication
     })
-    await this.validateArray({ guidePeople, techSkill, otherSkill })
-    const emptyValues = validatedInputs.includes(true)
-    const { valuationError } = this.state
-    if (emptyValues || valuationError) {
+    const groupingsAllValid = await this.validateGroupings({
+      guidePeople,
+      techSkill,
+      otherSkill
+    })
+    if (!inputsAllValid || !groupingsAllValid) {
       this.setState({ formInComplete: true })
-    }
-
-    if (!emptyValues && !valuationError) {
+    } else {
       this.props.createVolunteerHandler({
         firstName,
         lastName,
@@ -241,9 +242,9 @@ class Forms extends Component {
         industry,
         hearAboutCYF,
         employer: hearAboutCYFFromEmployer ? employer : '',
-        guidePeople: filterEmptyValue(guidePeople),
-        techSkill: filterEmptyValue(techSkill),
-        otherSkill: filterEmptyValue(otherSkill),
+        guidePeople: filterForCheckedItems(guidePeople),
+        techSkill: filterForCheckedItems(techSkill),
+        otherSkill: filterForCheckedItems(otherSkill),
         userId,
         agreeToTOU,
         agreeToReceiveCommunication
