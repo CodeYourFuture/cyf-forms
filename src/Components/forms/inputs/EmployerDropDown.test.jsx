@@ -171,8 +171,11 @@ describe('EmployerDropDown', () => {
 
   it('can be cleared', async () => {
     const onChange = vi.fn()
-    renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
-    await selectEvent.clearAll(screen.getByLabelText(/who is your employer/i))
+    const { user } = renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
+    const inputElement = screen.getByRole('combobox', { id: /employer/i })
+    expect(screen.getByText('BBC')).toBeInTheDocument()
+    const clearElement = inputElement.parentElement.parentElement.nextElementSibling.firstElementChild
+    await user.click(clearElement)
     expect(onChange).toHaveBeenCalledWith({
       target: { name: 'employer', type: 'text', value: '' }
     })
@@ -191,7 +194,7 @@ describe('EmployerDropDown', () => {
 const renderInForm = ({
   employers = [],
   isEmpty = false,
-  onChange = () => {},
+  onChange = () => { },
   value = ''
 }) => {
   const user = userEvent.setup()
