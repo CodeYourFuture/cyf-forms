@@ -18,7 +18,7 @@
     "redux-thunk": "^3.1.0"
   },
   "scripts": {
-    "build": "vite build --outDir build/$BUILD_PATH",
+    "build": "vite build --outDir $BUILD_PATH",
     "e2e": "concurrently -k -s first -n \"app,e2e\" \"BROWSER=none yarn start\" \"yarn e2e:run\"",
     "e2e:dev": "concurrently -k -n \"app,e2e\" \"yarn start\" \"cypress open --e2e\"",
     "e2e:prod": "concurrently -k -s first -n \"app,e2e\" \"yarn serve\" \"yarn e2e:run\"",
