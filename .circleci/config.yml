@@ -86,7 +86,7 @@ jobs:
             GENERATE_SOURCEMAP: 'false'
             VITE_NODE_ENV: 'PRODUCTION'
       - persist_to_workspace:
-          root: .
+          root: build
           paths:
             - qa
             - staging
