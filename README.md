@@ -24,7 +24,7 @@ In the project directory, you can run:
 ### `yarn start`
 
 Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Open [http://localhost:3002](http://localhost:3002) to view it in the browser.
 
 The page will reload if you make edits.<br>
 You will also see any lint errors in the console.
@@ -46,8 +46,8 @@ Your app is ready to be deployed!
 
 Runs the [Cypress] end-to-end tests, which means:
 
-- Starting a mock for the backend server on port 3100
-- Starting the forms app in LOCAL mode on port 3000
+- Starting a mock for the backend server on port 3001
+- Starting the forms app in LOCAL mode on port 3002
 - Waiting for the app to start then running the tests
 
 [cypress]: https://www.cypress.io/

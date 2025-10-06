@@ -53,7 +53,7 @@ describe('useSession', () => {
   })
 
   describe('updating', () => {
-    it('updates the value asked', async () => {
+    it('updates the value asked', () => {
       const { result } = renderHook(() => useSession(key))
       act(() => result.current[1]({ foo: 'bar' }))
       expect(result.current[0]).toEqual({ foo: 'bar' })

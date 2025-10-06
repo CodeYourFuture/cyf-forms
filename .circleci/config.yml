@@ -70,23 +70,23 @@ jobs:
           environment:
             BUILD_PATH: 'qa'
             GENERATE_SOURCEMAP: 'false'
-            REACT_APP_NODE_ENV: 'QA'
+            VITE_NODE_ENV: 'QA'
       - run:
           name: build staging
           command: yarn build
           environment:
             BUILD_PATH: 'staging'
             GENERATE_SOURCEMAP: 'false'
-            REACT_APP_NODE_ENV: 'STAGING'
+            VITE_NODE_ENV: 'STAGING'
       - run:
           name: build production
           command: yarn build
           environment:
             BUILD_PATH: 'production'
             GENERATE_SOURCEMAP: 'false'
-            REACT_APP_NODE_ENV: 'PRODUCTION'
+            VITE_NODE_ENV: 'PRODUCTION'
       - persist_to_workspace:
-          root: .
+          root: build
           paths:
             - qa
             - staging

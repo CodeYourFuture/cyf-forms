@@ -30,7 +30,7 @@ describe('EmployerDropDown', () => {
   })
 
   it('updates the rest of the form', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     renderInForm({ employers: ['Deloitte', 'EDF', 'FlexJobs'], onChange })
     await selectEvent.select(
       screen.getByLabelText(/who is your employer/i),
@@ -51,7 +51,7 @@ describe('EmployerDropDown', () => {
   })
 
   it('allows the user to enter their own employer', async () => {
-    const onChange = jest.fn()
+    const onChange = vi.fn()
     const { user } = renderInForm({
       employers: ['ABC', 'BBC', 'CBC'],
       onChange
@@ -170,9 +170,12 @@ describe('EmployerDropDown', () => {
   })
 
   it('can be cleared', async () => {
-    const onChange = jest.fn()
-    renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
-    await selectEvent.clearAll(screen.getByLabelText(/who is your employer/i))
+    const onChange = vi.fn()
+    const { user } = renderInForm({ employers: ['ABC', 'BBC', 'CBC'], onChange, value: 'BBC' })
+    const inputElement = screen.getByRole('combobox', { id: /employer/i })
+    expect(screen.getByText('BBC')).toBeInTheDocument()
+    const clearElement = inputElement.parentElement.parentElement.nextElementSibling.firstElementChild
+    await user.click(clearElement)
     expect(onChange).toHaveBeenCalledWith({
       target: { name: 'employer', type: 'text', value: '' }
     })
@@ -191,7 +194,7 @@ describe('EmployerDropDown', () => {
 const renderInForm = ({
   employers = [],
   isEmpty = false,
-  onChange = () => {},
+  onChange = () => { },
   value = ''
 }) => {
   const user = userEvent.setup()
@@ -200,6 +203,7 @@ const renderInForm = ({
       <EmployerDropDown
         arrayList={employers.map(name => ({ _id: name, name }))}
         isEmpty={isEmpty}
+        isRequired={true}
         name="employer"
         onChange={onChange}
         value={value}
