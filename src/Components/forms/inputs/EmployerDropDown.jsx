@@ -1,12 +1,14 @@
 import { useMemo } from 'react'
 import { Label } from 'reactstrap'
 import Select from 'react-select/creatable'
+import RequiredFlag from '../RequiredFlag'
 
 import useSession from '../../../hooks/useSession'
 
 const EmployerDropDown = ({
   arrayList: employers,
   isEmpty,
+  isRequired,
   onChange,
   value
 }) => {
@@ -32,7 +34,7 @@ const EmployerDropDown = ({
 
   return (
     <div className="form-group">
-      <Label htmlFor="employer">Who is your employer? *</Label>
+      <Label htmlFor="employer">Who is your employer?{isRequired ? ' ' : ''}{isRequired ? <RequiredFlag /> : ''}</Label>
       <Select
         className={isEmpty ? 'is-empty' : ''}
         inputId="employer"
